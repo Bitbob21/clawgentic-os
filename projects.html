@@ -1,0 +1,659 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Projects — Founder OS Demo</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #071a2e;
+      --surface: #0f2744;
+      --surface-hover: #163558;
+      --surface-card: #143049;
+      --border: #1e5c82;
+      --border-light: #143b55;
+      --text: #e6edf3;
+      --text-dim: #5d8aa8;
+      --accent: #00bcd4;
+      --green: #26c6da;
+      --yellow: #f0883e;
+      --red: #f56565;
+      --purple: #a371f7;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Inter', -apple-system, sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; background-image: radial-gradient(circle at 1px 1px, rgba(0,188,212,0.05) 1px, transparent 0); background-size: 40px 40px; }
+    .container { max-width: 1300px; margin: 0 auto; padding: 0 20px; }
+
+    .header { background: rgba(7,26,46,0.98); border-bottom: 1px solid var(--border); height: 52px; display: flex; align-items: center; position: sticky; top: 0; z-index: 50; }
+    .header .container { display: flex; align-items: center; justify-content: space-between; width: 100%; }
+    .header-left { display: flex; align-items: center; gap: 20px; }
+    .header-right { display: flex; align-items: center; gap: 14px; }
+    .logo { font-family: 'JetBrains Mono', monospace; font-size: 0.82rem; font-weight: 600; color: var(--accent); text-decoration: none; letter-spacing: -0.2px; }
+    .logo span { color: var(--text-dim); font-weight: 400; }
+    .header-nav { display: flex; gap: 2px; }
+    .header-nav button { background: none; border: none; color: var(--text-dim); font-family: 'Inter', sans-serif; font-size: 0.78rem; padding: 7px 14px; border-radius: 6px; cursor: pointer; transition: all 0.15s; }
+    .header-nav button:hover { background: var(--surface-hover); color: var(--text); }
+    .header-nav button.active { color: var(--accent); background: rgba(0,188,212,0.08); }
+    .online-badge { display: flex; align-items: center; gap: 6px; font-size: 0.7rem; font-family: 'JetBrains Mono', monospace; color: var(--green); }
+    .online-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--green); animation: pulse 2s infinite; }
+    @keyframes pulse { 0%,100% { opacity: 1; } 50% { opacity: 0.3; } }
+    .back-link { color: var(--text-dim); text-decoration: none; font-size: 0.75rem; display: flex; align-items: center; gap: 5px; }
+    .back-link:hover { color: var(--accent); }
+    .demo-pill { background: rgba(38,198,218,0.12); border: 1px solid rgba(38,198,218,0.3); color: var(--green); font-size: 0.65rem; font-family: 'JetBrains Mono', monospace; padding: 3px 10px; border-radius: 100px; }
+
+    main { padding: 24px 0 40px; }
+
+    .page-title { font-size: 1.1rem; font-weight: 700; margin-bottom: 6px; }
+    .page-sub { font-size: 0.8rem; color: var(--text-dim); margin-bottom: 24px; font-family: 'JetBrains Mono', monospace; }
+
+    /* STATS ROW */
+    .stats-row { display: flex; gap: 14px; margin-bottom: 28px; flex-wrap: wrap; }
+    .stat-card { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 14px 20px; flex: 1; min-width: 140px; }
+    .stat-label { font-size: 0.65rem; color: var(--text-dim); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 6px; }
+    .stat-value { font-family: 'JetBrains Mono', monospace; font-size: 1.5rem; font-weight: 600; }
+    .stat-value.accent { color: var(--accent); }
+    .stat-value.yellow { color: var(--yellow); }
+    .stat-value.green { color: var(--green); }
+
+    /* SECTION */
+    .section-label { font-size: 0.7rem; color: var(--text-dim); text-transform: uppercase; letter-spacing: 0.8px; margin-bottom: 12px; }
+
+    /* PROJECT GRID */
+    .project-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(340px, 1fr)); gap: 14px; margin-bottom: 32px; }
+
+    .project-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 18px 20px;
+      cursor: pointer;
+      transition: border-color 0.15s, transform 0.12s;
+      text-decoration: none;
+      color: var(--text);
+      display: block;
+    }
+    .project-card:hover { border-color: var(--accent); transform: translateY(-2px); }
+
+    .project-top { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 10px; }
+    .project-name { font-size: 0.95rem; font-weight: 600; display: flex; align-items: center; gap: 8px; }
+    .project-prio { font-size: 0.58rem; font-family: 'JetBrains Mono', monospace; padding: 2px 7px; border-radius: 4px; font-weight: 600; }
+    .prio1 { background: var(--red); color: #fff; }
+    .prio2 { background: var(--yellow); color: #000; }
+    .prio3 { background: var(--surface-hover); color: var(--text-dim); border: 1px solid var(--border); }
+    .project-status { font-size: 0.65rem; font-family: 'JetBrains Mono', monospace; padding: 2px 8px; border-radius: 4px; }
+    .status.active { background: rgba(240,136,62,0.15); color: var(--yellow); border: 1px solid rgba(240,136,62,0.3); }
+    .status.paused { background: rgba(93,138,168,0.1); color: var(--text-dim); border: 1px solid var(--border); }
+    .status.done { background: rgba(38,198,218,0.1); color: var(--green); border: 1px solid rgba(38,198,218,0.2); }
+    .project-desc { font-size: 0.78rem; color: var(--text-dim); margin-bottom: 14px; line-height: 1.5; }
+
+    .project-bar { display: flex; gap: 5px; align-items: center; margin-bottom: 12px; }
+    .bar-seg { height: 5px; border-radius: 3px; }
+    .bar-seg.todo { background: var(--text-dim); }
+    .bar-seg.active { background: var(--yellow); }
+    .bar-seg.done { background: var(--green); }
+    .bar-stat { font-size: 0.65rem; font-family: 'JetBrains Mono', monospace; color: var(--text-dim); margin-left: 6px; display: flex; align-items: center; gap: 3px; }
+    .bar-stat .dot { width: 5px; height: 5px; border-radius: 50%; }
+    .bar-stat .dot.todo { background: var(--text-dim); }
+    .bar-stat .dot.active { background: var(--yellow); }
+    .bar-stat .dot.done { background: var(--green); }
+
+    .project-footer { display: flex; justify-content: space-between; align-items: center; }
+    .project-tags { display: flex; gap: 5px; flex-wrap: wrap; }
+    .tag { font-size: 0.58rem; font-family: 'JetBrains Mono', monospace; background: rgba(0,188,212,0.08); color: var(--accent); border: 1px solid rgba(0,188,212,0.15); padding: 2px 7px; border-radius: 4px; }
+    .tag.orange { background: rgba(240,136,62,0.08); color: var(--yellow); border-color: rgba(240,136,62,0.15); }
+    .tag.purple { background: rgba(163,113,247,0.08); color: var(--purple); border-color: rgba(163,113,247,0.15); }
+    .tag.green { background: rgba(38,198,218,0.08); color: var(--green); border-color: rgba(38,198,218,0.15); }
+    .project-dates { font-size: 0.62rem; color: var(--text-dim); font-family: 'JetBrains Mono', monospace; }
+
+    /* FOOTER NOTE */
+    .footer-note { text-align: center; margin-top: 30px; padding: 12px; background: var(--surface); border: 1px solid var(--border); border-radius: 8px; font-size: 0.72rem; color: var(--text-dim); font-family: 'JetBrains Mono', monospace; }
+
+    @media (max-width: 640px) {
+      .project-grid { grid-template-columns: 1fr; }
+      .header-nav { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="header">
+  <div class="container">
+    <div class="header-left">
+      <a href="/" class="back-link">← Back</a>
+      <a href="/" class="logo">clawgentic<span>.os</span></a>
+      <nav class="header-nav">
+        <button class="active">Projects</button>
+        <button>Board</button>
+        <button>Docs</button>
+        <button>Kalender</button>
+        <button>⚡ Lightning</button>
+      </nav>
+    </div>
+    <div class="header-right">
+      <div class="online-badge"><span class="online-dot"></span>Online</div>
+      <span class="demo-pill">DEMO</span>
+    </div>
+  </div>
+</div>
+
+<main class="container">
+
+  <div class="page-title">Projects</div>
+  <div class="page-sub">4 active · 2 paused · 8 done · Click any project to open the board</div>
+
+  <div class="stats-row">
+    <div class="stat-card"><div class="stat-label">Total Projects</div><div class="stat-value accent">14</div></div>
+    <div class="stat-card"><div class="stat-label">Active</div><div class="stat-value yellow">4</div></div>
+    <div class="stat-card"><div class="stat-label">Open Tasks</div><div class="stat-value">28</div></div>
+    <div class="stat-card"><div class="stat-label">Done This Week</div><div class="stat-value green">11</div></div>
+    <div class="stat-card"><div class="stat-label">Blockers</div><div class="stat-value" style="color:var(--red)">1</div></div>
+  </div>
+
+  <div class="section-label">Active Projects</div>
+  <div class="project-grid">
+
+    <a href="#board-saas" class="project-card" onclick="showBoard('saas'); return false;">
+      <div class="project-top">
+        <div class="project-name">SaaS Starter Kit <span class="project-prio prio1">P1</span></div>
+        <span class="project-status active">● Active</span>
+      </div>
+      <div class="project-desc">Launch-ready SaaS boilerplate mit Auth, Billing, E-Mail & Admin Dashboard. Stripe Integration.</div>
+      <div class="project-bar">
+        <div class="bar-seg todo" style="width:50px"></div>
+        <div class="bar-seg active" style="width:22px"></div>
+        <div class="bar-seg done" style="width:18px"></div>
+        <div class="bar-stat"><span class="dot todo"></span>8</div>
+        <div class="bar-stat"><span class="dot active"></span>3</div>
+        <div class="bar-stat"><span class="dot done"></span>2</div>
+      </div>
+      <div class="project-footer">
+        <div class="project-tags">
+          <span class="tag">React</span>
+          <span class="tag orange">Stripe</span>
+          <span class="tag purple">Auth</span>
+        </div>
+        <span class="project-dates">Launch: May 2026</span>
+      </div>
+    </a>
+
+    <a href="#board-content" class="project-card" onclick="showBoard('content'); return false;">
+      <div class="project-top">
+        <div class="project-name">Content Engine <span class="project-prio prio1">P1</span></div>
+        <span class="project-status active">● Active</span>
+      </div>
+      <div class="project-desc">Automatisiertes Content-Framework: Blog, Newsletter, LinkedIn. KI-gestützter First Draft.</div>
+      <div class="project-bar">
+        <div class="bar-seg todo" style="width:40px"></div>
+        <div class="bar-seg active" style="width:28px"></div>
+        <div class="bar-seg done" style="width:32px"></div>
+        <div class="bar-stat"><span class="dot todo"></span>5</div>
+        <div class="bar-stat"><span class="dot active"></span>3</div>
+        <div class="bar-stat"><span class="dot done"></span>4</div>
+      </div>
+      <div class="project-footer">
+        <div class="project-tags">
+          <span class="tag">Copywriting</span>
+          <span class="tag orange">SEO</span>
+          <span class="tag green">KI</span>
+        </div>
+        <span class="project-dates">Ongoing</span>
+      </div>
+    </a>
+
+    <a href="#board-course" class="project-card" onclick="showBoard('course'); return false;">
+      <div class="project-top">
+        <div class="project-name">Online Masterclass <span class="project-prio prio2">P2</span></div>
+        <span class="project-status active">● Active</span>
+      </div>
+      <div class="project-desc">Premium Online-Kurs: 12 Module, Workbooks, Community. Pre-Launch E-Mail Liste aufbauen.</div>
+      <div class="project-bar">
+        <div class="bar-seg todo" style="width:55px"></div>
+        <div class="bar-seg active" style="width:15px"></div>
+        <div class="bar-seg done" style="width:10px"></div>
+        <div class="bar-stat"><span class="dot todo"></span>7</div>
+        <div class="bar-stat"><span class="dot active"></span>2</div>
+        <div class="bar-stat"><span class="dot done"></span>1</div>
+      </div>
+      <div class="project-footer">
+        <div class="project-tags">
+          <span class="tag">Course</span>
+          <span class="tag orange">Marketing</span>
+          <span class="tag purple">Community</span>
+        </div>
+        <span class="project-dates">Launch: Jun 2026</span>
+      </div>
+    </a>
+
+    <a href="#board-podcast" class="project-card" onclick="showBoard('podcast'); return false;">
+      <div class="project-top">
+        <div class="project-name">Podcast Pipeline <span class="project-prio prio2">P2</span></div>
+        <span class="project-status active">● Active</span>
+      </div>
+      <div class="project-desc">Wöchentlicher Podcast: Recording, Editing, Shownotes, Distribution. Riverside.fm Workflow.</div>
+      <div class="project-bar">
+        <div class="bar-seg todo" style="width:30px"></div>
+        <div class="bar-seg active" style="width:20px"></div>
+        <div class="bar-seg done" style="width:50px"></div>
+        <div class="bar-stat"><span class="dot todo"></span>3</div>
+        <div class="bar-stat"><span class="dot active"></span>2</div>
+        <div class="bar-stat"><span class="dot done"></span>5</div>
+      </div>
+      <div class="project-footer">
+        <div class="project-tags">
+          <span class="tag">Audio</span>
+          <span class="tag orange">Distribution</span>
+          <span class="tag green">Guest Outreach</span>
+        </div>
+        <span class="project-dates">Weekly</span>
+      </div>
+    </a>
+
+  </div>
+
+  <div class="section-label">Paused</div>
+  <div class="project-grid">
+
+    <a href="#" class="project-card" style="opacity:0.7;" onclick="return false;">
+      <div class="project-top">
+        <div class="project-name">Affiliate Store <span class="project-prio prio3">P3</span></div>
+        <span class="project-status paused">⏸ Paused</span>
+      </div>
+      <div class="project-desc">Nischen-Store mit Product Reviews & Comparison Pages. Amazon Associates Integration.</div>
+      <div class="project-bar">
+        <div class="bar-seg todo" style="width:60px"></div>
+        <div class="bar-seg active" style="width:0px"></div>
+        <div class="bar-seg done" style="width:10px"></div>
+        <div class="bar-stat"><span class="dot todo"></span>4</div>
+        <div class="bar-stat"><span class="dot active"></span>0</div>
+        <div class="bar-stat"><span class="dot done"></span>1</div>
+      </div>
+      <div class="project-footer">
+        <div class="project-tags"><span class="tag">E-Commerce</span><span class="tag orange">SEO</span></div>
+        <span class="project-dates">Paused: Mar 2026</span>
+      </div>
+    </a>
+
+    <a href="#" class="project-card" style="opacity:0.7;" onclick="return false;">
+      <div class="project-top">
+        <div class="project-name">Freelance OS <span class="project-prio prio3">P3</span></div>
+        <span class="project-status paused">⏸ Paused</span>
+      </div>
+      <div class="project-desc">Productized Service Dashboard: Clients, Invoices, Time Tracking, Onboarding automatisieren.</div>
+      <div class="project-bar">
+        <div class="bar-seg todo" style="width:45px"></div>
+        <div class="bar-seg active" style="width:0px"></div>
+        <div class="bar-seg done" style="width:20px"></div>
+        <div class="bar-stat"><span class="dot todo"></span>5</div>
+        <div class="bar-stat"><span class="dot active"></span>0</div>
+        <div class="bar-stat"><span class="dot done"></span>2</div>
+      </div>
+      <div class="project-footer">
+        <div class="project-tags"><span class="tag">Productized</span><span class="tag purple">Automation</span></div>
+        <span class="project-dates">Paused: Feb 2026</span>
+      </div>
+    </a>
+
+  </div>
+
+  <div class="section-label">Done</div>
+  <div class="project-grid">
+
+    <a href="#" class="project-card" style="opacity:0.6;" onclick="return false;">
+      <div class="project-top">
+        <div class="project-name">Notion Template Pack <span class="project-prio prio3">P3</span></div>
+        <span class="project-status done">✓ Done</span>
+      </div>
+      <div class="project-desc">Notion OS Templates für Freelancer: Projektmanagement, Finanzen, Content Calendar.</div>
+      <div class="project-bar">
+        <div class="bar-seg todo" style="width:0px"></div>
+        <div class="bar-seg active" style="width:0px"></div>
+        <div class="bar-seg done" style="width:100px"></div>
+        <div class="bar-stat"><span class="dot todo"></span>0</div>
+        <div class="bar-stat"><span class="dot active"></span>0</div>
+        <div class="bar-stat"><span class="dot done"></span>9</div>
+      </div>
+      <div class="project-footer">
+        <div class="project-tags"><span class="tag">Notion</span><span class="tag green">Published</span></div>
+        <span class="project-dates">Done: Jan 2026</span>
+      </div>
+    </a>
+
+    <a href="#" class="project-card" style="opacity:0.6;" onclick="return false;">
+      <div class="project-top">
+        <div class="project-name">Lead Magnet Funnel <span class="project-prio prio3">P3</span></div>
+        <span class="project-status done">✓ Done</span>
+      </div>
+      <div class="project-desc">Landing Page + Lead Magnet + Email Sequence. 1.200 neue subscribers in 30 Tagen.</div>
+      <div class="project-bar">
+        <div class="bar-seg todo" style="width:0px"></div>
+        <div class="bar-seg active" style="width:0px"></div>
+        <div class="bar-seg done" style="width:100px"></div>
+        <div class="bar-stat"><span class="dot done"></span>6</div>
+      </div>
+      <div class="project-footer">
+        <div class="project-tags"><span class="tag">Marketing</span><span class="tag green">1.2k Leads</span></div>
+        <span class="project-dates">Done: Feb 2026</span>
+      </div>
+    </a>
+
+    <a href="#" class="project-card" style="opacity:0.6;" onclick="return false;">
+      <div class="project-top">
+        <div class="project-name">YouTube Channel <span class="project-prio prio3">P3</span></div>
+        <span class="project-status done">✓ Done</span>
+      </div>
+      <div class="project-desc">10-Video Batch Production. Thumbnail A/B Testing, Shorts Strategy, Community Tab.</div>
+      <div class="project-bar">
+        <div class="bar-seg todo" style="width:0px"></div>
+        <div class="bar-seg active" style="width:0px"></div>
+        <div class="bar-seg done" style="width:100px"></div>
+        <div class="bar-stat"><span class="dot done"></span>10</div>
+      </div>
+      <div class="project-footer">
+        <div class="project-tags"><span class="tag">YouTube</span><span class="tag green">Batch</span></div>
+        <span class="project-dates">Done: Jan 2026</span>
+      </div>
+    </a>
+
+  </div>
+
+  <div class="footer-note">Founder OS Demo · Click any active project to open its board · Your actual projects are private</div>
+
+</main>
+
+<!-- ═══════════════════════════════════════════════════════════════ -->
+<!-- BOARD OVERLAY (hidden by default) -->
+<!-- ═══════════════════════════════════════════════════════════════ -->
+<div id="board-overlay" style="display:none; position:fixed; inset:0; z-index:200; background:var(--bg); overflow-y:auto;" onclick="if(event.target===this) closeBoard()">
+  <div style="max-width:1400px;margin:0 auto;padding:0 20px 40px;">
+
+    <div style="display:flex; align-items:center; gap:16px; padding:16px 0; border-bottom:1px solid var(--border); margin-bottom:20px;">
+      <button onclick="closeBoard()" style="background:var(--surface); border:1px solid var(--border); color:var(--text-dim); border-radius:7px; padding:7px 14px; cursor:pointer; font-family:'Inter',sans-serif; font-size:0.78rem;">← Projects</button>
+      <div style="font-size:1rem; font-weight:700;" id="board-title">Project</div>
+      <span id="board-prio" style="font-size:0.62rem; font-family:'JetBrains Mono',monospace; padding:2px 7px; border-radius:4px; font-weight:600; background:var(--red); color:#fff;">P1</span>
+      <span style="font-size:0.72rem; color:var(--text-dim); font-family:'JetBrains Mono',monospace;" id="board-count"></span>
+    </div>
+
+    <div style="display:grid; grid-template-columns:1fr 300px; gap:20px; align-items:start;">
+
+      <div id="board-columns" style="display:grid; grid-template-columns:repeat(4,1fr); gap:14px;">
+        <!-- Columns injected by JS -->
+      </div>
+
+      <div style="display:flex; flex-direction:column; gap:14px;">
+
+        <div class="chat" style="background:var(--surface); border:1px solid var(--border); border-radius:10px; display:flex; flex-direction:column;">
+          <div style="padding:11px 14px; border-bottom:1px solid var(--border-light); display:flex; gap:10px; align-items:center;">
+            <div style="width:30px;height:30px;border-radius:50%;background:rgba(163,113,247,0.15);border:1px solid var(--purple);display:flex;align-items:center;justify-content:center;font-size:0.9rem;">🤖</div>
+            <div>
+              <div style="font-size:0.8rem; font-weight:600;">Max</div>
+              <div style="font-size:0.62rem; color:var(--green); font-family:'JetBrains Mono',monospace;">● Online</div>
+            </div>
+          </div>
+          <div id="chat-messages" style="padding:12px 14px; display:flex; flex-direction:column; gap:10px; min-height:260px; max-height:340px; overflow-y:auto;">
+            <div style="display:flex; gap:8px; max-width:88%;">
+              <div style="width:26px;height:26px;border-radius:50%;background:rgba(163,113,247,0.15);border:1px solid var(--purple);display:flex;align-items:center;justify-content:center;font-size:0.75rem;">🤖</div>
+              <div>
+                <div style="background:var(--surface-card); border:1px solid var(--border-light); padding:9px 12px; border-radius:10px; font-size:0.76rem; line-height:1.55;">Alles im Plan. Schick mir die finalen Links wenn das Launch-Video fertig ist.</div>
+                <div style="font-size:0.58rem; color:var(--text-dim); margin-top:3px; font-family:'JetBrains Mono',monospace;">10:02 · today</div>
+              </div>
+            </div>
+            <div style="display:flex; gap:8px; max-width:88%; align-self:flex-end; flex-direction:row-reverse;">
+              <div>
+                <div style="background:rgba(163,113,247,0.1); border:1px solid rgba(163,113,247,0.25); padding:9px 12px; border-radius:10px; font-size:0.76rem; line-height:1.55;">Video ist in der Finalisierung. Werde das morgen früh liefern. Any blockers from your side?</div>
+                <div style="font-size:0.58rem; color:var(--text-dim); margin-top:3px; font-family:'JetBrains Mono',monospace; text-align:right;">10:03 · today</div>
+              </div>
+            </div>
+          </div>
+          <div style="padding:10px 12px; border-top:1px solid var(--border-light); display:flex; gap:8px;">
+            <input type="text" placeholder="Message Max..." style="flex:1; background:var(--bg); border:1px solid var(--border); border-radius:7px; padding:7px 12px; color:var(--text); font-family:'Inter',sans-serif; font-size:0.76rem;">
+            <button style="background:var(--accent); color:var(--bg); border:none; border-radius:7px; padding:7px 14px; font-weight:600; font-size:0.76rem; cursor:pointer;">Send</button>
+          </div>
+        </div>
+
+        <div style="background:var(--surface); border:1px solid var(--border); border-radius:10px; padding:13px 14px;">
+          <div style="font-size:0.65rem; color:var(--text-dim); text-transform:uppercase; letter-spacing:0.8px; margin-bottom:10px;">Quick Actions</div>
+          <div style="display:grid; grid-template-columns:1fr 1fr; gap:6px;">
+            <button style="background:var(--surface-card); border:1px solid var(--border-light); border-radius:7px; padding:9px 12px; color:var(--text); font-family:'Inter',sans-serif; font-size:0.74rem; cursor:pointer; text-align:left; display:flex; align-items:center; gap:6px;">💡 Brain Dump</button>
+            <button style="background:var(--surface-card); border:1px solid var(--border-light); border-radius:7px; padding:9px 12px; color:var(--text); font-family:'Inter',sans-serif; font-size:0.74rem; cursor:pointer; text-align:left; display:flex; align-items:center; gap:6px;">📋 New Task</button>
+            <button style="background:var(--surface-card); border:1px solid var(--border-light); border-radius:7px; padding:9px 12px; color:var(--text); font-family:'Inter',sans-serif; font-size:0.74rem; cursor:pointer; text-align:left; display:flex; align-items:center; gap:6px;">🌤 Weather</button>
+            <button style="background:var(--surface-card); border:1px solid var(--border-light); border-radius:7px; padding:9px 12px; color:var(--text); font-family:'Inter',sans-serif; font-size:0.74rem; cursor:pointer; text-align:left; display:flex; align-items:center; gap:6px;">🔄 Sync</button>
+          </div>
+        </div>
+
+        <div style="background:var(--surface); border:1px solid var(--border); border-radius:10px; padding:13px 14px;">
+          <div style="font-size:0.65rem; color:var(--text-dim); text-transform:uppercase; letter-spacing:0.8px; margin-bottom:10px;">Skills</div>
+          <div style="display:flex; flex-wrap:wrap; gap:5px;">
+            <span style="background:var(--surface-card); border:1px solid var(--border-light); border-radius:5px; padding:4px 9px; font-size:0.62rem; font-family:'JetBrains Mono',monospace; color:var(--text-dim);">weather</span>
+            <span style="background:var(--surface-card); border:1px solid var(--border-light); border-radius:5px; padding:4px 9px; font-size:0.62rem; font-family:'JetBrains Mono',monospace; color:var(--text-dim);">lnurl-pay</span>
+            <span style="background:var(--surface-card); border:1px solid var(--border-light); border-radius:5px; padding:4px 9px; font-size:0.62rem; font-family:'JetBrains Mono',monospace; color:var(--text-dim);">tmux</span>
+            <span style="background:var(--surface-card); border:1px solid var(--border-light); border-radius:5px; padding:4px 9px; font-size:0.62rem; font-family:'JetBrains Mono',monospace; color:var(--text-dim);">canvas</span>
+            <span style="background:var(--surface-card); border:1px solid var(--border-light); border-radius:5px; padding:4px 9px; font-size:0.62rem; font-family:'JetBrains Mono',monospace; color:var(--text-dim);">github</span>
+            <span style="background:var(--surface-card); border:1px solid var(--border-light); border-radius:5px; padding:4px 9px; font-size:0.62rem; font-family:'JetBrains Mono',monospace; color:var(--text-dim);">pdf</span>
+            <span style="background:var(--surface-card); border:1px solid var(--border-light); border-radius:5px; padding:4px 9px; font-size:0.62rem; font-family:'JetBrains Mono',monospace; color:var(--text-dim);">reminders</span>
+            <span style="background:rgba(0,188,212,0.08); border:1px solid rgba(0,188,212,0.2); border-radius:5px; padding:4px 9px; font-size:0.62rem; font-family:'JetBrains Mono',monospace; color:var(--accent);">+ Learn</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+const PROJECTS = {
+  saas: {
+    name: 'SaaS Starter Kit',
+    prio: 'P1',
+    taskCount: 13,
+    cols: [
+      {
+        title: 'TO DO', count: 8, color: 'var(--text-dim)',
+        tasks: [
+          { title: 'Stripe Webhook Endpoint — Subscription Events', tag: 'Billing', assignee: 'FD', date: 'This week' },
+          { title: 'User Invitation System — Multi-workspace Support', tag: 'Auth', assignee: 'FD', date: 'Next week' },
+          { title: 'Email Template Builder — Drag & Drop Editor', tag: 'Frontend', assignee: 'FD', date: 'Next week' },
+          { title: 'Onboarding Flow — 5-Step Wizard', tag: 'UX', assignee: 'FD', date: 'Sprint 2' },
+          { title: 'Billing Portal — Invoice History & Export', tag: 'Billing', assignee: 'FD', date: 'Sprint 2' },
+          { title: 'Notification Center — In-App + Email Preferences', tag: 'Feature', assignee: 'FD', date: 'Sprint 3' },
+          { title: 'API Rate Limiting — Redis-based Token Bucket', tag: 'Backend', assignee: 'FD', date: 'Sprint 3' },
+          { title: 'Dark Mode — System Preference + Manual Toggle', tag: 'Frontend', assignee: 'FD', date: 'Sprint 3' },
+        ]
+      },
+      {
+        title: 'IN PROGRESS', count: 3, color: 'var(--yellow)',
+        tasks: [
+          { title: 'Admin Dashboard — User & Revenue Analytics', tag: 'Frontend', assignee: 'FD', date: 'Apr 15' },
+          { title: 'Stripe Checkout — One-Time & Subscription', tag: 'Billing', assignee: 'FD', date: 'Apr 12' },
+          { title: 'JWT Refresh Token Rotation', tag: 'Auth', assignee: 'FD', date: 'Apr 10' },
+        ]
+      },
+      {
+        title: 'DONE', count: 2, color: 'var(--green)',
+        tasks: [
+          { title: 'Project Setup — Next.js 14 + Prisma + PostgreSQL', tag: 'DevOps', assignee: 'FD', date: 'Mar 28' },
+          { title: 'Auth System — Google OAuth + Magic Link', tag: 'Auth', assignee: 'FD', date: 'Apr 2' },
+        ]
+      },
+      {
+        title: '💡 BACKLOG', count: 4, color: 'var(--accent)',
+        tasks: [
+          { title: 'Mobile App — React Native Shell', tag: 'Mobile', assignee: 'FD', date: 'Sprint 4' },
+          { title: 'AI Writing Assistant — GPT-4 Integration', tag: 'Feature', assignee: 'FD', date: 'Sprint 4' },
+          { title: 'White-label Solution — Custom Domain per Customer', tag: 'Enterprise', assignee: 'FD', date: 'Sprint 5' },
+          { title: 'Zapier Integration — Webhook Triggers', tag: 'Integration', assignee: 'FD', date: 'Sprint 5' },
+        ]
+      }
+    ]
+  },
+  content: {
+    name: 'Content Engine',
+    prio: 'P1',
+    taskCount: 12,
+    cols: [
+      {
+        title: 'TO DO', count: 5, color: 'var(--text-dim)',
+        tasks: [
+          { title: 'Content Calendar — Q2 Editorial Plan', tag: 'Strategy', assignee: 'FD', date: 'This week' },
+          { title: 'LinkedIn Carousel Series — 8 Posts', tag: 'LinkedIn', assignee: 'FD', date: 'Next week' },
+          { title: 'Guest Post Outreach — 20 Targets', tag: 'Outreach', assignee: 'FD', date: 'Next week' },
+          { title: 'Blog SEO Audit — All 40 Posts', tag: 'SEO', assignee: 'FD', date: 'This month' },
+          { title: 'YouTube Shorts Script Template', tag: 'Video', assignee: 'FD', date: 'This month' },
+        ]
+      },
+      {
+        title: 'IN PROGRESS', count: 3, color: 'var(--yellow)',
+        tasks: [
+          { title: 'Weekly Newsletter — Issue #24 Draft', tag: 'Newsletter', assignee: 'FD', date: 'Friday' },
+          { title: 'Lead Magnet Landing Page — "Startup OS"', tag: 'Marketing', assignee: 'FD', date: 'Apr 12' },
+          { title: 'Twitter Thread — "10 Mistakes Founders Make"', tag: 'Social', assignee: 'FD', date: 'Daily' },
+        ]
+      },
+      {
+        title: 'DONE', count: 4, color: 'var(--green)',
+        tasks: [
+          { title: 'Blog Post — "How to Validate Your SaaS Idea"', tag: 'Blog', assignee: 'FD', date: 'Apr 1' },
+          { title: 'Newsletter — Issue #23 sent (1.847 open rate)', tag: 'Newsletter', assignee: 'FD', date: 'Mar 28' },
+          { title: 'LinkedIn Post — "My $0 to $5k MRR Journey"', tag: 'LinkedIn', assignee: 'FD', date: 'Mar 25' },
+          { title: 'Podcast Guest Application — 3 Shows', tag: 'Podcast', assignee: 'FD', date: 'Mar 22' },
+        ]
+      },
+      {
+        title: '💡 BACKLOG', count: 3, color: 'var(--accent)',
+        tasks: [
+          { title: 'Newsletter Relaunch — New Substack Design', tag: 'Newsletter', assignee: 'FD', date: 'May' },
+          { title: 'Medium Cross-Posting Automation', tag: 'Distribution', assignee: 'FD', date: 'Sprint 2' },
+          { title: 'Content Repurposing — Blog → LinkedIn → Twitter', tag: 'Automation', assignee: 'FD', date: 'Sprint 2' },
+        ]
+      }
+    ]
+  },
+  course: {
+    name: 'Online Masterclass',
+    prio: 'P2',
+    taskCount: 10,
+    cols: [
+      {
+        title: 'TO DO', count: 7, color: 'var(--text-dim)',
+        tasks: [
+          { title: 'Module 8-12 — Video Recording', tag: 'Content', assignee: 'FD', date: 'May' },
+          { title: 'Workbook Design — All 12 Modules', tag: 'Design', assignee: 'FD', date: 'May' },
+          { title: 'Community Setup — Circle.so Onboarding', tag: 'Community', assignee: 'FD', date: 'May' },
+          { title: 'Payment Processor — Gumroad or Stripe', tag: 'Billing', assignee: 'FD', date: 'May' },
+          { title: 'Pre-Launch Landing Page', tag: 'Marketing', assignee: 'FD', date: 'May' },
+          { title: 'Early Bird Email Sequence — 5 Emails', tag: 'Email', assignee: 'FD', date: 'Jun' },
+          { title: 'Facebook Group — 100 Founding Members', tag: 'Community', assignee: 'FD', date: 'Jun' },
+        ]
+      },
+      {
+        title: 'IN PROGRESS', count: 2, color: 'var(--yellow)',
+        tasks: [
+          { title: 'Module 1-7 — Video Recording', tag: 'Content', assignee: 'FD', date: 'Apr 30' },
+          { title: 'Lead Magnet — Free Mini-Course "First 100 Customers"', tag: 'Marketing', assignee: 'FD', date: 'Apr 20' },
+        ]
+      },
+      {
+        title: 'DONE', count: 1, color: 'var(--green)',
+        tasks: [
+          { title: 'Course Blueprint — 12-Module Curriculum', tag: 'Strategy', assignee: 'FD', date: 'Mar 20' },
+        ]
+      },
+      {
+        title: '💡 BACKLOG', count: 2, color: 'var(--accent)',
+        tasks: [
+          { title: 'Certification System — PDF Certificates', tag: 'Feature', assignee: 'FD', date: 'Sprint 3' },
+          { title: 'Live Q&A Sessions — Monthly Zoom Calls', tag: 'Community', assignee: 'FD', date: 'Post-launch' },
+        ]
+      }
+    ]
+  },
+  podcast: {
+    name: 'Podcast Pipeline',
+    prio: 'P2',
+    taskCount: 10,
+    cols: [
+      {
+        title: 'TO DO', count: 3, color: 'var(--text-dim)',
+        tasks: [
+          { title: 'Episode 15 Guest Research & Questions', tag: 'Prep', assignee: 'FD', date: 'This week' },
+          { title: 'Riverside.fm Setup — New Microphone', tag: 'Equipment', assignee: 'FD', date: 'This week' },
+          { title: 'YouTube Chapter Markers — All Episodes', tag: 'Distribution', assignee: 'FD', date: 'Weekly' },
+        ]
+      },
+      {
+        title: 'IN PROGRESS', count: 2, color: 'var(--yellow)',
+        tasks: [
+          { title: 'Episode 14 — Recording + Editing', tag: 'Production', assignee: 'FD', date: 'This week' },
+          { title: 'Guest Outreach — 5 Potential Guests', tag: 'Outreach', assignee: 'FD', date: 'Ongoing' },
+        ]
+      },
+      {
+        title: 'DONE', count: 5, color: 'var(--green)',
+        tasks: [
+          { title: 'Episode 13 — "From 0 to 10k Listeners"', tag: 'Published', assignee: 'FD', date: 'Apr 2' },
+          { title: 'Episode 12 — "Bootstrapping vs VC"', tag: 'Published', assignee: 'FD', date: 'Mar 26' },
+          { title: 'Episode 11 — "Hiring First Employee"', tag: 'Published', assignee: 'FD', date: 'Mar 19' },
+          { title: 'Podcast Cover Art — New Design', tag: 'Branding', assignee: 'FD', date: 'Mar 15' },
+          { title: 'Transcription Setup — Descript Integration', tag: 'Automation', assignee: 'FD', date: 'Mar 10' },
+        ]
+      },
+      {
+        title: '💡 BACKLOG', count: 2, color: 'var(--accent)',
+        tasks: [
+          { title: 'Podcast Network Outreach — 3 Shows', tag: 'Growth', assignee: 'FD', date: 'Sprint 2' },
+          { title: 'Sponsor Pitch Deck — Preparation', tag: 'Monetization', assignee: 'FD', date: 'Sprint 3' },
+        ]
+      }
+    ]
+  }
+};
+
+function showBoard(id) {
+  const proj = PROJECTS[id];
+  if (!proj) return;
+
+  document.getElementById('board-title').textContent = proj.name;
+  document.getElementById('board-prio').textContent = proj.prio;
+  document.getElementById('board-count').textContent = proj.taskCount + ' Tasks';
+
+  const colsEl = document.getElementById('board-columns');
+  colsEl.innerHTML = proj.cols.map(col => `
+    <div style="background:var(--surface); border:1px solid var(--border); border-radius:10px; padding:13px;">
+      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px; padding-bottom:9px; border-bottom:1px solid var(--border-light);">
+        <span style="font-size:0.68rem; font-weight:700; text-transform:uppercase; letter-spacing:0.8px; color:${col.color};">${col.title}</span>
+        <span style="font-size:0.62rem; font-family:'JetBrains Mono',monospace; color:var(--text-dim); background:var(--bg); padding:2px 7px; border-radius:10px;">${col.count}</span>
+      </div>
+      ${col.tasks.map(t => `
+        <div style="background:var(--surface-card); border:1px solid var(--border-light); border-radius:8px; padding:11px 12px; margin-bottom:7px; cursor:pointer; transition:border-color 0.15s;">
+          <div style="font-size:0.8rem; font-weight:500; line-height:1.4; margin-bottom:8px;">${t.title}</div>
+          <div style="display:inline-block; font-size:0.58rem; font-family:'JetBrains Mono',monospace; background:rgba(0,188,212,0.1); color:var(--accent); border:1px solid rgba(0,188,212,0.2); padding:2px 6px; border-radius:4px; margin-bottom:8px;">${t.tag}</div>
+          <div style="display:flex; gap:4px; margin-bottom:8px;">
+            <button style="background:none; border:1px solid var(--border); color:var(--text-dim); font-size:0.6rem; font-family:'JetBrains Mono',monospace; padding:2px 7px; border-radius:4px; cursor:pointer;">←</button>
+            <button style="background:none; border:1px solid var(--border); color:var(--text-dim); font-size:0.6rem; font-family:'JetBrains Mono',monospace; padding:2px 7px; border-radius:4px; cursor:pointer;">→</button>
+            <button style="background:none; border:1px solid var(--border); color:var(--text-dim); font-size:0.6rem; font-family:'JetBrains Mono',monospace; padding:2px 7px; border-radius:4px; cursor:pointer;">✓</button>
+          </div>
+          <div style="display:flex; justify-content:space-between; align-items:center;">
+            <span style="font-size:0.62rem; font-family:'JetBrains Mono',monospace; color:var(--text-dim); display:flex; align-items:center; gap:4px;">
+              <span style="width:16px;height:16px;border-radius:50%;border:1px solid var(--border);display:inline-flex;align-items:center;justify-content:center;font-size:0.5rem;font-weight:700;background:rgba(163,113,247,0.1);color:var(--purple);border-color:var(--purple);">${t.assignee}</span>
+              @founder
+            </span>
+            <span style="font-size:0.6rem; color:var(--text-dim); font-family:'JetBrains Mono',monospace;">${t.date}</span>
+          </div>
+        </div>
+      `).join('')}
+    </div>
+  `).join('');
+
+  document.getElementById('board-overlay').style.display = 'block';
+  document.body.style.overflow = 'hidden';
+}
+
+function closeBoard() {
+  document.getElementById('board-overlay').style.display = 'none';
+  document.body.style.overflow = '';
+}
+</script>
+
+</body>
+</html>
