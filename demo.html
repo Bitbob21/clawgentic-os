@@ -8,17 +8,20 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
   <style>
     :root {
-      --bg: #0b0f14;
-      --surface: #141b24;
-      --surface2: #1a2332;
-      --border: rgba(0, 188, 212, 0.15);
-      --primary: #00bcd4;
-      --primary-dim: rgba(0, 188, 212, 0.1);
-      --accent: #f56565;
-      --text: #e2e8f0;
-      --text-muted: #8899aa;
-      --grid-color: rgba(0, 188, 212, 0.04);
-      --success: #48bb78;
+      --bg: #071a2e;
+      --bg-kanban: #091f38;
+      --surface: #122d47;
+      --surface-hover: #1a3d5c;
+      --surface-card: #163450;
+      --border: #1e5c82;
+      --border-light: #143d5a;
+      --text: #e6edf3;
+      --text-dim: #5d8aa8;
+      --accent: #00bcd4;
+      --green: #26c6da;
+      --yellow: #f0883e;
+      --red: #f56565;
+      --purple: #a371f7;
     }
 
     * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -26,486 +29,764 @@
     body {
       font-family: 'Inter', -apple-system, sans-serif;
       background: var(--bg);
+      background-image: radial-gradient(circle at 1px 1px, rgba(0,188,212,0.06) 1px, transparent 0);
+      background-size: 40px 40px;
       color: var(--text);
       min-height: 100vh;
-      background-image:
-        linear-gradient(var(--grid-color) 1px, transparent 1px),
-        linear-gradient(90deg, var(--grid-color) 1px, transparent 1px);
-      background-size: 40px 40px;
     }
 
-    .container { max-width: 1100px; margin: 0 auto; padding: 0 24px; }
+    .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
 
-    /* HEADER */
-    header {
+    /* ── HEADER ── */
+    .header {
       background: var(--surface);
       border-bottom: 1px solid var(--border);
-      padding: 0;
-    }
-    header .container {
+      height: 52px;
       display: flex;
-      justify-content: space-between;
       align-items: center;
-      height: 60px;
     }
+    .header .container {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+    }
+    .header-left { display: flex; align-items: center; gap: 20px; }
     .logo {
       font-family: 'JetBrains Mono', monospace;
-      font-size: 1rem;
+      font-size: 0.85rem;
       font-weight: 600;
-      color: var(--primary);
+      color: var(--accent);
       text-decoration: none;
+      letter-spacing: -0.3px;
     }
-    .logo span { color: var(--text-muted); font-weight: 400; }
-    .demo-badge {
-      background: rgba(72, 187, 120, 0.15);
-      border: 1px solid rgba(72, 187, 120, 0.3);
-      color: var(--success);
-      font-size: 0.75rem;
+    .logo span { color: var(--text-dim); font-weight: 400; }
+    .header-nav { display: flex; gap: 4px; }
+    .header-nav button {
+      background: none;
+      border: none;
+      color: var(--text-dim);
+      font-family: 'Inter', sans-serif;
+      font-size: 0.8rem;
+      padding: 6px 12px;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+    .header-nav button:hover { color: var(--text); background: var(--surface-hover); }
+    .header-nav button.active { color: var(--accent); background: var(--surface-hover); }
+    .header-right { display: flex; align-items: center; gap: 14px; }
+    .ln-badge {
+      background: rgba(0,188,212,0.12);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 3px 10px;
+      font-size: 0.72rem;
       font-family: 'JetBrains Mono', monospace;
-      padding: 4px 12px;
-      border-radius: 100px;
+      color: var(--accent);
+    }
+    .header-status {
+      font-size: 0.72rem;
+      font-family: 'JetBrains Mono', monospace;
+      color: var(--green);
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+    .status-dot {
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: var(--green);
+      animation: pulse 2s infinite;
+    }
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.4; }
     }
     .back-link {
-      color: var(--text-muted);
+      color: var(--text-dim);
       text-decoration: none;
-      font-size: 0.85rem;
+      font-size: 0.78rem;
       display: flex;
       align-items: center;
       gap: 4px;
     }
-    .back-link:hover { color: var(--primary); }
-
-    /* MAIN */
-    main { padding: 40px 0; }
-
-    /* STATS BAR */
-    .stats-bar {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 16px;
-      margin-bottom: 32px;
+    .back-link:hover { color: var(--accent); }
+    .demo-pill {
+      background: rgba(38, 198, 218, 0.12);
+      border: 1px solid rgba(38, 198, 218, 0.3);
+      color: var(--green);
+      font-size: 0.7rem;
+      font-family: 'JetBrains Mono', monospace;
+      padding: 3px 10px;
+      border-radius: 100px;
     }
-    .stat {
+
+    /* ── MAIN ── */
+    main { padding: 24px 0; }
+
+    /* ── STATS ── */
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 12px;
+      margin-bottom: 24px;
+    }
+    .stat-card {
       background: var(--surface);
       border: 1px solid var(--border);
-      border-radius: 10px;
-      padding: 20px;
-      text-align: center;
+      border-radius: 8px;
+      padding: 14px 16px;
     }
-    .stat-num {
-      font-size: 2rem;
-      font-weight: 700;
+    .stat-label {
+      font-size: 0.68rem;
+      color: var(--text-dim);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 6px;
+    }
+    .stat-value {
       font-family: 'JetBrains Mono', monospace;
-      color: var(--primary);
+      font-size: 1.4rem;
+      font-weight: 600;
     }
-    .stat-label { font-size: 0.8rem; color: var(--text-muted); margin-top: 4px; }
+    .stat-value.accent { color: var(--accent); }
+    .stat-value.yellow { color: var(--yellow); }
+    .stat-value.green { color: var(--green); }
+    .stat-value.red { color: var(--red); }
 
-    /* PROJECTS HEADER */
-    .projects-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 16px;
-    }
-    .projects-header h2 { font-size: 1rem; font-weight: 600; }
-    .filter-tabs { display: flex; gap: 8px; }
-    .filter-tabs span {
-      font-size: 0.8rem;
-      padding: 4px 12px;
-      border-radius: 6px;
-      cursor: pointer;
-      color: var(--text-muted);
-    }
-    .filter-tabs span.active {
-      background: var(--primary-dim);
-      color: var(--primary);
-      border: 1px solid var(--border);
-    }
-
-    /* KANBAN */
-    .kanban { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 20px; }
-
-    .column { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 16px; }
-    .col-header {
+    /* ── SECTION HEADER ── */
+    .section-header {
       display: flex;
       justify-content: space-between;
       align-items: center;
       margin-bottom: 14px;
-      padding-bottom: 12px;
-      border-bottom: 1px solid var(--border);
     }
-    .col-title { font-size: 0.85rem; font-weight: 600; display: flex; gap: 8px; align-items: center; }
-    .col-count {
-      background: var(--surface2);
-      font-size: 0.7rem;
+    .section-title {
+      font-size: 0.85rem;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .badge-demo {
+      background: var(--accent);
+      color: var(--bg);
+      font-size: 0.6rem;
       font-family: 'JetBrains Mono', monospace;
-      padding: 2px 7px;
-      border-radius: 10px;
-      color: var(--text-muted);
-    }
-    .col-add { color: var(--text-muted); cursor: pointer; font-size: 1.1rem; }
-    .col-add:hover { color: var(--primary); }
-
-    /* TASK CARDS */
-    .task-card {
-      background: var(--surface2);
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      padding: 14px;
-      margin-bottom: 10px;
-      cursor: pointer;
-      transition: border-color 0.15s, transform 0.15s;
-    }
-    .task-card:hover { border-color: var(--primary); transform: translateY(-1px); }
-    .task-title { font-size: 0.88rem; font-weight: 500; margin-bottom: 8px; }
-    .task-meta { display: flex; gap: 6px; flex-wrap: wrap; }
-    .task-tag {
-      font-size: 0.7rem;
-      font-family: 'JetBrains Mono', monospace;
-      padding: 2px 8px;
+      padding: 2px 6px;
       border-radius: 4px;
-      background: var(--primary-dim);
-      color: var(--primary);
     }
-    .task-tag.high { background: rgba(245, 101, 101, 0.15); color: var(--accent); }
-    .task-footer {
+    .section-tabs { display: flex; gap: 4px; }
+    .section-tabs button {
+      background: none;
+      border: 1px solid var(--border);
+      color: var(--text-dim);
+      font-family: 'Inter', sans-serif;
+      font-size: 0.72rem;
+      padding: 4px 12px;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+    .section-tabs button:hover { border-color: var(--accent); color: var(--text); }
+    .section-tabs button.active {
+      background: var(--accent);
+      border-color: var(--accent);
+      color: var(--bg);
+    }
+
+    /* ── KANBAN ── */
+    .kanban {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 16px;
+      margin-bottom: 24px;
+    }
+    .kanban-col {
+      background: var(--bg-kanban);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 14px;
+    }
+    .kanban-col-header {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      margin-top: 10px;
+      margin-bottom: 12px;
+      padding-bottom: 10px;
+      border-bottom: 1px solid var(--border-light);
     }
-    .task-assignee {
-      width: 24px;
-      height: 24px;
+    .kanban-col-title {
+      font-size: 0.78rem;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .kanban-col.todo .kanban-col-title { color: var(--text-dim); }
+    .kanban-col.in-progress .kanban-col-title { color: var(--yellow); }
+    .kanban-col.done .kanban-col-title { color: var(--green); }
+    .kanban-count {
+      background: var(--surface);
+      border: 1px solid var(--border-light);
+      font-size: 0.65rem;
+      font-family: 'JetBrains Mono', monospace;
+      padding: 1px 6px;
+      border-radius: 10px;
+      color: var(--text-dim);
+    }
+    .kanban-add {
+      color: var(--text-dim);
+      cursor: pointer;
+      font-size: 1rem;
+      line-height: 1;
+      transition: color 0.15s;
+    }
+    .kanban-add:hover { color: var(--accent); }
+
+    /* TASK CARDS */
+    .task-card {
+      background: var(--surface-card);
+      border: 1px solid var(--border-light);
+      border-radius: 8px;
+      padding: 12px;
+      margin-bottom: 8px;
+      cursor: pointer;
+      transition: border-color 0.15s, transform 0.15s;
+    }
+    .task-card:hover {
+      border-color: var(--accent);
+      transform: translateY(-1px);
+    }
+    .task-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 8px;
+    }
+    .task-title {
+      font-size: 0.82rem;
+      font-weight: 500;
+      line-height: 1.4;
+      flex: 1;
+      padding-right: 8px;
+    }
+    .task-badges { display: flex; gap: 4px; flex-wrap: wrap; justify-content: flex-end; }
+    .badge {
+      font-size: 0.6rem;
+      font-family: 'JetBrains Mono', monospace;
+      padding: 2px 6px;
+      border-radius: 4px;
+    }
+    .badge.prio1 { background: var(--red); color: #fff; }
+    .badge.prio2 { background: var(--yellow); color: #000; }
+    .badge.active { background: var(--accent); color: var(--bg); }
+    .badge.tag { background: rgba(0,188,212,0.12); color: var(--accent); border: 1px solid rgba(0,188,212,0.2); }
+    .task-bottom {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .assignee {
+      width: 22px; height: 22px;
       border-radius: 50%;
-      background: var(--primary-dim);
       border: 1px solid var(--border);
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 0.65rem;
-      font-weight: 600;
-      color: var(--primary);
+      font-size: 0.6rem;
+      font-weight: 700;
     }
-    .task-date { font-size: 0.7rem; color: var(--text-muted); font-family: 'JetBrains Mono', monospace; }
+    .assignee.seb { background: rgba(240,136,62,0.15); color: var(--yellow); border-color: var(--yellow); }
+    .assignee.max { background: rgba(163,113,247,0.15); color: var(--purple); border-color: var(--purple); }
+    .task-date {
+      font-size: 0.65rem;
+      color: var(--text-dim);
+      font-family: 'JetBrains Mono', monospace;
+    }
+
+    /* ── BOTTOM ROW ── */
+    .bottom-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+
+    /* PROJECT LIST */
+    .project-list { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; overflow: hidden; }
+    .project-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 14px 18px;
+      border-bottom: 1px solid var(--border-light);
+      cursor: pointer;
+      transition: background 0.15s;
+    }
+    .project-item:last-child { border-bottom: none; }
+    .project-item:hover { background: var(--surface-hover); }
+    .project-info { display: flex; align-items: center; gap: 12px; }
+    .project-dot {
+      width: 8px; height: 8px;
+      border-radius: 50%;
+      background: var(--accent);
+    }
+    .project-name { font-size: 0.85rem; font-weight: 500; }
+    .project-meta { font-size: 0.72rem; color: var(--text-dim); margin-top: 2px; }
+    .project-stats { display: flex; gap: 16px; align-items: center; }
+    .stat-dot {
+      width: 6px; height: 6px;
+      border-radius: 50%;
+    }
+    .stat-dot.todo { background: var(--text-dim); }
+    .stat-dot.active { background: var(--yellow); }
+    .stat-dot.done { background: var(--green); }
+    .project-stat {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      font-size: 0.72rem;
+      font-family: 'JetBrains Mono', monospace;
+      color: var(--text-dim);
+    }
 
     /* CHAT WIDGET */
     .chat-widget {
       background: var(--surface);
       border: 1px solid var(--border);
       border-radius: 10px;
-      margin-top: 32px;
-      overflow: hidden;
+      display: flex;
+      flex-direction: column;
     }
     .chat-header {
       padding: 14px 18px;
-      border-bottom: 1px solid var(--border);
+      border-bottom: 1px solid var(--border-light);
       display: flex;
-      gap: 10px;
+      gap: 12px;
       align-items: center;
     }
     .chat-avatar {
-      width: 32px;
-      height: 32px;
+      width: 34px; height: 34px;
       border-radius: 50%;
-      background: var(--primary-dim);
-      border: 1px solid var(--primary);
+      background: rgba(163,113,247,0.15);
+      border: 1px solid var(--purple);
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 0.9rem;
+      font-size: 1rem;
     }
     .chat-info { flex: 1; }
     .chat-name { font-size: 0.85rem; font-weight: 600; }
-    .chat-status { font-size: 0.7rem; color: var(--success); font-family: 'JetBrains Mono', monospace; }
+    .chat-sub { font-size: 0.7rem; color: var(--green); font-family: 'JetBrains Mono', monospace; }
     .chat-body {
-      padding: 16px 18px;
-      height: 160px;
-      overflow-y: auto;
+      padding: 14px 18px;
+      flex: 1;
       display: flex;
       flex-direction: column;
       gap: 12px;
+      min-height: 200px;
+      max-height: 220px;
+      overflow-y: auto;
     }
-    .chat-msg { display: flex; gap: 8px; max-width: 85%; }
-    .chat-msg.max { align-self: flex-end; flex-direction: row-reverse; }
+    .chat-msg { display: flex; gap: 8px; max-width: 90%; }
+    .chat-msg.from-max { align-self: flex-end; flex-direction: row-reverse; }
     .chat-bubble {
-      background: var(--surface2);
-      border: 1px solid var(--border);
+      background: var(--surface-card);
+      border: 1px solid var(--border-light);
       padding: 10px 14px;
       border-radius: 12px;
-      font-size: 0.85rem;
-      line-height: 1.5;
+      font-size: 0.82rem;
+      line-height: 1.55;
     }
-    .chat-msg.max .chat-bubble { background: var(--primary-dim); border-color: var(--border); }
-    .chat-time { font-size: 0.65rem; color: var(--text-muted); margin-top: 4px; font-family: 'JetBrains Mono', monospace; }
+    .chat-msg.from-max .chat-bubble {
+      background: rgba(163,113,247,0.1);
+      border-color: rgba(163,113,247,0.3);
+    }
+    .chat-time {
+      font-size: 0.62rem;
+      color: var(--text-dim);
+      margin-top: 4px;
+      font-family: 'JetBrains Mono', monospace;
+    }
     .chat-input-row {
       padding: 12px 18px;
-      border-top: 1px solid var(--border);
+      border-top: 1px solid var(--border-light);
       display: flex;
       gap: 10px;
     }
     .chat-input-row input {
       flex: 1;
-      background: var(--surface2);
+      background: var(--bg-kanban);
       border: 1px solid var(--border);
       border-radius: 8px;
       padding: 8px 14px;
       color: var(--text);
       font-family: 'Inter', sans-serif;
-      font-size: 0.85rem;
+      font-size: 0.82rem;
     }
-    .chat-input-row input:focus { outline: none; border-color: var(--primary); }
+    .chat-input-row input:focus { outline: none; border-color: var(--accent); }
     .chat-input-row button {
-      background: var(--primary);
+      background: var(--accent);
       color: var(--bg);
       border: none;
       border-radius: 8px;
       padding: 8px 16px;
       font-weight: 600;
-      font-size: 0.85rem;
+      font-size: 0.8rem;
       cursor: pointer;
     }
 
     /* FOOTER NOTE */
-    .demo-note {
+    .footer-note {
       text-align: center;
-      margin-top: 24px;
-      padding: 14px;
+      margin-top: 20px;
+      padding: 12px;
       background: var(--surface);
       border: 1px solid var(--border);
       border-radius: 8px;
-      font-size: 0.8rem;
-      color: var(--text-muted);
+      font-size: 0.75rem;
+      color: var(--text-dim);
       font-family: 'JetBrains Mono', monospace;
     }
 
-    @media (max-width: 900px) {
-      .stats-bar { grid-template-columns: repeat(2, 1fr); }
+    @media (max-width: 1024px) {
+      .stats { grid-template-columns: repeat(3, 1fr); }
+      .bottom-row { grid-template-columns: 1fr; }
       .kanban { grid-template-columns: 1fr; }
     }
-    @media (max-width: 600px) {
-      .stats-bar { grid-template-columns: 1fr 1fr; }
+    @media (max-width: 640px) {
+      .stats { grid-template-columns: 1fr 1fr; }
+      .header-nav { display: none; }
     }
   </style>
 </head>
 <body>
 
-<header>
+<div class="header">
   <div class="container">
-    <a href="/" class="back-link">← Back to site</a>
-    <a href="/" class="logo">clawgentic<span>.os</span></a>
-    <span class="demo-badge">LIVE DEMO</span>
+    <div class="header-left">
+      <a href="/" class="back-link">← Back</a>
+      <a href="/" class="logo">clawgentic<span>.os</span></a>
+      <nav class="header-nav">
+        <button class="active">Projects</button>
+        <button>Board</button>
+        <button>Calendar</button>
+        <button>Chat</button>
+      </nav>
+    </div>
+    <div class="header-right">
+      <span class="ln-badge">⚡ max@ln.com</span>
+      <span class="header-status"><span class="status-dot"></span>Max online</span>
+      <span class="demo-pill">DEMO</span>
+    </div>
   </div>
-</header>
+</div>
 
 <main class="container">
 
-  <div class="stats-bar">
-    <div class="stat">
-      <div class="stat-num">4</div>
-      <div class="stat-label">Active Projects</div>
+  <div class="stats">
+    <div class="stat-card">
+      <div class="stat-label">Projects</div>
+      <div class="stat-value accent">4</div>
     </div>
-    <div class="stat">
-      <div class="stat-num">12</div>
+    <div class="stat-card">
       <div class="stat-label">Open Tasks</div>
+      <div class="stat-value">11</div>
     </div>
-    <div class="stat">
-      <div class="stat-num">3</div>
+    <div class="stat-card">
       <div class="stat-label">In Progress</div>
+      <div class="stat-value yellow">3</div>
     </div>
-    <div class="stat">
-      <div class="stat-num">0</div>
-      <div class="stat-label">Blocked</div>
+    <div class="stat-card">
+      <div class="stat-label">Done Today</div>
+      <div class="stat-value green">2</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-label">Blockers</div>
+      <div class="stat-value red">0</div>
     </div>
   </div>
 
-  <div class="projects-header">
-    <h2>Projects</h2>
-    <div class="filter-tabs">
-      <span class="active">All</span>
-      <span>Active</span>
-      <span>Done</span>
+  <div class="section-header">
+    <div class="section-title">
+      Projects
+      <span class="badge-demo">DEMO</span>
+    </div>
+    <div class="section-tabs">
+      <button class="active">All</button>
+      <button>Active</button>
+      <button>Done</button>
     </div>
   </div>
 
   <div class="kanban">
 
-    <!-- TODO COLUMN -->
-    <div class="column">
-      <div class="col-header">
-        <div class="col-title">To Do <span class="col-count">4</span></div>
-        <div class="col-add">+</div>
+    <!-- TODO -->
+    <div class="kanban-col todo">
+      <div class="kanban-col-header">
+        <div class="kanban-col-title">To Do <span class="kanban-count">5</span></div>
+        <div class="kanban-add">+</div>
       </div>
+
       <div class="task-card">
-        <div class="task-title">Finalize investor pitch deck</div>
-        <div class="task-meta">
-          <span class="task-tag high">Prio 1</span>
-          <span class="task-tag">Founder OS</span>
+        <div class="task-top">
+          <div class="task-title">Finalize investor pitch deck v2</div>
+          <div class="task-badges"><span class="badge prio1">P1</span></div>
         </div>
-        <div class="task-footer">
-          <div class="task-assignee">MK</div>
-          <div class="task-date">Due Today</div>
+        <div class="task-bottom">
+          <div class="assignee max">MX</div>
+          <div class="task-date">Due today</div>
         </div>
       </div>
+
       <div class="task-card">
-        <div class="task-title">Research competitor pricing</div>
-        <div class="task-meta">
-          <span class="task-tag">Research</span>
+        <div class="task-top">
+          <div class="task-title">Research ZSL partnership terms</div>
+          <div class="task-badges"><span class="badge tag">Outreach</span></div>
         </div>
-        <div class="task-footer">
-          <div class="task-assignee">MX</div>
+        <div class="task-bottom">
+          <div class="assignee max">MX</div>
           <div class="task-date">This week</div>
         </div>
       </div>
+
       <div class="task-card">
-        <div class="task-title">Schedule call with ZSL</div>
-        <div class="task-meta">
-          <span class="task-tag">Outreach</span>
+        <div class="task-top">
+          <div class="task-title">Schedule call with Saramonic NZ</div>
+          <div class="task-badges"><span class="badge tag">OceanEar</span></div>
         </div>
-        <div class="task-footer">
-          <div class="task-assignee">SE</div>
+        <div class="task-bottom">
+          <div class="assignee seb">SE</div>
           <div class="task-date">This week</div>
         </div>
       </div>
+
       <div class="task-card">
-        <div class="task-title">Update landing page copy</div>
-        <div class="task-meta">
-          <span class="task-tag">Marketing</span>
+        <div class="task-top">
+          <div class="task-title">Update Founder OS landing page</div>
+          <div class="task-badges"><span class="badge tag">Marketing</span></div>
         </div>
-        <div class="task-footer">
-          <div class="task-assignee">MX</div>
+        <div class="task-bottom">
+          <div class="assignee max">MX</div>
           <div class="task-date">Next week</div>
+        </div>
+      </div>
+
+      <div class="task-card">
+        <div class="task-top">
+          <div class="task-title">Uber Eats task — weekly report</div>
+          <div class="task-badges"><span class="badge tag">Automation</span></div>
+        </div>
+        <div class="task-bottom">
+          <div class="assignee max">MX</div>
+          <div class="task-date">Weekly</div>
         </div>
       </div>
     </div>
 
-    <!-- IN PROGRESS COLUMN -->
-    <div class="column">
-      <div class="col-header">
-        <div class="col-title">In Progress <span class="col-count">3</span></div>
-        <div class="col-add">+</div>
+    <!-- IN PROGRESS -->
+    <div class="kanban-col in-progress">
+      <div class="kanban-col-header">
+        <div class="kanban-col-title">In Progress <span class="kanban-count">3</span></div>
+        <div class="kanban-add">+</div>
       </div>
+
       <div class="task-card">
-        <div class="task-title">Launch OceanEar beta</div>
-        <div class="task-meta">
-          <span class="task-tag high">Prio 1</span>
-          <span class="task-tag">OceanEar</span>
+        <div class="task-top">
+          <div class="task-title">Launch OceanEar beta</div>
+          <div class="task-badges"><span class="badge prio1">P1</span><span class="badge active">Active</span></div>
         </div>
-        <div class="task-footer">
-          <div class="task-assignee">SE</div>
+        <div class="task-bottom">
+          <div class="assignee seb">SE</div>
           <div class="task-date">Apr 8</div>
         </div>
       </div>
+
       <div class="task-card">
-        <div class="task-title">Set up CI/CD pipeline</div>
-        <div class="task-meta">
-          <span class="task-tag">DevOps</span>
+        <div class="task-top">
+          <div class="task-title">CI/CD pipeline — GitHub Actions</div>
+          <div class="task-badges"><span class="badge tag">DevOps</span></div>
         </div>
-        <div class="task-footer">
-          <div class="task-assignee">MX</div>
+        <div class="task-bottom">
+          <div class="assignee max">MX</div>
           <div class="task-date">Apr 10</div>
         </div>
       </div>
+
       <div class="task-card">
-        <div class="task-title">Kina population survey</div>
-        <div class="task-meta">
-          <span class="task-tag">Research</span>
+        <div class="task-top">
+          <div class="task-title">Kina population survey — data collection</div>
+          <div class="task-badges"><span class="badge tag">Research</span></div>
         </div>
-        <div class="task-footer">
-          <div class="task-assignee">SE</div>
+        <div class="task-bottom">
+          <div class="assignee seb">SE</div>
           <div class="task-date">Ongoing</div>
         </div>
       </div>
     </div>
 
-    <!-- DONE COLUMN -->
-    <div class="column">
-      <div class="col-header">
-        <div class="col-title">Done <span class="col-count">5</span></div>
-        <div class="col-add">+</div>
+    <!-- DONE -->
+    <div class="kanban-col done">
+      <div class="kanban-col-header">
+        <div class="kanban-col-title">Done <span class="kanban-count">4</span></div>
+        <div class="kanban-add">+</div>
       </div>
+
       <div class="task-card">
-        <div class="task-title">Clawgentic website v1</div>
-        <div class="task-meta">
-          <span class="task-tag">Clawgentic</span>
+        <div class="task-top">
+          <div class="task-title">Clawgentic website v1 — launched</div>
+          <div class="task-badges"><span class="badge tag">Clawgentic</span></div>
         </div>
-        <div class="task-footer">
-          <div class="task-assignee">MX</div>
+        <div class="task-bottom">
+          <div class="assignee max">MX</div>
           <div class="task-date">Today</div>
         </div>
       </div>
+
       <div class="task-card">
-        <div class="task-title">Strategy workshop completed</div>
-        <div class="task-meta">
-          <span class="task-tag">Planning</span>
+        <div class="task-top">
+          <div class="task-title">OceanEar strategy workshop</div>
+          <div class="task-badges"><span class="badge tag">Planning</span></div>
         </div>
-        <div class="task-footer">
-          <div class="task-assignee">SE</div>
+        <div class="task-bottom">
+          <div class="assignee seb">SE</div>
           <div class="task-date">Apr 2</div>
         </div>
       </div>
+
       <div class="task-card">
-        <div class="task-title">Bookkeeping review</div>
-        <div class="task-meta">
-          <span class="task-tag">Admin</span>
+        <div class="task-top">
+          <div class="task-title">Instagram automation research</div>
+          <div class="task-badges"><span class="badge tag">Research</span></div>
         </div>
-        <div class="task-footer">
-          <div class="task-assignee">SE</div>
+        <div class="task-bottom">
+          <div class="assignee max">MX</div>
+          <div class="task-date">Apr 4</div>
+        </div>
+      </div>
+
+      <div class="task-card">
+        <div class="task-top">
+          <div class="task-title">Uber Eats automation — weekly run</div>
+          <div class="task-badges"><span class="badge tag">Automation</span></div>
+        </div>
+        <div class="task-bottom">
+          <div class="assignee max">MX</div>
           <div class="task-date">Apr 1</div>
         </div>
       </div>
-      <div class="task-card">
-        <div class="task-title">Email sequence drafted</div>
-        <div class="task-meta">
-          <span class="task-tag">Marketing</span>
+    </div>
+  </div>
+
+  <div class="bottom-row">
+
+    <!-- PROJECT LIST -->
+    <div>
+      <div class="section-header">
+        <div class="section-title">All Projects</div>
+      </div>
+      <div class="project-list">
+        <div class="project-item">
+          <div class="project-info">
+            <div class="project-dot"></div>
+            <div>
+              <div class="project-name">OceanEar</div>
+              <div class="project-meta">App + Hardware · Prio 1</div>
+            </div>
+          </div>
+          <div class="project-stats">
+            <div class="project-stat"><span class="stat-dot todo"></span> 3</div>
+            <div class="project-stat"><span class="stat-dot active"></span> 1</div>
+            <div class="project-stat"><span class="stat-dot done"></span> 4</div>
+          </div>
         </div>
-        <div class="task-footer">
-          <div class="task-assignee">MX</div>
-          <div class="task-date">Mar 30</div>
+        <div class="project-item">
+          <div class="project-info">
+            <div class="project-dot"></div>
+            <div>
+              <div class="project-name">Clawgentic OS</div>
+              <div class="project-meta">Magic Installer · Prio 1</div>
+            </div>
+          </div>
+          <div class="project-stats">
+            <div class="project-stat"><span class="stat-dot todo"></span> 2</div>
+            <div class="project-stat"><span class="stat-dot active"></span> 1</div>
+            <div class="project-stat"><span class="stat-dot done"></span> 1</div>
+          </div>
+        </div>
+        <div class="project-item">
+          <div class="project-info">
+            <div class="project-dot"></div>
+            <div>
+              <div class="project-name">Founder OS</div>
+              <div class="project-meta">Präsentation · Active</div>
+            </div>
+          </div>
+          <div class="project-stats">
+            <div class="project-stat"><span class="stat-dot todo"></span> 0</div>
+            <div class="project-stat"><span class="stat-dot active"></span> 1</div>
+            <div class="project-stat"><span class="stat-dot done"></span> 2</div>
+          </div>
+        </div>
+        <div class="project-item">
+          <div class="project-info">
+            <div class="project-dot"></div>
+            <div>
+              <div class="project-name">Kina Research</div>
+              <div class="project-meta">Field Research · Ongoing</div>
+            </div>
+          </div>
+          <div class="project-stats">
+            <div class="project-stat"><span class="stat-dot todo"></span> 1</div>
+            <div class="project-stat"><span class="stat-dot active"></span> 1</div>
+            <div class="project-stat"><span class="stat-dot done"></span> 2</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- CHAT WIDGET -->
+    <div>
+      <div class="section-header">
+        <div class="section-title">Chat with Max</div>
+      </div>
+      <div class="chat-widget">
+        <div class="chat-header">
+          <div class="chat-avatar">🤖</div>
+          <div class="chat-info">
+            <div class="chat-name">Max</div>
+            <div class="chat-sub">● Online — responds in minutes</div>
+          </div>
+        </div>
+        <div class="chat-body">
+          <div class="chat-msg">
+            <div class="chat-avatar">🤖</div>
+            <div>
+              <div class="chat-bubble">Morning! OceanEar beta on track for Apr 8. I've drafted the launch email sequence — sending a test to your inbox shortly. ZSL outreach ready to go.</div>
+              <div class="chat-time">09:14 · today</div>
+            </div>
+          </div>
+          <div class="chat-msg from-max">
+            <div>
+              <div class="chat-bubble">Perfect. Send it. CI/CD pipeline is live for the website — new commits deploy automatically now.</div>
+              <div class="chat-time">09:15 · today</div>
+            </div>
+          </div>
+          <div class="chat-msg">
+            <div class="chat-avatar">🤖</div>
+            <div>
+              <div class="chat-bubble">Done. Test email sent ✅ ZSL email queued. I'll update the board when it's done. Blockers: 0.</div>
+              <div class="chat-time">09:15 · today</div>
+            </div>
+          </div>
+        </div>
+        <div class="chat-input-row">
+          <input type="text" placeholder="Message Max...">
+          <button>Send</button>
         </div>
       </div>
     </div>
   </div>
 
-  <!-- CHAT WIDGET -->
-  <div class="chat-widget">
-    <div class="chat-header">
-      <div class="chat-avatar">🤖</div>
-      <div class="chat-info">
-        <div class="chat-name">Max</div>
-        <div class="chat-status">● Online — responds within minutes</div>
-      </div>
-    </div>
-    <div class="chat-body">
-      <div class="chat-msg">
-        <div class="chat-avatar">🤖</div>
-        <div>
-          <div class="chat-bubble">Morning! OceanEar beta is on track for Apr 8. I've drafted the launch email sequence — want me to send the first test tonight?</div>
-          <div class="chat-time">09:14 · today</div>
-        </div>
-      </div>
-      <div class="chat-msg max">
-        <div>
-          <div class="chat-bubble">Yes, send the test to my email. Also — the website looks good. CI is live ✅</div>
-          <div class="chat-time">09:15 · today</div>
-        </div>
-      </div>
-      <div class="chat-msg">
-        <div class="chat-avatar">🤖</div>
-        <div>
-          <div class="chat-bubble">Done. Check your inbox in 5 minutes. I'll also update the board and ping ZSL about the call.</div>
-          <div class="chat-time">09:15 · today</div>
-        </div>
-      </div>
-    </div>
-    <div class="chat-input-row">
-      <input type="text" placeholder="Message Max...">
-      <button>Send</button>
-    </div>
-  </div>
-
-  <div class="demo-note">
-    This is a live demo. Your actual dashboard is private at: <strong>your-server:18901</strong>
+  <div class="footer-note">
+    This is a live demo · Your actual dashboard is private
   </div>
 
 </main>
