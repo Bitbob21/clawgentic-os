@@ -3,766 +3,117 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Founder OS — Board Demo</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <title>Founder OS — Dashboard Demo</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
   <style>
-    :root {
-      --bg: #071a2e;
-      --surface: #122d47;
-      --surface-hover: #1a3d5c;
-      --surface-card: #163450;
-      --border: #1e5c82;
-      --border-light: #143d5a;
-      --text: #e6edf3;
-      --text-dim: #5d8aa8;
-      --accent: #00bcd4;
-      --green: #26c6da;
-      --yellow: #f0883e;
-      --red: #f56565;
-      --purple: #a371f7;
-    }
     * { margin: 0; padding: 0; box-sizing: border-box; }
     body {
       font-family: 'Inter', -apple-system, sans-serif;
-      background: var(--bg);
-      color: var(--text);
+      background: #071a2e;
+      color: #e6edf3;
       min-height: 100vh;
-      background-image: radial-gradient(circle at 1px 1px, rgba(0,188,212,0.05) 1px, transparent 0);
-      background-size: 40px 40px;
     }
-    .container { max-width: 1400px; margin: 0 auto; padding: 0 20px; }
-
-    /* ── HEADER ── */
-    .header {
-      background: var(--surface);
-      border-bottom: 1px solid var(--border);
-      height: 50px;
-      display: flex;
-      align-items: center;
-    }
-    .header .container {
+    .demo-bar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      background: rgba(7,26,46,0.95);
+      border-bottom: 1px solid #1e5c82;
+      padding: 10px 20px;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      width: 100%;
+      backdrop-filter: blur(8px);
     }
-    .header-left { display: flex; align-items: center; gap: 20px; }
-    .header-right { display: flex; align-items: center; gap: 16px; }
+    .demo-bar-left { display: flex; align-items: center; gap: 16px; }
+    .demo-badge {
+      background: #f0883e;
+      color: #000;
+      font-size: 0.65rem;
+      font-family: 'JetBrains Mono', monospace;
+      font-weight: 700;
+      padding: 3px 10px;
+      border-radius: 4px;
+      letter-spacing: 0.5px;
+    }
+    .demo-label {
+      font-size: 0.78rem;
+      color: #5d8aa8;
+    }
+    .demo-label strong { color: #e6edf3; }
+    .back-link {
+      color: #5d8aa8;
+      text-decoration: none;
+      font-size: 0.78rem;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+    .back-link:hover { color: #00bcd4; }
     .logo {
       font-family: 'JetBrains Mono', monospace;
       font-size: 0.8rem;
       font-weight: 600;
-      color: var(--accent);
+      color: #00bcd4;
       text-decoration: none;
     }
-    .logo span { color: var(--text-dim); font-weight: 400; }
-    .header-nav { display: flex; gap: 2px; }
-    .header-nav button {
-      background: none;
-      border: none;
-      color: var(--text-dim);
-      font-family: 'Inter', sans-serif;
-      font-size: 0.78rem;
-      padding: 6px 14px;
-      border-radius: 6px;
-      cursor: pointer;
-      transition: all 0.15s;
+    .logo span { color: #5d8aa8; font-weight: 400; }
+    .screenshot-wrap {
+      padding-top: 52px;
+      min-height: 100vh;
     }
-    .header-nav button:hover { background: var(--surface-hover); color: var(--text); }
-    .header-nav button.active { color: var(--accent); background: var(--surface-hover); }
-    .online-badge {
+    .screenshot-wrap img {
+      width: 100%;
+      height: calc(100vh - 52px);
+      object-fit: cover;
+      display: block;
+    }
+    .demo-footer {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: rgba(7,26,46,0.9);
+      border-top: 1px solid #1e5c82;
+      padding: 10px 20px;
       display: flex;
-      align-items: center;
-      gap: 5px;
-      font-size: 0.7rem;
-      font-family: 'JetBrains Mono', monospace;
-      color: var(--green);
-    }
-    .online-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--green); animation: pulse 2s infinite; }
-    @keyframes pulse { 0%,100% { opacity: 1; } 50% { opacity: 0.3; } }
-    .back-link { color: var(--text-dim); text-decoration: none; font-size: 0.75rem; display: flex; align-items: center; gap: 4px; }
-    .back-link:hover { color: var(--accent); }
-    .demo-pill {
-      background: rgba(38,198,218,0.12);
-      border: 1px solid rgba(38,198,218,0.3);
-      color: var(--green);
-      font-size: 0.65rem;
-      font-family: 'JetBrains Mono', monospace;
-      padding: 2px 8px;
-      border-radius: 100px;
-    }
-
-    /* ── PROJECT HEADER ── */
-    .project-header {
-      padding: 18px 0 14px;
-      display: flex;
-      align-items: center;
-      gap: 16px;
-    }
-    .project-title {
-      font-size: 1.1rem;
-      font-weight: 700;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-    .project-prio {
-      font-size: 0.62rem;
-      font-family: 'JetBrains Mono', monospace;
-      padding: 2px 7px;
-      border-radius: 4px;
-      font-weight: 600;
-      background: var(--red);
-      color: #fff;
-    }
-    .task-count {
-      font-size: 0.72rem;
-      font-family: 'JetBrains Mono', monospace;
-      color: var(--text-dim);
-    }
-    .ws-badge {
-      background: rgba(163,113,247,0.12);
-      border: 1px solid rgba(163,113,247,0.3);
-      color: var(--purple);
-      font-size: 0.62rem;
-      font-family: 'JetBrains Mono', monospace;
-      padding: 2px 8px;
-      border-radius: 4px;
-    }
-
-    /* ── BOARD LAYOUT ── */
-    .board-wrap { display: grid; grid-template-columns: 1fr 280px; gap: 18px; }
-
-    .board {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 14px;
-      align-items: start;
-    }
-    .col {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 10px;
-      padding: 12px;
-    }
-    .col-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 10px;
-      padding-bottom: 8px;
-      border-bottom: 1px solid var(--border-light);
-    }
-    .col-title {
-      font-size: 0.72rem;
-      font-weight: 600;
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-    }
-    .col.todo .col-title { color: var(--text-dim); }
-    .col.in-progress .col-title { color: var(--yellow); }
-    .col.done .col-title { color: var(--green); }
-    .col.backlog .col-title { color: var(--accent); }
-    .col-count {
-      font-size: 0.62rem;
-      font-family: 'JetBrains Mono', monospace;
-      color: var(--text-dim);
-      background: var(--bg);
-      padding: 1px 6px;
-      border-radius: 10px;
-    }
-
-    /* TASK CARDS */
-    .task {
-      background: var(--surface-card);
-      border: 1px solid var(--border-light);
-      border-radius: 8px;
-      padding: 11px;
-      margin-bottom: 7px;
-      cursor: pointer;
-      transition: border-color 0.15s, transform 0.1s;
-    }
-    .task:hover { border-color: var(--accent); transform: translateY(-1px); }
-    .task-title { font-size: 0.8rem; font-weight: 500; line-height: 1.4; margin-bottom: 8px; }
-    .task-actions {
-      display: flex;
-      gap: 4px;
-      flex-wrap: wrap;
-    }
-    .task-btn {
-      background: none;
-      border: 1px solid var(--border);
-      color: var(--text-dim);
-      font-size: 0.6rem;
-      font-family: 'JetBrains Mono', monospace;
-      padding: 2px 6px;
-      border-radius: 4px;
-      cursor: pointer;
-      transition: all 0.15s;
-    }
-    .task-btn:hover { border-color: var(--accent); color: var(--accent); }
-    .task-assignee {
-      display: inline-flex;
-      align-items: center;
-      gap: 4px;
-      font-size: 0.62rem;
-      font-family: 'JetBrains Mono', monospace;
-      color: var(--text-dim);
-      margin-top: 6px;
-    }
-    .assignee-dot {
-      width: 16px; height: 16px;
-      border-radius: 50%;
-      border: 1px solid;
-      display: inline-flex;
-      align-items: center;
       justify-content: center;
-      font-size: 0.5rem;
-      font-weight: 700;
+      gap: 24px;
+      backdrop-filter: blur(8px);
     }
-    .assignee-dot.max { background: rgba(163,113,247,0.15); color: var(--purple); border-color: var(--purple); }
-    .assignee-dot.seb { background: rgba(240,136,62,0.15); color: var(--yellow); border-color: var(--yellow); }
-    .assignee-dot.placeholder { background: rgba(93,138,168,0.1); color: var(--text-dim); border-color: var(--border); }
-
-    /* ── RIGHT SIDEBAR ── */
-    .sidebar {}
-
-    /* CHAT WIDGET */
-    .chat-widget {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 10px;
-      display: flex;
-      flex-direction: column;
-      margin-bottom: 14px;
-    }
-    .chat-header {
-      padding: 10px 14px;
-      border-bottom: 1px solid var(--border-light);
-      display: flex;
-      gap: 10px;
-      align-items: center;
-    }
-    .chat-avatar {
-      width: 28px; height: 28px;
-      border-radius: 50%;
-      background: rgba(163,113,247,0.15);
-      border: 1px solid var(--purple);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 0.85rem;
-    }
-    .chat-title { font-size: 0.78rem; font-weight: 600; }
-    .chat-sub { font-size: 0.6rem; color: var(--green); font-family: 'JetBrains Mono', monospace; }
-    .chat-body {
-      padding: 10px 14px;
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
-      min-height: 260px;
-      max-height: 320px;
-      overflow-y: auto;
-    }
-    .chat-msg { display: flex; gap: 7px; max-width: 90%; }
-    .chat-msg.from-max { align-self: flex-end; flex-direction: row-reverse; }
-    .chat-bubble {
-      background: var(--surface-card);
-      border: 1px solid var(--border-light);
-      padding: 8px 11px;
-      border-radius: 9px;
-      font-size: 0.75rem;
-      line-height: 1.5;
-    }
-    .chat-msg.from-max .chat-bubble {
-      background: rgba(163,113,247,0.1);
-      border-color: rgba(163,113,247,0.25);
-    }
-    .chat-time { font-size: 0.58rem; color: var(--text-dim); margin-top: 2px; font-family: 'JetBrains Mono', monospace; }
-    .chat-input-row {
-      padding: 9px 12px;
-      border-top: 1px solid var(--border-light);
-      display: flex;
-      gap: 7px;
-    }
-    .chat-input-row input {
-      flex: 1;
-      background: var(--bg);
-      border: 1px solid var(--border);
-      border-radius: 6px;
-      padding: 6px 10px;
-      color: var(--text);
-      font-family: 'Inter', sans-serif;
-      font-size: 0.75rem;
-    }
-    .chat-input-row input:focus { outline: none; border-color: var(--accent); }
-    .chat-input-row button {
-      background: var(--accent);
-      color: var(--bg);
-      border: none;
-      border-radius: 6px;
-      padding: 6px 12px;
-      font-weight: 600;
-      font-size: 0.75rem;
-      cursor: pointer;
-    }
-
-    /* QUICK ACTIONS */
-    .quick-actions {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 10px;
-      padding: 12px 14px;
-      margin-bottom: 14px;
-    }
-    .qa-title { font-size: 0.68rem; color: var(--text-dim); text-transform: uppercase; letter-spacing: 0.8px; margin-bottom: 9px; }
-    .qa-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 5px; }
-    .qa-btn {
-      background: var(--surface-card);
-      border: 1px solid var(--border-light);
-      border-radius: 6px;
-      padding: 8px 10px;
-      color: var(--text);
-      font-family: 'Inter', sans-serif;
+    .demo-footer span {
       font-size: 0.72rem;
-      cursor: pointer;
-      text-align: left;
-      transition: border-color 0.15s, background 0.15s;
-      display: flex;
-      align-items: center;
-      gap: 5px;
-    }
-    .qa-btn:hover { border-color: var(--accent); background: var(--surface-hover); }
-
-    /* SKILLS */
-    .skills-section {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 10px;
-      padding: 12px 14px;
-    }
-    .skills-title { font-size: 0.68rem; color: var(--text-dim); text-transform: uppercase; letter-spacing: 0.8px; margin-bottom: 9px; }
-    .skills-grid { display: flex; flex-wrap: wrap; gap: 4px; }
-    .skill-tag {
-      background: var(--surface-card);
-      border: 1px solid var(--border-light);
-      border-radius: 4px;
-      padding: 3px 8px;
-      font-size: 0.62rem;
-      font-family: 'JetBrains Mono', monospace;
-      color: var(--text-dim);
-    }
-
-    /* FOOTER */
-    .demo-note {
-      text-align: center;
-      margin: 16px 0;
-      padding: 10px;
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      font-size: 0.7rem;
-      color: var(--text-dim);
+      color: #5d8aa8;
       font-family: 'JetBrains Mono', monospace;
     }
-
-    @media (max-width: 1100px) {
-      .board-wrap { grid-template-columns: 1fr; }
-      .sidebar { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
-      .board { grid-template-columns: repeat(2, 1fr); }
-    }
-    @media (max-width: 640px) {
-      .header-nav { display: none; }
-      .board { grid-template-columns: 1fr; }
-      .sidebar { grid-template-columns: 1fr; }
-    }
+    .demo-footer strong { color: #26c6da; }
   </style>
 </head>
 <body>
 
-<div class="header">
-  <div class="container">
-    <div class="header-left">
-      <a href="/" class="back-link">← Back</a>
-      <a href="/" class="logo">clawgentic<span>.os</span></a>
-      <nav class="header-nav">
-        <button>Projects</button>
-        <button class="active">Board</button>
-        <button>Docs</button>
-        <button>Kalender</button>
-        <button>⚡ Lightning</button>
-      </nav>
-    </div>
-    <div class="header-right">
-      <div class="online-badge">
-        <span class="online-dot"></span>
-        Online
-      </div>
-      <span class="demo-pill">DEMO</span>
-    </div>
+<div class="demo-bar">
+  <div class="demo-bar-left">
+    <a href="/" class="back-link">← Back</a>
+    <a href="/" class="logo">clawgentic<span>.os</span></a>
+    <span class="demo-badge">DEMO</span>
+    <span class="demo-label"><strong>Clawgentic</strong> · Board View · 22 Tasks</span>
+  </div>
+  <div class="demo-bar-left">
+    <span class="demo-label">Live Dashboard — <strong>Max</strong> responds in real-time</span>
   </div>
 </div>
 
-<div class="container">
+<div class="screenshot-wrap">
+  <img src="demo-dashboard.png" alt="Founder OS Dashboard Demo">
+</div>
 
-  <div class="project-header">
-    <div class="project-title">
-      Clawgentic
-      <span class="project-prio">P1</span>
-    </div>
-    <span class="task-count">22 Tasks</span>
-    <span class="ws-badge">↔ Max online (WS)</span>
-  </div>
-
-  <div class="board-wrap">
-
-    <!-- BOARD -->
-    <div class="board">
-
-      <!-- TO DO -->
-      <div class="col todo">
-        <div class="col-header">
-          <span class="col-title">TO DO</span>
-          <span class="col-count">12</span>
-        </div>
-
-        <div class="task">
-          <div class="task-title">Server Upgrade: CX53 (32GB/8vCPU) → Gemma 4 31B lokal</div>
-          <div class="task-actions">
-            <button class="task-btn">→ Active</button>
-            <button class="task-btn">✓ Done</button>
-          </div>
-          <div class="task-assignee"><span class="assignee-dot max">MX</span> @max</div>
-        </div>
-
-        <div class="task">
-          <div class="task-title">Backend Robustness — Systemd Service & Auto-Restart bei Hangs</div>
-          <div class="task-actions">
-            <button class="task-btn">→ Active</button>
-            <button class="task-btn">✓ Done</button>
-          </div>
-          <div class="task-assignee"><span class="assignee-dot max">MX</span> @max</div>
-        </div>
-
-        <div class="task">
-          <div class="task-title">Backlog-Spalte einklappbar machen (horizontal)</div>
-          <div class="task-actions">
-            <button class="task-btn">→ Active</button>
-            <button class="task-btn">✓ Done</button>
-          </div>
-          <div class="task-assignee"><span class="assignee-dot placeholder">?</span></div>
-        </div>
-
-        <div class="task">
-          <div class="task-title">Mobile Responsive Design</div>
-          <div class="task-actions">
-            <button class="task-btn">→ Active</button>
-            <button class="task-btn">✓ Done</button>
-          </div>
-          <div class="task-assignee"><span class="assignee-dot placeholder">?</span></div>
-        </div>
-
-        <div class="task">
-          <div class="task-title">Backend API Dokumentation</div>
-          <div class="task-actions">
-            <button class="task-btn">→ Active</button>
-            <button class="task-btn">✓ Done</button>
-          </div>
-          <div class="task-assignee"><span class="assignee-dot placeholder">?</span></div>
-        </div>
-
-        <div class="task">
-          <div class="task-title">Multi-Browser Support — Tab-spezifische clientId</div>
-          <div class="task-actions">
-            <button class="task-btn">→ Active</button>
-            <button class="task-btn">✓ Done</button>
-          </div>
-          <div class="task-assignee"><span class="assignee-dot placeholder">?</span></div>
-        </div>
-
-        <div class="task">
-          <div class="task-title">Backend: Attachment Path Normalization</div>
-          <div class="task-actions">
-            <button class="task-btn">→ Active</button>
-            <button class="task-btn">✓ Done</button>
-          </div>
-          <div class="task-assignee"><span class="assignee-dot placeholder">?</span></div>
-        </div>
-
-        <div class="task">
-          <div class="task-title">Brain Dump in Board integrieren</div>
-          <div class="task-actions">
-            <button class="task-btn">→ Active</button>
-            <button class="task-btn">✓ Done</button>
-          </div>
-          <div class="task-assignee"><span class="assignee-dot placeholder">?</span></div>
-        </div>
-
-        <div class="task">
-          <div class="task-title">User Auth einbauen</div>
-          <div class="task-actions">
-            <button class="task-btn">→ Active</button>
-            <button class="task-btn">✓ Done</button>
-          </div>
-          <div class="task-assignee"><span class="assignee-dot placeholder">?</span></div>
-        </div>
-
-        <div class="task">
-          <div class="task-title">Single Source of Truth für Uploads</div>
-          <div class="task-actions">
-            <button class="task-btn">→ Active</button>
-            <button class="task-btn">✓ Done</button>
-          </div>
-          <div class="task-assignee"><span class="assignee-dot placeholder">?</span></div>
-        </div>
-
-        <div class="task">
-          <div class="task-title">CI/CD — automatische Deploys bei Commits</div>
-          <div class="task-actions">
-            <button class="task-btn">→ Active</button>
-            <button class="task-btn">✓ Done</button>
-          </div>
-          <div class="task-assignee"><span class="assignee-dot max">MX</span> @max</div>
-        </div>
-
-        <div class="task">
-          <div class="task-title">GitHub Integration — Issues ↔ Board Sync</div>
-          <div class="task-actions">
-            <button class="task-btn">→ Active</button>
-            <button class="task-btn">✓ Done</button>
-          </div>
-          <div class="task-assignee"><span class="assignee-dot placeholder">?</span></div>
-        </div>
-      </div>
-
-      <!-- IN PROGRESS -->
-      <div class="col in-progress">
-        <div class="col-header">
-          <span class="col-title">IN PROGRESS</span>
-          <span class="col-count">4</span>
-        </div>
-
-        <div class="task">
-          <div class="task-title">Workshop für strategische Ausrichtung vorbereiten</div>
-          <div class="task-actions">
-            <button class="task-btn">← Todo</button>
-            <button class="task-btn">✓ Done</button>
-          </div>
-          <div class="task-assignee"><span class="assignee-dot seb">SE</span> @seb</div>
-        </div>
-
-        <div class="task">
-          <div class="task-title">Dashboard interaktiv testen</div>
-          <div class="task-actions">
-            <button class="task-btn">← Todo</button>
-            <button class="task-btn">✓ Done</button>
-          </div>
-          <div class="task-assignee"><span class="assignee-dot max">MX</span> @max</div>
-        </div>
-
-        <div class="task">
-          <div class="task-title">Workshop: Club of Engineers & Friends — Max vorstellen</div>
-          <div class="task-actions">
-            <button class="task-btn">← Todo</button>
-            <button class="task-btn">✓ Done</button>
-          </div>
-          <div class="task-assignee"><span class="assignee-dot seb">SE</span> @seb</div>
-        </div>
-
-        <div class="task">
-          <div class="task-title">UI finalisieren (Drag&Drop, Task-Details, Comments)</div>
-          <div class="task-actions">
-            <button class="task-btn">← Todo</button>
-            <button class="task-btn">✓ Done</button>
-          </div>
-          <div class="task-assignee"><span class="assignee-dot max">MX</span> @max</div>
-        </div>
-      </div>
-
-      <!-- DONE -->
-      <div class="col done">
-        <div class="col-header">
-          <span class="col-title">DONE</span>
-          <span class="col-count">6</span>
-        </div>
-
-        <div class="task">
-          <div class="task-title">Backend API (Express)</div>
-          <div class="task-actions">
-            <button class="task-btn">← Todo</button>
-          </div>
-          <div class="task-assignee"><span class="assignee-dot max">MX</span> @max</div>
-        </div>
-
-        <div class="task">
-          <div class="task-title">Konzept definiert</div>
-          <div class="task-actions">
-            <button class="task-btn">← Todo</button>
-          </div>
-          <div class="task-assignee"><span class="assignee-dot seb">SE</span> @seb</div>
-        </div>
-
-        <div class="task">
-          <div class="task-title">Tech Stack gewählt (Node.js + Express + Vanilla JS)</div>
-          <div class="task-actions">
-            <button class="task-btn">← Todo</button>
-          </div>
-          <div class="task-assignee"><span class="assignee-dot max">MX</span> @max</div>
-        </div>
-
-        <div class="task">
-          <div class="task-title">Chat Integration: Dashboard-Chat via Gateway WebSocket ✅</div>
-          <div class="task-actions">
-            <button class="task-btn">← Todo</button>
-          </div>
-          <div class="task-assignee"><span class="assignee-dot max">MX</span> @max</div>
-        </div>
-
-        <div class="task">
-          <div class="task-title">CI anpassen</div>
-          <div class="task-actions">
-            <button class="task-btn">← Todo</button>
-          </div>
-          <div class="task-assignee"><span class="assignee-dot max">MX</span> @max</div>
-        </div>
-
-        <div class="task">
-          <div class="task-title">QR Code Fix (api.qrserver.com代替 chart.googleapis.com)</div>
-          <div class="task-actions">
-            <button class="task-btn">← Todo</button>
-          </div>
-          <div class="task-assignee"><span class="assignee-dot max">MX</span> @max</div>
-        </div>
-      </div>
-
-      <!-- BACKLOG -->
-      <div class="col backlog">
-        <div class="col-header">
-          <span class="col-title">💡 BACKLOG</span>
-          <span class="col-count">4</span>
-        </div>
-
-        <div class="task">
-          <div class="task-title">User Auth einbauen</div>
-          <div class="task-actions">
-            <button class="task-btn">→ Todo</button>
-          </div>
-          <div class="task-assignee"><span class="assignee-dot placeholder">?</span></div>
-        </div>
-
-        <div class="task">
-          <div class="task-title">Multi-Browser Support — Tab-spezifische clientId</div>
-          <div class="task-actions">
-            <button class="task-btn">→ Todo</button>
-          </div>
-          <div class="task-assignee"><span class="assignee-dot placeholder">?</span></div>
-        </div>
-
-        <div class="task">
-          <div class="task-title">Backend: Attachment Path Normalization</div>
-          <div class="task-actions">
-            <button class="task-btn">→ Todo</button>
-          </div>
-          <div class="task-assignee"><span class="assignee-dot placeholder">?</span></div>
-        </div>
-
-        <div class="task">
-          <div class="task-title">Brain Dump in Board integrieren</div>
-          <div class="task-actions">
-            <button class="task-btn">→ Todo</button>
-          </div>
-          <div class="task-assignee"><span class="assignee-dot placeholder">?</span></div>
-        </div>
-      </div>
-
-    </div>
-
-    <!-- SIDEBAR -->
-    <div class="sidebar">
-
-      <!-- Chat -->
-      <div class="chat-widget">
-        <div class="chat-header">
-          <div class="chat-avatar">🤖</div>
-          <div>
-            <div class="chat-title">Max</div>
-            <div class="chat-sub">● Online (WS)</div>
-          </div>
-        </div>
-        <div class="chat-body">
-          <div class="chat-msg">
-            <div class="chat-avatar">🤖</div>
-            <div>
-              <div class="chat-bubble">Dashboard läuft. QR Code Fix ist deployt ✅ Task-Board ist interaktiv — du kannst Tasks mit den Buttons verschieben.</div>
-              <div class="chat-time">09:32 · today</div>
-            </div>
-          </div>
-          <div class="chat-msg from-max">
-            <div>
-              <div class="chat-bubble">Gut. CI ist auch durchgelaufen — neuer Commit zu GitHub Pages deployt automagisch. Noch Blocker?</div>
-              <div class="chat-time">09:33 · today</div>
-            </div>
-          </div>
-          <div class="chat-msg">
-            <div class="chat-avatar">🤖</div>
-            <div>
-              <div class="chat-bubble">Nein. Alles klar. OceanEar Launch Apr 8 im Blick. Ich report um 20:00 NZDT.</div>
-              <div class="chat-time">09:33 · today</div>
-            </div>
-          </div>
-          <div class="chat-msg from-max">
-            <div>
-              <div class="chat-bubble">Perfekt. ☀️</div>
-              <div class="chat-time">09:33 · today</div>
-            </div>
-          </div>
-        </div>
-        <div class="chat-input-row">
-          <input type="text" placeholder="Message Max...">
-          <button>Send</button>
-        </div>
-      </div>
-
-      <!-- Quick Actions -->
-      <div class="quick-actions">
-        <div class="qa-title">Schnellaktionen</div>
-        <div class="qa-grid">
-          <button class="qa-btn">💡 Brain Dump</button>
-          <button class="qa-btn">✚ Neues Projekt</button>
-          <button class="qa-btn">🌤 Wetter</button>
-          <button class="qa-btn">🔄 Board Sync</button>
-        </div>
-      </div>
-
-      <!-- Skills -->
-      <div class="skills-section">
-        <div class="skills-title">Skills</div>
-        <div class="skills-grid">
-          <span class="skill-tag">weather</span>
-          <span class="skill-tag">lnurl-pay</span>
-          <span class="skill-tag">tmux</span>
-          <span class="skill-tag">healthcheck</span>
-          <span class="skill-tag">canvas</span>
-          <span class="skill-tag">node-connect</span>
-          <span class="skill-tag">skill-creator</span>
-          <span class="skill-tag">github</span>
-          <span class="skill-tag">sag</span>
-          <span class="skill-tag">summarize</span>
-          <span class="skill-tag">blogwatcher</span>
-          <span class="skill-tag">pdf</span>
-          <span class="skill-tag">browser</span>
-          <span class="skill-tag">reminders</span>
-          <span class="skill-tag">tts</span>
-          <span class="skill-tag">+ Lernen</span>
-        </div>
-      </div>
-
-    </div>
-  </div>
-
-  <div class="demo-note">This is a live demo · Your actual dashboard is private</div>
-
+<div class="demo-footer">
+  <span>⚡ <strong>4 Projects</strong></span>
+  <span>📋 <strong>22 Tasks</strong></span>
+  <span>💬 <strong>Max online</strong></span>
+  <span>🔒 <strong>Private — your data stays on your server</strong></span>
 </div>
 
 </body>
