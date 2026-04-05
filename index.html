@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Clawgentic OS — Founder OS for NZ Founders</title>
+  <meta name="description" content="Empowering NZ Solopreneurs with Autonomous AI. One command to build your digital workforce.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #0b0f14;
+      --surface: #141b24;
+      --surface2: #1a2332;
+      --border: rgba(0, 188, 212, 0.15);
+      --primary: #00bcd4;
+      --primary-dim: rgba(0, 188, 212, 0.1);
+      --accent: #f56565;
+      --text: #e2e8f0;
+      --text-muted: #8899aa;
+      --grid-color: rgba(0, 188, 212, 0.04);
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Inter', -apple-system, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      min-height: 100vh;
+      background-image:
+        linear-gradient(var(--grid-color) 1px, transparent 1px),
+        linear-gradient(90deg, var(--grid-color) 1px, transparent 1px);
+      background-size: 40px 40px;
+    }
+
+    .container {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    /* NAV */
+    nav {
+      padding: 20px 0;
+      border-bottom: 1px solid var(--border);
+    }
+    nav .container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .logo {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: var(--primary);
+      text-decoration: none;
+      letter-spacing: -0.5px;
+    }
+    .logo span { color: var(--text-muted); font-weight: 400; }
+    .nav-links { display: flex; gap: 28px; align-items: center; }
+    .nav-links a {
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 0.9rem;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--primary); }
+    .btn-nav {
+      background: var(--primary);
+      color: var(--bg) !important;
+      padding: 8px 18px;
+      border-radius: 6px;
+      font-weight: 600;
+    }
+    .btn-nav:hover { opacity: 0.85; }
+
+    /* HERO */
+    .hero {
+      padding: 100px 0 80px;
+      text-align: center;
+    }
+    .badge {
+      display: inline-block;
+      background: var(--primary-dim);
+      border: 1px solid var(--border);
+      color: var(--primary);
+      font-size: 0.8rem;
+      font-family: 'JetBrains Mono', monospace;
+      padding: 4px 14px;
+      border-radius: 100px;
+      margin-bottom: 24px;
+    }
+    h1 {
+      font-size: clamp(2.4rem, 6vw, 4rem);
+      font-weight: 800;
+      line-height: 1.1;
+      margin-bottom: 20px;
+      letter-spacing: -1.5px;
+    }
+    h1 .accent { color: var(--accent); }
+    h1 .dim { color: var(--text-muted); font-weight: 600; }
+    .hero-sub {
+      font-size: 1.15rem;
+      color: var(--text-muted);
+      max-width: 560px;
+      margin: 0 auto 40px;
+    }
+
+    /* TERMINAL */
+    .terminal {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      overflow: hidden;
+      max-width: 640px;
+      margin: 0 auto 80px;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+    }
+    .terminal-bar {
+      background: var(--surface2);
+      padding: 10px 14px;
+      display: flex;
+      gap: 6px;
+      align-items: center;
+    }
+    .dot { width: 12px; height: 12px; border-radius: 50%; }
+    .dot-r { background: #f56565; }
+    .dot-y { background: #f6c90e; }
+    .dot-g { background: #3ccf4e; }
+    .terminal-title {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      margin-left: 8px;
+    }
+    .terminal-body {
+      padding: 20px 24px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.9rem;
+    }
+    .terminal-body .line { margin-bottom: 8px; }
+    .prompt { color: var(--primary); }
+    .cmd { color: var(--text); }
+    .output { color: var(--text-muted); font-size: 0.85rem; }
+    .comment { color: #4a5568; }
+    .highlight { color: var(--accent); }
+
+    /* FEATURES */
+    .features { padding: 80px 0; }
+    .section-label {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.8rem;
+      color: var(--primary);
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      margin-bottom: 12px;
+    }
+    .section-title {
+      font-size: 2rem;
+      font-weight: 700;
+      margin-bottom: 48px;
+      letter-spacing: -0.5px;
+    }
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 20px;
+    }
+    .feature-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 28px;
+      transition: border-color 0.2s, transform 0.2s;
+    }
+    .feature-card:hover {
+      border-color: var(--primary);
+      transform: translateY(-2px);
+    }
+    .feature-icon {
+      width: 40px;
+      height: 40px;
+      background: var(--primary-dim);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 16px;
+      font-size: 1.2rem;
+    }
+    .feature-card h3 {
+      font-size: 1rem;
+      font-weight: 600;
+      margin-bottom: 8px;
+    }
+    .feature-card p {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+    }
+
+    /* WHAT YOU GET */
+    .whatyouget { padding: 80px 0; }
+    .get-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 40px;
+      align-items: center;
+    }
+    .get-list { list-style: none; }
+    .get-list li {
+      padding: 12px 0;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      gap: 12px;
+      align-items: flex-start;
+    }
+    .get-list li:last-child { border-bottom: none; }
+    .check { color: var(--primary); font-weight: 700; }
+    .get-list strong { display: block; margin-bottom: 2px; }
+    .get-list span { font-size: 0.85rem; color: var(--text-muted); }
+
+    /* CODE PREVIEW */
+    .code-preview {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 28px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.82rem;
+      line-height: 1.8;
+    }
+    .code-line { display: flex; gap: 12px; }
+    .linenum { color: #4a5568; user-select: none; min-width: 20px; text-align: right; }
+    .code-keyword { color: var(--primary); }
+    .code-string { color: #68d391; }
+    .code-comment { color: #4a5568; }
+    .code-func { color: #f6c90e; }
+    .code-var { color: var(--accent); }
+
+    /* CTA */
+    .cta {
+      padding: 100px 0;
+      text-align: center;
+    }
+    .cta-box {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 60px 40px;
+    }
+    .cta h2 {
+      font-size: 2rem;
+      font-weight: 700;
+      margin-bottom: 12px;
+    }
+    .cta p {
+      color: var(--text-muted);
+      margin-bottom: 32px;
+    }
+    .cta-btn {
+      display: inline-block;
+      background: var(--primary);
+      color: var(--bg);
+      font-weight: 700;
+      font-size: 1rem;
+      padding: 14px 32px;
+      border-radius: 8px;
+      text-decoration: none;
+      transition: opacity 0.2s;
+    }
+    .cta-btn:hover { opacity: 0.85; }
+    .cta-note {
+      margin-top: 16px;
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      font-family: 'JetBrains Mono', monospace;
+    }
+
+    /* FOOTER */
+    footer {
+      padding: 40px 0;
+      border-top: 1px solid var(--border);
+      font-size: 0.85rem;
+      color: var(--text-muted);
+    }
+    footer .container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    footer a { color: var(--text-muted); text-decoration: none; }
+    footer a:hover { color: var(--primary); }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .get-grid { grid-template-columns: 1fr; }
+      .nav-links { gap: 16px; }
+      .cta-box { padding: 40px 24px; }
+      footer .container { flex-direction: column; gap: 12px; text-align: center; }
+    }
+
+    @media (max-width: 480px) {
+      .nav-links a:not(.btn-nav) { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <div class="container">
+    <a href="/" class="logo">clawgentic<span>.os</span></a>
+    <div class="nav-links">
+      <a href="#features">Features</a>
+      <a href="#how">How it works</a>
+      <a href="#pricing">Pricing</a>
+      <a href="http://204.168.190.201:18901/" class="btn-nav" target="_blank">Dashboard</a>
+    </div>
+  </div>
+</nav>
+
+<section class="hero">
+  <div class="container">
+    <div class="badge">Wellington, NZ · OpenClaw Powered</div>
+    <h1>Founder OS<br><span class="dim">built for</span> <span class="accent">solopreneurs</span></h1>
+    <p class="hero-sub">Your digital workforce in one command. Max runs in the background — your projects, outreach, and operations on autopilot.</p>
+
+    <div class="terminal">
+      <div class="terminal-bar">
+        <div class="dot dot-r"></div>
+        <div class="dot dot-y"></div>
+        <div class="dot dot-g"></div>
+        <span class="terminal-title">Founder OS — Ubuntu 24.04</span>
+      </div>
+      <div class="terminal-body">
+        <div class="line"><span class="prompt">$</span> <span class="cmd">curl -sSL clawgentic.co.nz/install.sh | bash</span></div>
+        <div class="line"><span class="comment"># ─── Clawgentic OS v1.0 ───</span></div>
+        <div class="line"><span class="output">Installing Docker...</span> <span class="highlight">✓</span></div>
+        <div class="line"><span class="output">Pulling OpenClaw Agentic Core...</span> <span class="highlight">✓</span></div>
+        <div class="line"><span class="output">Configuring Telegram Bot...</span> <span class="highlight">✓</span></div>
+        <div class="line"><span class="output">Launching Max...</span> <span class="highlight">✓</span></div>
+        <div class="line">&nbsp;</div>
+        <div class="line"><span class="comment">✅ Max is live. Check Telegram.</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="features" id="features">
+  <div class="container">
+    <div class="section-label">What you get</div>
+    <h2 class="section-title">Everything a NZ founder needs</h2>
+    <div class="features-grid">
+      <div class="feature-card">
+        <div class="feature-icon">🤖</div>
+        <h3>Max — Your AI Co-Founder</h3>
+        <p>Runs autonomously in the background. Manages projects, writes emails, does research, and reports daily. Texts you on Telegram.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">📊</div>
+        <h3>Project Dashboard</h3>
+        <p>Kanban boards, task management, file uploads, comments. Your entire operation in one visual interface.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">⚡</div>
+        <h3>Lightning Network</h3>
+        <p>Built-in Bitcoin/LN payments. Send and receive sats. No middleman, no fees going to payment processors.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🔗</div>
+        <h3>Toolchain Integration</h3>
+        <p>GitHub, Gmail, Calendar, Uber Eats, supermarkets — Max connects to the services you already use.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🌊</div>
+        <h3>NZ-First Design</h3>
+        <p>Built in Wellington for Wellington founders. Pacific/Auckland timezone, local references, local payment options.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🔒</div>
+        <h3>Your Own Server</h3>
+        <p>Everything runs on your own VPS. You own the data. Max has no backdoor access. Full privacy, full control.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="whatyouget">
+  <div class="container">
+    <div class="section-label">Built on OpenClaw</div>
+    <div class="get-grid">
+      <div>
+        <h2 class="section-title">The full stack, ready to run</h2>
+        <ul class="get-list">
+          <li>
+            <span class="check">✓</span>
+            <div>
+              <strong>OpenClaw Gateway</strong>
+              <span>The agentic engine — handles Telegram, memory, skills, tools, and scheduling</span>
+            </div>
+          </li>
+          <li>
+            <span class="check">✓</span>
+            <div>
+              <strong>Max AI Assistant</strong>
+              <span>Your always-on co-founder with context from your projects, emails, and calendar</span>
+            </div>
+          </li>
+          <li>
+            <span class="check">✓</span>
+            <div>
+              <strong>Founder OS Dashboard</strong>
+              <span>Visual Kanban, task management, file sharing, and real-time chat with Max</span>
+            </div>
+          </li>
+          <li>
+            <span class="check">✓</span>
+            <div>
+              <strong>CI/CD Pipeline</strong>
+              <span>GitHub Actions deploy changes automatically. Push to main, Max gets the update.</span>
+            </div>
+          </li>
+          <li>
+            <span class="check">✓</span>
+            <div>
+              <strong>Skills Library</strong>
+              <span>Reminders, web search, browser automation, TTS, PDF generation — all ready to use</span>
+            </div>
+          </li>
+        </ul>
+      </div>
+      <div class="code-preview">
+        <div class="code-line"><span class="linenum">1</span><span class="code-comment">// Max manages your projects</span></div>
+        <div class="code-line"><span class="linenum">2</span><span class="code-keyword">const</span> <span class="code-var">task</span> = {</div>
+        <div class="code-line"><span class="linenum">3</span>  title: <span class="code-string">"Outreach to investor"</span>,</div>
+        <div class="code-line"><span class="linenum">4</span>  status: <span class="code-string">"todo"</span>,</div>
+        <div class="code-line"><span class="linenum">5</span>  assignee: <span class="code-string">"max"</span></div>
+        <div class="code-line"><span class="linenum">6</span>}</div>
+        <div class="code-line"><span class="linenum">7</span>&nbsp;</div>
+        <div class="code-line"><span class="linenum">8</span><span class="code-func">max</span>.<span class="code-func">createTask</span>(task)</div>
+        <div class="code-line"><span class="linenum">9</span><span class="code-comment">// → Assigned, tracked, done.</span></div>
+        <div class="code-line"><span class="linenum">10</span>&nbsp;</div>
+        <div class="code-line"><span class="linenum">11</span><span class="code-comment">// 20:00 NZDT — daily report lands</span></div>
+        <div class="code-line"><span class="linenum">12</span><span class="code-comment">// in your Telegram inbox.</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="features" id="how">
+  <div class="container">
+    <div class="section-label">How it works</div>
+    <h2 class="section-title">From zero to running in 5 minutes</h2>
+    <div class="features-grid">
+      <div class="feature-card">
+        <div class="feature-icon">1</div>
+        <h3>Run the install command</h3>
+        <p>One line in your terminal. The script sets up Docker, pulls the code, and asks for your API keys.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">2</div>
+        <h3>Connect Telegram</h3>
+        <p>Create a bot via @BotFather, paste the token. Max is now reachable wherever you are.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">3</div>
+        <h3>Configure your projects</h3>
+        <p>Tell Max about your projects, contacts, and priorities. Max learns your business.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">4</div>
+        <h3>Let Max run</h3>
+        <p>Daily standups, research, email drafts, CRM updates — Max handles the operational load.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="cta">
+  <div class="container">
+    <div class="cta-box">
+      <h2>Ready to build?</h2>
+      <p>Get your Founder OS running today. One command, no config files, no dev ops degree.</p>
+      <a href="https://github.com/Bitbob21/clawgentic-os" class="cta-btn" target="_blank">
+        View on GitHub
+      </a>
+      <div class="cta-note">clawgentic.co.nz</div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <div>© 2026 Clawgentic OS · Wellington, New Zealand</div>
+    <div>
+      <a href="https://github.com/Bitbob21/clawgentic-os" target="_blank">GitHub</a>
+      ·
+      <a href="http://204.168.190.201:18901/" target="_blank">Dashboard</a>
+      ·
+      <a href="https://discord.gg/clawd" target="_blank">Community</a>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
