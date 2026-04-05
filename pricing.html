@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pricing — Founder OS</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #071a2e;
+      --surface: #0f2744;
+      --surface-hover: #163558;
+      --surface-card: #143049;
+      --border: #1e5c82;
+      --border-light: #143b55;
+      --text: #e6edf3;
+      --text-dim: #5d8aa8;
+      --accent: #00bcd4;
+      --green: #26c6da;
+      --yellow: #f0883e;
+      --red: #f56565;
+      --purple: #a371f7;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Inter', -apple-system, sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; background-image: radial-gradient(circle at 1px 1px, rgba(0,188,212,0.05) 1px, transparent 0); background-size: 40px 40px; }
+    .container { max-width: 1100px; margin: 0 auto; padding: 0 20px; }
+
+    .header { background: rgba(7,26,46,0.98); border-bottom: 1px solid var(--border); height: 52px; display: flex; align-items: center; position: sticky; top: 0; z-index: 50; }
+    .header .container { display: flex; align-items: center; justify-content: space-between; width: 100%; }
+    .header-left { display: flex; align-items: center; gap: 20px; }
+    .header-right { display: flex; align-items: center; gap: 14px; }
+    .logo { font-family: 'JetBrains Mono', monospace; font-size: 0.82rem; font-weight: 600; color: var(--accent); text-decoration: none; letter-spacing: -0.2px; }
+    .logo span { color: var(--text-dim); font-weight: 400; }
+    .header-nav { display: flex; gap: 2px; }
+    .header-nav button { background: none; border: none; color: var(--text-dim); font-family: 'Inter', sans-serif; font-size: 0.78rem; padding: 7px 14px; border-radius: 6px; cursor: pointer; transition: all 0.15s; }
+    .header-nav button:hover { background: var(--surface-hover); color: var(--text); }
+    .header-nav button.active { color: var(--accent); background: rgba(0,188,212,0.08); }
+    .online-badge { display: flex; align-items: center; gap: 6px; font-size: 0.7rem; font-family: 'JetBrains Mono', monospace; color: var(--green); }
+    .online-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--green); animation: pulse 2s infinite; }
+    @keyframes pulse { 0%,100% { opacity: 1; } 50% { opacity: 0.3; } }
+    .back-link { color: var(--text-dim); text-decoration: none; font-size: 0.75rem; display: flex; align-items: center; gap: 5px; }
+    .back-link:hover { color: var(--accent); }
+    .demo-pill { background: rgba(38,198,218,0.12); border: 1px solid rgba(38,198,218,0.3); color: var(--green); font-size: 0.65rem; font-family: 'JetBrains Mono', monospace; padding: 3px 10px; border-radius: 100px; }
+
+    main { padding: 32px 0 60px; }
+
+    .page-eyebrow { font-size: 0.72rem; font-family: 'JetBrains Mono', monospace; color: var(--accent); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 10px; }
+    .page-title { font-size: 2rem; font-weight: 700; margin-bottom: 12px; }
+    .page-sub { font-size: 0.95rem; color: var(--text-dim); max-width: 520px; line-height: 1.6; }
+
+    /* TOGGLE */
+    .toggle-row { display: flex; align-items: center; gap: 14px; margin: 28px 0 36px; }
+    .toggle-label { font-size: 0.82rem; color: var(--text-dim); }
+    .toggle-label.active { color: var(--text); }
+    .toggle { width: 44px; height: 24px; background: var(--surface); border: 1px solid var(--border); border-radius: 100px; position: relative; cursor: pointer; transition: background 0.2s; }
+    .toggle::after { content: ''; position: absolute; width: 18px; height: 18px; background: var(--text-dim); border-radius: 50%; top: 2px; left: 2px; transition: all 0.2s; }
+    .toggle.on { background: rgba(0,188,212,0.2); border-color: var(--accent); }
+    .toggle.on::after { background: var(--accent); left: 22px; }
+    .save-badge { background: rgba(38,198,218,0.1); border: 1px solid rgba(38,198,218,0.25); color: var(--accent); font-size: 0.62rem; font-family: 'JetBrains Mono', monospace; padding: 3px 9px; border-radius: 4px; }
+
+    /* PRICING GRID */
+    .pricing-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+
+    .plan-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 26px 24px;
+      position: relative;
+      transition: border-color 0.2s, transform 0.12s;
+    }
+    .plan-card:hover { border-color: var(--accent); transform: translateY(-2px); }
+    .plan-card.popular { border-color: var(--accent); box-shadow: 0 0 0 1px rgba(0,188,212,0.15), 0 8px 32px rgba(0,188,212,0.08); }
+    .plan-popular-badge {
+      position: absolute;
+      top: -10px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: var(--accent);
+      color: var(--bg);
+      font-size: 0.6rem;
+      font-family: 'JetBrains Mono', monospace;
+      font-weight: 700;
+      padding: 3px 12px;
+      border-radius: 100px;
+      white-space: nowrap;
+    }
+    .plan-name { font-size: 0.85rem; font-weight: 600; color: var(--text-dim); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 8px; }
+    .plan-card.popular .plan-name { color: var(--accent); }
+    .plan-price { display: flex; align-items: baseline; gap: 4px; margin-bottom: 6px; }
+    .plan-price .currency { font-size: 1.1rem; font-weight: 600; color: var(--text); }
+    .plan-price .amount { font-family: 'JetBrains Mono', monospace; font-size: 2.6rem; font-weight: 700; color: var(--text); }
+    .plan-price .period { font-size: 0.78rem; color: var(--text-dim); }
+    .plan-card.popular .plan-price .amount { color: var(--accent); }
+    .plan-desc { font-size: 0.78rem; color: var(--text-dim); margin-bottom: 20px; line-height: 1.5; }
+    .plan-divider { height: 1px; background: var(--border-light); margin: 18px 0; }
+    .plan-features { list-style: none; display: flex; flex-direction: column; gap: 10px; margin-bottom: 22px; }
+    .plan-features li { display: flex; align-items: flex-start; gap: 9px; font-size: 0.8rem; line-height: 1.45; }
+    .plan-features li .check { color: var(--green); font-size: 0.9rem; flex-shrink: 0; margin-top: 1px; }
+    .plan-features li .cross { color: var(--text-dim); font-size: 0.9rem; flex-shrink: 0; margin-top: 1px; }
+    .plan-features li .lim { color: var(--yellow); }
+    .plan-cta {
+      display: block;
+      width: 100%;
+      padding: 11px;
+      border-radius: 8px;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.82rem;
+      font-weight: 600;
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.15s;
+      text-decoration: none;
+      border: 1px solid var(--border);
+      background: var(--surface-card);
+      color: var(--text);
+    }
+    .plan-cta:hover { border-color: var(--accent); color: var(--accent); }
+    .plan-card.popular .plan-cta { background: var(--accent); color: var(--bg); border-color: var(--accent); }
+    .plan-card.popular .plan-cta:hover { background: #00d9f5; border-color: #00d9f5; }
+
+    /* ADD-ONS */
+    .addons-title { font-size: 0.7rem; color: var(--text-dim); text-transform: uppercase; letter-spacing: 0.8px; margin: 40px 0 16px; }
+    .addons-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 12px; }
+    .addon-card { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 16px 18px; }
+    .addon-name { font-size: 0.82rem; font-weight: 600; margin-bottom: 4px; }
+    .addon-desc { font-size: 0.72rem; color: var(--text-dim); margin-bottom: 10px; line-height: 1.45; }
+    .addon-price { font-family: 'JetBrains Mono', monospace; font-size: 0.82rem; color: var(--accent); }
+
+    /* FAQ */
+    .faq-title { font-size: 0.7rem; color: var(--text-dim); text-transform: uppercase; letter-spacing: 0.8px; margin: 40px 0 16px; }
+    .faq-list { display: flex; flex-direction: column; gap: 8px; }
+    .faq-item { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 16px 18px; }
+    .faq-q { font-size: 0.82rem; font-weight: 600; margin-bottom: 6px; }
+    .faq-a { font-size: 0.78rem; color: var(--text-dim); line-height: 1.6; }
+
+    /* FOOTER NOTE */
+    .footer-note { text-align: center; margin-top: 40px; font-size: 0.72rem; color: var(--text-dim); font-family: 'JetBrains Mono', monospace; }
+
+    @media (max-width: 900px) { .pricing-grid { grid-template-columns: 1fr; max-width: 420px; margin: 0 auto; } }
+    @media (max-width: 640px) { .header-nav { display: none; } .page-title { font-size: 1.5rem; } }
+  </style>
+</head>
+<body>
+
+<div class="header">
+  <div class="container">
+    <div class="header-left">
+      <a href="/" class="back-link">← Back</a>
+      <a href="/" class="logo">clawgentic<span>.os</span></a>
+      <nav class="header-nav">
+        <a href="projects.html" style="background:none; border:none; color:var(--text-dim); font-family:'Inter',sans-serif; font-size:0.78rem; padding:7px 14px; border-radius:6px; cursor:pointer; text-decoration:none;">Projects</a>
+        <button class="active">Pricing</button>
+        <button>Docs</button>
+      </nav>
+    </div>
+    <div class="header-right">
+      <div class="online-badge"><span class="online-dot"></span>Online</div>
+      <span class="demo-pill">DEMO</span>
+    </div>
+  </div>
+</div>
+
+<main class="container">
+
+  <div class="page-eyebrow">Pricing</div>
+  <div class="page-title">Simple, transparent pricing</div>
+  <div class="page-sub">Start for free. Scale as you grow. No hidden fees, no lock-in. Cancel anytime.</div>
+
+  <div class="toggle-row">
+    <span class="toggle-label active">Monthly</span>
+    <div class="toggle" id="annual-toggle" onclick="toggleAnnual()"></div>
+    <span class="toggle-label" id="annual-label">Annual <span class="save-badge">Save 20%</span></span>
+  </div>
+
+  <div class="pricing-grid">
+
+    <!-- STARTER -->
+    <div class="plan-card">
+      <div class="plan-name">Starter</div>
+      <div class="plan-price">
+        <span class="currency">$</span>
+        <span class="amount" data-monthly="0" data-annual="0">0</span>
+        <span class="period">/month</span>
+      </div>
+      <div class="plan-desc">For founders who want to try Founder OS before committing.</div>
+      <div class="plan-divider"></div>
+      <ul class="plan-features">
+        <li><span class="check">✓</span> Up to 3 projects</li>
+        <li><span class="check">✓</span> 10 tasks per project</li>
+        <li><span class="check">✓</span> 1 teammate (you + Max)</li>
+        <li><span class="check">✓</span> Basic dashboard</li>
+        <li><span class="check">✓</span> Brain Dump</li>
+        <li><span class="check">✓</span> Max AI Chat (50 msgs/mo)</li>
+        <li><span class="cross">—</span> <span class="lim">GitHub integration</span></li>
+        <li><span class="cross">—</span> <span class="lim">Lightning payments</span></li>
+        <li><span class="cross">—</span> <span class="lim">Custom domain</span></li>
+      </ul>
+      <a href="#" class="plan-cta" onclick="return false;">Get Started Free</a>
+    </div>
+
+    <!-- PRO -->
+    <div class="plan-card popular">
+      <div class="plan-popular-badge">MOST POPULAR</div>
+      <div class="plan-name">Pro</div>
+      <div class="plan-price">
+        <span class="currency">$</span>
+        <span class="amount" data-monthly="49" data-annual="39">49</span>
+        <span class="period">/month</span>
+      </div>
+      <div class="plan-desc">For solo founders running one or two businesses at full speed.</div>
+      <div class="plan-divider"></div>
+      <ul class="plan-features">
+        <li><span class="check">✓</span> <strong>Unlimited</strong> projects</li>
+        <li><span class="check">✓</span> <strong>Unlimited</strong> tasks</li>
+        <li><span class="check">✓</span> Up to 3 teammates</li>
+        <li><span class="check">✓</span> Full dashboard + analytics</li>
+        <li><span class="check">✓</span> Brain Dump + Quick Actions</li>
+        <li><span class="check">✓</span> Max AI Chat <strong>unlimited</strong></li>
+        <li><span class="check">✓</span> GitHub sync (issues ↔ board)</li>
+        <li><span class="check">✓</span> Lightning Address (payments)</li>
+        <li><span class="check">✓</span> Calendar sync (iCal)</li>
+        <li><span class="check">✓</span> Custom domain</li>
+      </ul>
+      <a href="#" class="plan-cta" onclick="return false;">Start Pro Trial</a>
+    </div>
+
+    <!-- AGENCY -->
+    <div class="plan-card">
+      <div class="plan-name">Agency</div>
+      <div class="plan-price">
+        <span class="currency">$</span>
+        <span class="amount" data-monthly="149" data-annual="119">149</span>
+        <span class="period">/month</span>
+      </div>
+      <div class="plan-desc">For studios, agencies, and fast-moving teams with multiple clients.</div>
+      <div class="plan-divider"></div>
+      <ul class="plan-features">
+        <li><span class="check">✓</span> Everything in Pro</li>
+        <li><span class="check">✓</span> <strong>Unlimited</strong> teammates</li>
+        <li><span class="check">✓</span> Client workspaces</li>
+        <li><span class="check">✓</span> White-label dashboard</li>
+        <li><span class="check">✓</span> Client sharing + read-only access</li>
+        <li><span class="check">✓</span> Priority Max support</li>
+        <li><span class="check">✓</span> Zapier + Make.com integration</li>
+        <li><span class="check">✓</span> API access</li>
+        <li><span class="check">✓</span> Dedicated onboarding session</li>
+      </ul>
+      <a href="#" class="plan-cta" onclick="return false;">Contact Sales</a>
+    </div>
+
+  </div>
+
+  <!-- ADD-ONS -->
+  <div class="addons-title">Add-ons</div>
+  <div class="addons-grid">
+    <div class="addon-card">
+      <div class="addon-name">Extra Teammate Seat</div>
+      <div class="addon-desc">Add one more person to your workspace.</div>
+      <div class="addon-price">+$9/mo per seat</div>
+    </div>
+    <div class="addon-card">
+      <div class="addon-name">AI Add-on Pack</div>
+      <div class="addon-desc">100 additional Max AI messages per month.</div>
+      <div class="addon-price">+$5/mo</div>
+    </div>
+    <div class="addon-card">
+      <div class="addon-name">Custom Domain (extra)</div>
+      <div class="addon-desc">One additional custom domain for white-label.</div>
+      <div class="addon-price">+$5/mo per domain</div>
+    </div>
+    <div class="addon-card">
+      <div class="addon-name">Priority Support</div>
+      <div class="addon-desc">Skip the queue. Max responds within 2 hours.</div>
+      <div class="addon-price">+$15/mo</div>
+    </div>
+  </div>
+
+  <!-- FAQ -->
+  <div class="faq-title">Frequently Asked Questions</div>
+  <div class="faq-list">
+    <div class="faq-item">
+      <div class="faq-q">Can I switch plans anytime?</div>
+      <div class="faq-a">Yes. Upgrade or downgrade at any time. Upgrades take effect immediately, downgrades at the end of your billing cycle.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">What counts as a "teammate"?</div>
+      <div class="faq-a">Anyone with a login to your workspace. Viewers (read-only) are free and don't count toward your seat limit.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">Is the free Starter plan really free forever?</div>
+      <div class="faq-a">Yes. Starter has hard limits (3 projects, 10 tasks/project) but there's no trial expiry. We won't ask for your credit card.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">How does Lightning Address payments work?</div>
+      <div class="faq-a">Pro and Agency plans can be paid via Lightning Address (like max@clawgentic.os). We run our own LNbits node. Bank transfer and card also accepted.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">What happens to my data if I cancel?</div>
+      <div class="faq-a">Your data is exportable as JSON at any time. After cancellation, data is retained for 30 days and then permanently deleted.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">Do you offer refunds?</div>
+      <div class="faq-a">Monthly plans: no refunds after 7 days. Annual plans: prorated refund within 30 days. No questions asked.</div>
+    </div>
+  </div>
+
+  <div class="footer-note">All prices in USD · Powered by Stripe + Lightning ⚡</div>
+
+</main>
+
+<script>
+let annual = false;
+function toggleAnnual() {
+  annual = !annual;
+  document.getElementById('annual-toggle').classList.toggle('on', annual);
+  document.getElementById('annual-label').classList.toggle('active', annual);
+  document.querySelector('.toggle-label:first-of-type').classList.toggle('active', !annual);
+  document.querySelectorAll('.plan-price .amount').forEach(el => {
+    el.textContent = annual ? el.dataset.annual : el.dataset.monthly;
+  });
+}
+</script>
+
+</body>
+</html>
