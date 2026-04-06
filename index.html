@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Clawgentic OS — Founder OS for NZ Founders</title>
-  <meta name="description" content="Empowering NZ Solopreneurs with Autonomous AI. One command to build your digital workforce.">
+  <title>Founder OS — Your AI Chief of Staff, Running on Your Server</title>
+  <meta name="description" content="Max is an autonomous AI co-founder who runs your operations. Project management, research, outreach, daily reports — while you focus on building.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
@@ -21,9 +21,7 @@
       --text-muted: #8899aa;
       --grid-color: rgba(0, 188, 212, 0.04);
     }
-
     * { margin: 0; padding: 0; box-sizing: border-box; }
-
     body {
       font-family: 'Inter', -apple-system, sans-serif;
       background: var(--bg);
@@ -35,113 +33,36 @@
         linear-gradient(90deg, var(--grid-color) 1px, transparent 1px);
       background-size: 40px 40px;
     }
-
-    .container {
-      max-width: 960px;
-      margin: 0 auto;
-      padding: 0 24px;
-    }
+    .container { max-width: 960px; margin: 0 auto; padding: 0 24px; }
 
     /* NAV */
-    nav {
-      padding: 20px 0;
-      border-bottom: 1px solid var(--border);
-    }
-    nav .container {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-    .logo {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 1.1rem;
-      font-weight: 600;
-      color: var(--primary);
-      text-decoration: none;
-      letter-spacing: -0.5px;
-    }
+    nav { padding: 20px 0; border-bottom: 1px solid var(--border); }
+    nav .container { display: flex; justify-content: space-between; align-items: center; }
+    .logo { font-family: 'JetBrains Mono', monospace; font-size: 1.1rem; font-weight: 600; color: var(--primary); text-decoration: none; letter-spacing: -0.5px; }
     .logo span { color: var(--text-muted); font-weight: 400; }
     .nav-links { display: flex; gap: 28px; align-items: center; }
-    .nav-links a {
-      color: var(--text-muted);
-      text-decoration: none;
-      font-size: 0.9rem;
-      transition: color 0.2s;
-    }
+    .nav-links a { color: var(--text-muted); text-decoration: none; font-size: 0.9rem; transition: color 0.2s; }
     .nav-links a:hover { color: var(--primary); }
-    .btn-nav {
-      background: var(--primary);
-      color: var(--bg) !important;
-      padding: 8px 18px;
-      border-radius: 6px;
-      font-weight: 600;
-    }
+    .btn-nav { background: var(--primary); color: var(--bg) !important; padding: 8px 18px; border-radius: 6px; font-weight: 600; }
     .btn-nav:hover { opacity: 0.85; }
 
     /* HERO */
-    .hero {
-      padding: 100px 0 80px;
-      text-align: center;
-    }
-    .badge {
-      display: inline-block;
-      background: var(--primary-dim);
-      border: 1px solid var(--border);
-      color: var(--primary);
-      font-size: 0.8rem;
-      font-family: 'JetBrains Mono', monospace;
-      padding: 4px 14px;
-      border-radius: 100px;
-      margin-bottom: 24px;
-    }
-    h1 {
-      font-size: clamp(2.4rem, 6vw, 4rem);
-      font-weight: 800;
-      line-height: 1.1;
-      margin-bottom: 20px;
-      letter-spacing: -1.5px;
-    }
+    .hero { padding: 90px 0 70px; }
+    .badge { display: inline-block; background: var(--primary-dim); border: 1px solid var(--border); color: var(--primary); font-size: 0.75rem; font-family: 'JetBrains Mono', monospace; padding: 4px 14px; border-radius: 100px; margin-bottom: 24px; }
+    h1 { font-size: clamp(2.4rem, 6vw, 3.8rem); font-weight: 800; line-height: 1.1; letter-spacing: -1.5px; margin-bottom: 24px; }
     h1 .accent { color: var(--accent); }
     h1 .dim { color: var(--text-muted); font-weight: 600; }
-    .hero-sub {
-      font-size: 1.15rem;
-      color: var(--text-muted);
-      max-width: 560px;
-      margin: 0 auto 40px;
-    }
+    .hero-sub { font-size: 1.15rem; color: var(--text-muted); max-width: 540px; margin-bottom: 48px; line-height: 1.65; }
 
     /* TERMINAL */
-    .terminal {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 10px;
-      overflow: hidden;
-      max-width: 640px;
-      margin: 0 auto 80px;
-      box-shadow: 0 20px 60px rgba(0,0,0,0.5);
-    }
-    .terminal-bar {
-      background: var(--surface2);
-      padding: 10px 14px;
-      display: flex;
-      gap: 6px;
-      align-items: center;
-    }
+    .terminal { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; overflow: hidden; max-width: 640px; margin: 0 auto 70px; box-shadow: 0 20px 60px rgba(0,0,0,0.5); }
+    .terminal-bar { background: var(--surface2); padding: 10px 14px; display: flex; gap: 6px; align-items: center; }
     .dot { width: 12px; height: 12px; border-radius: 50%; }
     .dot-r { background: #f56565; }
     .dot-y { background: #f6c90e; }
     .dot-g { background: #3ccf4e; }
-    .terminal-title {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 0.75rem;
-      color: var(--text-muted);
-      margin-left: 8px;
-    }
-    .terminal-body {
-      padding: 20px 24px;
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 0.9rem;
-    }
+    .terminal-title { font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; color: var(--text-muted); margin-left: 8px; }
+    .terminal-body { padding: 20px 24px; font-family: 'JetBrains Mono', monospace; font-size: 0.9rem; }
     .terminal-body .line { margin-bottom: 8px; }
     .prompt { color: var(--primary); }
     .cmd { color: var(--text); }
@@ -149,90 +70,58 @@
     .comment { color: #4a5568; }
     .highlight { color: var(--accent); }
 
+    /* SECTION LABEL */
+    .section-label { font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; color: var(--primary); text-transform: uppercase; letter-spacing: 2px; margin-bottom: 12px; }
+    .section-title { font-size: 1.9rem; font-weight: 700; margin-bottom: 40px; letter-spacing: -0.5px; }
+
+    /* PROBLEM */
+    .problem { padding: 80px 0; border-top: 1px solid var(--border); }
+    .problem-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: start; }
+    .problem-list { list-style: none; display: flex; flex-direction: column; gap: 16px; }
+    .problem-list li { display: flex; gap: 12px; align-items: flex-start; background: var(--surface); border: 1px solid var(--border); border-radius: 8px; padding: 14px 16px; }
+    .problem-list .x { color: var(--accent); font-weight: 700; font-size: 1rem; flex-shrink: 0; margin-top: 1px; }
+    .problem-list strong { display: block; font-size: 0.9rem; margin-bottom: 2px; }
+    .problem-list span { font-size: 0.8rem; color: var(--text-muted); }
+    .problem-right {}
+    .problem-right .section-title { margin-bottom: 16px; }
+    .problem-tagline { font-size: 1.05rem; color: var(--text-muted); line-height: 1.65; margin-bottom: 24px; }
+    .problem-quote { background: var(--primary-dim); border-left: 3px solid var(--primary); border-radius: 0 8px 8px 0; padding: 16px 20px; font-size: 0.88rem; color: var(--text-muted); font-style: italic; }
+
+    /* SOLUTION */
+    .solution { padding: 80px 0; }
+    .solution-intro { max-width: 600px; margin-bottom: 48px; }
+    .solution-intro p { font-size: 1rem; color: var(--text-muted); margin-bottom: 16px; }
+    .solution-card { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 32px; margin-bottom: 20px; }
+    .solution-card-top { display: flex; align-items: center; gap: 14px; margin-bottom: 14px; }
+    .solution-avatar { width: 44px; height: 44px; background: var(--primary-dim); border: 1px solid var(--border); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.2rem; flex-shrink: 0; }
+    .solution-name { font-size: 0.88rem; font-weight: 600; color: var(--primary); font-family: 'JetBrains Mono', monospace; }
+    .solution-role { font-size: 0.72rem; color: var(--text-muted); }
+    .solution-msg { font-size: 0.9rem; color: var(--text); line-height: 1.6; }
+    .solution-msg p { margin-bottom: 10px; }
+    .solution-msg p:last-child { margin-bottom: 0; }
+    .solution-msg .ts { font-size: 0.72rem; color: var(--text-muted); margin-top: 10px; font-family: 'JetBrains Mono', monospace; }
+
     /* FEATURES */
-    .features { padding: 80px 0; }
-    .section-label {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 0.8rem;
-      color: var(--primary);
-      text-transform: uppercase;
-      letter-spacing: 2px;
-      margin-bottom: 12px;
-    }
-    .section-title {
-      font-size: 2rem;
-      font-weight: 700;
-      margin-bottom: 48px;
-      letter-spacing: -0.5px;
-    }
-    .features-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 20px;
-    }
-    .feature-card {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 10px;
-      padding: 28px;
-      transition: border-color 0.2s, transform 0.2s;
-    }
-    .feature-card:hover {
-      border-color: var(--primary);
-      transform: translateY(-2px);
-    }
-    .feature-icon {
-      width: 40px;
-      height: 40px;
-      background: var(--primary-dim);
-      border-radius: 8px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin-bottom: 16px;
-      font-size: 1.2rem;
-    }
-    .feature-card h3 {
-      font-size: 1rem;
-      font-weight: 600;
-      margin-bottom: 8px;
-    }
-    .feature-card p {
-      font-size: 0.9rem;
-      color: var(--text-muted);
-    }
+    .features { padding: 80px 0; border-top: 1px solid var(--border); }
+    .features-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
+    .feature-card { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 26px; transition: border-color 0.2s, transform 0.2s; }
+    .feature-card:hover { border-color: var(--primary); transform: translateY(-2px); }
+    .feature-icon { width: 40px; height: 40px; background: var(--primary-dim); border-radius: 8px; display: flex; align-items: center; justify-content: center; margin-bottom: 14px; font-size: 1.1rem; }
+    .feature-card h3 { font-size: 0.95rem; font-weight: 600; margin-bottom: 8px; }
+    .feature-card p { font-size: 0.85rem; color: var(--text-muted); line-height: 1.6; }
 
     /* WHAT YOU GET */
     .whatyouget { padding: 80px 0; }
-    .get-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 40px;
-      align-items: center;
-    }
+    .get-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: start; }
     .get-list { list-style: none; }
-    .get-list li {
-      padding: 12px 0;
-      border-bottom: 1px solid var(--border);
-      display: flex;
-      gap: 12px;
-      align-items: flex-start;
-    }
+    .get-list li { padding: 12px 0; border-bottom: 1px solid var(--border); display: flex; gap: 12px; align-items: flex-start; }
     .get-list li:last-child { border-bottom: none; }
-    .check { color: var(--primary); font-weight: 700; }
-    .get-list strong { display: block; margin-bottom: 2px; }
-    .get-list span { font-size: 0.85rem; color: var(--text-muted); }
+    .check { color: var(--primary); font-weight: 700; flex-shrink: 0; margin-top: 2px; }
+    .get-list strong { display: block; margin-bottom: 2px; font-size: 0.9rem; }
+    .get-list span { font-size: 0.82rem; color: var(--text-muted); }
 
     /* CODE PREVIEW */
-    .code-preview {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 10px;
-      padding: 28px;
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 0.82rem;
-      line-height: 1.8;
-    }
+    .code-preview { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 28px; font-family: 'JetBrains Mono', monospace; font-size: 0.82rem; line-height: 1.8; }
     .code-line { display: flex; gap: 12px; }
     .linenum { color: #4a5568; user-select: none; min-width: 20px; text-align: right; }
     .code-keyword { color: var(--primary); }
@@ -242,70 +131,32 @@
     .code-var { color: var(--accent); }
 
     /* CTA */
-    .cta {
-      padding: 100px 0;
-      text-align: center;
-    }
-    .cta-box {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 16px;
-      padding: 60px 40px;
-    }
-    .cta h2 {
-      font-size: 2rem;
-      font-weight: 700;
-      margin-bottom: 12px;
-    }
-    .cta p {
-      color: var(--text-muted);
-      margin-bottom: 32px;
-    }
-    .cta-btn {
-      display: inline-block;
-      background: var(--primary);
-      color: var(--bg);
-      font-weight: 700;
-      font-size: 1rem;
-      padding: 14px 32px;
-      border-radius: 8px;
-      text-decoration: none;
-      transition: opacity 0.2s;
-    }
+    .cta { padding: 90px 0; border-top: 1px solid var(--border); }
+    .cta-box { background: var(--surface); border: 1px solid var(--border); border-radius: 16px; padding: 56px 40px; text-align: center; }
+    .cta h2 { font-size: 1.9rem; font-weight: 700; margin-bottom: 12px; }
+    .cta p { color: var(--text-muted); margin-bottom: 32px; font-size: 1rem; max-width: 480px; margin-left: auto; margin-right: auto; }
+    .cta-btn { display: inline-block; background: var(--primary); color: var(--bg); font-weight: 700; font-size: 1rem; padding: 14px 32px; border-radius: 8px; text-decoration: none; transition: opacity 0.2s; }
     .cta-btn:hover { opacity: 0.85; }
-    .cta-note {
-      margin-top: 16px;
-      font-size: 0.8rem;
-      color: var(--text-muted);
-      font-family: 'JetBrains Mono', monospace;
-    }
+    .cta-note { margin-top: 14px; font-size: 0.75rem; color: var(--text-muted); font-family: 'JetBrains Mono', monospace; }
+    .cta-paths { display: flex; gap: 16px; justify-content: center; margin-top: 20px; flex-wrap: wrap; }
+    .cta-path { background: var(--surface2); border: 1px solid var(--border); border-radius: 8px; padding: 12px 18px; font-size: 0.78rem; }
+    .cta-path strong { color: var(--primary); font-family: 'JetBrains Mono', monospace; }
+    .cta-path span { color: var(--text-muted); }
 
     /* FOOTER */
-    footer {
-      padding: 40px 0;
-      border-top: 1px solid var(--border);
-      font-size: 0.85rem;
-      color: var(--text-muted);
-    }
-    footer .container {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
+    footer { padding: 40px 0; border-top: 1px solid var(--border); font-size: 0.85rem; color: var(--text-muted); }
+    footer .container { display: flex; justify-content: space-between; align-items: center; }
     footer a { color: var(--text-muted); text-decoration: none; }
     footer a:hover { color: var(--primary); }
 
-    /* Responsive */
     @media (max-width: 768px) {
-      .get-grid { grid-template-columns: 1fr; }
+      .problem-grid, .get-grid { grid-template-columns: 1fr; }
       .nav-links { gap: 16px; }
       .cta-box { padding: 40px 24px; }
       footer .container { flex-direction: column; gap: 12px; text-align: center; }
+      .cta-paths { flex-direction: column; align-items: center; }
     }
-
-    @media (max-width: 480px) {
-      .nav-links a:not(.btn-nav) { display: none; }
-    }
+    @media (max-width: 480px) { .nav-links a:not(.btn-nav) { display: none; } }
   </style>
 </head>
 <body>
@@ -318,15 +169,17 @@
       <a href="#how">How it works</a>
       <a href="/pricing.html">Pricing</a>
       <a href="/projects.html" target="_blank">Dashboard Demo</a>
+      <a href="/pricing.html" class="btn-nav">Get Started</a>
     </div>
   </div>
 </nav>
 
+<!-- HERO -->
 <section class="hero">
   <div class="container">
-    <div class="badge">Wellington, NZ · OpenClaw Powered</div>
-    <h1>Founder OS<br><span class="dim">built for</span> <span class="accent">solopreneurs</span></h1>
-    <p class="hero-sub">Your digital workforce in one command. Max runs in the background — your projects, outreach, and operations on autopilot.</p>
+    <div class="badge">Wellington, NZ · For NZ Founders</div>
+    <h1>Stop managing tools.<br><span class="dim">Start building</span> <span class="accent">your business.</span></h1>
+    <p class="hero-sub">Founder OS gives you Max — an autonomous AI chief of staff who manages your projects, runs your operations, and reports to you daily. Everything on your own server. Full privacy. Full control.</p>
 
     <div class="terminal">
       <div class="terminal-bar">
@@ -349,51 +202,129 @@
   </div>
 </section>
 
-<section class="features" id="features">
+<!-- PROBLEM -->
+<section class="problem">
   <div class="container">
-    <div class="section-label">What you get</div>
-    <h2 class="section-title">Everything a NZ founder needs</h2>
-    <div class="features-grid">
-      <div class="feature-card">
-        <div class="feature-icon">🤖</div>
-        <h3>Max — Your AI Co-Founder</h3>
-        <p>Runs autonomously in the background. Manages projects, writes emails, does research, and reports daily. Texts you on Telegram.</p>
+    <div class="problem-grid">
+      <div class="problem-right">
+        <div class="section-label">The problem</div>
+        <h2 class="section-title">You're the bottleneck.<br>Not for lack of effort.</h2>
+        <p class="problem-tagline">You're a one-person army. You've got Notion, Asana, Todoist, email, Slack, a calendar, five browsers open — and at 11pm you're still catching up.</p>
+        <div class="problem-quote">
+          "I have systems for my systems. But I'm the one who has to run all of them."
+        </div>
       </div>
-      <div class="feature-card">
-        <div class="feature-icon">📊</div>
-        <h3>Project Dashboard</h3>
-        <p>Kanban boards, task management, file uploads, comments. Your entire operation in one visual interface.</p>
+      <ul class="problem-list">
+        <li>
+          <span class="x">✕</span>
+          <div>
+            <strong>Your tools don't talk to each other</strong>
+            <span>Notion sits there. Your calendar doesn't update your tasks. Your CRM is 3 clicks away.</span>
+          </div>
+        </li>
+        <li>
+          <span class="x">✕</span>
+          <div>
+            <strong>You remember everything in your head</strong>
+            <span>The brief from Monday's call, the follow-up you meant to send, the invoice that's overdue. It's all in your memory.</span>
+          </div>
+        </li>
+        <li>
+          <span class="x">✕</span>
+          <div>
+            <strong>A VA costs $2k/month and needs managing</strong>
+            <span>You don't have the budget, the bandwidth, or the systems to onboard someone properly.</span>
+          </div>
+        </li>
+        <li>
+          <span class="x">✕</span>
+          <div>
+            <strong>You're the bottleneck on everything</strong>
+            <span>Every decision, every send, every follow-up waits for you. And you have one pair of hands.</span>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- SOLUTION -->
+<section class="solution">
+  <div class="container">
+    <div class="section-label">The solution</div>
+    <div class="solution-intro">
+      <h2 class="section-title">Max doesn't just answer questions.<br>He runs things for you.</h2>
+      <p>Max is an AI agent that lives on your server. He has context from your projects, your calendar, your emails. He acts autonomously — creating tasks, doing research, drafting outreach, sending updates. And he texts you on Telegram when it's done.</p>
+    </div>
+
+    <div class="solution-card">
+      <div class="solution-card-top">
+        <div class="solution-avatar">🤖</div>
+        <div>
+          <div class="solution-name">Max</div>
+          <div class="solution-role">AI Chief of Staff · running 24/7</div>
+        </div>
       </div>
-      <div class="feature-card">
-        <div class="feature-icon">⚡</div>
-        <h3>Lightning Network</h3>
-        <p>Built-in Bitcoin/LN payments. Send and receive sats. No middleman, no fees going to payment processors.</p>
-      </div>
-      <div class="feature-card">
-        <div class="feature-icon">🔗</div>
-        <h3>Toolchain Integration</h3>
-        <p>GitHub, Gmail, Calendar, Uber Eats, supermarkets — Max connects to the services you already use.</p>
-      </div>
-      <div class="feature-card">
-        <div class="feature-icon">🌊</div>
-        <h3>NZ-First Design</h3>
-        <p>Built in Wellington for Wellington founders. Pacific/Auckland timezone, local references, local payment options.</p>
-      </div>
-      <div class="feature-card">
-        <div class="feature-icon">🔒</div>
-        <h3>Your Own Server</h3>
-        <p>Everything runs on your own VPS. You own the data. Max has no backdoor access. Full privacy, full control.</p>
+      <div class="solution-msg">
+        <p>Good morning. Here's what I did overnight:</p>
+        <p>✓ Outreach ticket #47 sent to Sarah Chen (investor intro) — response pending<br>
+        ✓ Research on Shademap competitors completed — 6 companies mapped, summary in board<br>
+        ✓ Invoice to Meridian Labs drafted — review in your tasks, ready to send<br>
+        ✓ Follow-up on OceanEar supplier — 3 emails back, decision needed from you</p>
+        <p>One blocker: the Kina tracking app mockup is waiting on your feedback from last Thursday. Want me to send a reminder or leave it?</p>
+        <p class="ts">— Sent 08:02 NZDT via Telegram</p>
       </div>
     </div>
   </div>
 </section>
 
+<!-- FEATURES -->
+<section class="features" id="features">
+  <div class="container">
+    <div class="section-label">What you get</div>
+    <h2 class="section-title">Everything stays, everything connects</h2>
+    <div class="features-grid">
+      <div class="feature-card">
+        <div class="feature-icon">🤖</div>
+        <h3>Max — Autonomous AI Agent</h3>
+        <p>Max runs in the background, acts on your behalf, and reports when things are done. Not just a chatbot — a digital employee who never sleeps.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">📊</div>
+        <h3>Founder Dashboard</h3>
+        <p>Kanban boards, task management, file sharing, comments. Your entire operation in one visual interface — accessible from anywhere.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">⚡</div>
+        <h3>Lightning Address</h3>
+        <p>Your own Lightning address. Get paid in sats instantly, no payment processor fees. Max tracks every incoming payment automatically.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🔗</div>
+        <h3>Connects to Your Stack</h3>
+        <p>GitHub, Gmail, Calendar, and more. Max works with the tools you already use — no need to migrate everything to a new platform.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🔒</div>
+        <h3>Your Own Server</h3>
+        <p>Everything runs on your own VPS. You own the data. Max has no access to your information. Private by default.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">📲</div>
+        <h3>Telegram First</h3>
+        <p>Max texts you. Daily standups, blockers, completed tasks — everything lands in your Telegram inbox. No app to open.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHAT YOU GET -->
 <section class="whatyouget">
   <div class="container">
-    <div class="section-label">Built on OpenClaw</div>
+    <div class="section-label">What's included</div>
     <div class="get-grid">
       <div>
-        <h2 class="section-title">The full stack, ready to run</h2>
+        <h2 class="section-title">Built on your own server</h2>
         <ul class="get-list">
           <li>
             <span class="check">✓</span>
@@ -406,7 +337,7 @@
             <span class="check">✓</span>
             <div>
               <strong>Max AI Assistant</strong>
-              <span>Your always-on co-founder with context from your projects, emails, and calendar</span>
+              <span>Always-on co-founder with context from your projects, emails, and calendar</span>
             </div>
           </li>
           <li>
@@ -419,15 +350,15 @@
           <li>
             <span class="check">✓</span>
             <div>
-              <strong>CI/CD Pipeline</strong>
-              <span>GitHub Actions deploy changes automatically. Push to main, Max gets the update.</span>
+              <strong>GitHub Integration</strong>
+              <span>Push to main, Max gets the update. Issues automatically linked to your board.</span>
             </div>
           </li>
           <li>
             <span class="check">✓</span>
             <div>
               <strong>Skills Library</strong>
-              <span>Reminders, web search, browser automation, TTS, PDF generation — all ready to use</span>
+              <span>Reminders, web search, browser automation, TTS, PDF generation — ready to use</span>
             </div>
           </li>
         </ul>
@@ -441,7 +372,7 @@
         <div class="code-line"><span class="linenum">6</span>}</div>
         <div class="code-line"><span class="linenum">7</span>&nbsp;</div>
         <div class="code-line"><span class="linenum">8</span><span class="code-func">max</span>.<span class="code-func">createTask</span>(task)</div>
-        <div class="code-line"><span class="linenum">9</span><span class="code-comment">// → Assigned, tracked, done.</span></div>
+        <div class="code-line"><span class="linenum">9</span><span class="code-comment">// → Done. Max sends you a summary.</span></div>
         <div class="code-line"><span class="linenum">10</span>&nbsp;</div>
         <div class="code-line"><span class="linenum">11</span><span class="code-comment">// 20:00 NZDT — daily report lands</span></div>
         <div class="code-line"><span class="linenum">12</span><span class="code-comment">// in your Telegram inbox.</span></div>
@@ -450,44 +381,48 @@
   </div>
 </section>
 
+<!-- HOW IT WORKS -->
 <section class="features" id="how">
   <div class="container">
     <div class="section-label">How it works</div>
-    <h2 class="section-title">From zero to running in 5 minutes</h2>
+    <h2 class="section-title">From zero to running in 24 hours</h2>
     <div class="features-grid">
       <div class="feature-card">
         <div class="feature-icon">1</div>
-        <h3>Run the install command</h3>
-        <p>One line in your terminal. The script sets up Docker, pulls the code, and asks for your API keys.</p>
+        <h3>Book your setup</h3>
+        <p>Pick Personal Setup or Group Workshop. Either way, we get everything configured correctly from day one.</p>
       </div>
       <div class="feature-card">
         <div class="feature-icon">2</div>
-        <h3>Connect Telegram</h3>
-        <p>Create a bot via @BotFather, paste the token. Max is now reachable wherever you are.</p>
+        <h3>We set it up</h3>
+        <p>Server, DNS, SSL, Max, dashboard — I handle the technical side. You focus on your business.</p>
       </div>
       <div class="feature-card">
         <div class="feature-icon">3</div>
-        <h3>Configure your projects</h3>
-        <p>Tell Max about your projects, contacts, and priorities. Max learns your business.</p>
+        <h3>Max learns your world</h3>
+        <p>Tell Max about your projects, priorities, and contacts. Max learns your business and starts running tasks.</p>
       </div>
       <div class="feature-card">
         <div class="feature-icon">4</div>
-        <h3>Let Max run</h3>
-        <p>Daily standups, research, email drafts, CRM updates — Max handles the operational load.</p>
+        <h3>You stay in control</h3>
+        <p>Max acts autonomously but always reports to you. Telegram, dashboard, or both — you decide how much automation you want.</p>
       </div>
     </div>
   </div>
 </section>
 
+<!-- CTA -->
 <section class="cta">
   <div class="container">
     <div class="cta-box">
-      <h2>Ready for Your Own OS?</h2>
-      <p>Set up a server, install Founder OS, integrate Max. Everything live in 24 hours.</p>
-      <a href="/pricing.html" class="cta-btn">
-        Get Started
-      </a>
+      <h2>Ready to stop being the bottleneck?</h2>
+      <p>Two ways to get started: personal 1:1 setup or a hands-on group workshop. Both get you live in 24 hours.</p>
+      <a href="/pricing.html" class="cta-btn">See Pricing</a>
       <div class="cta-note">Setup in 24h · 14-day free trial</div>
+      <div class="cta-paths">
+        <div class="cta-path"><strong>Personal Setup</strong> — <span>$1.500 NZD one-time</span></div>
+        <div class="cta-path"><strong>Group Workshop</strong> — <span>$990 NZD/person · 5 spots</span></div>
+      </div>
     </div>
   </div>
 </section>
