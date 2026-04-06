@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Founder OS — Your AI Chief of Staff, Running on Your Server</title>
-  <meta name="description" content="Max is an autonomous AI co-founder who runs your operations. Project management, research, outreach, daily reports — while you focus on building.">
+  <title>Max — Your AI Co-Founder. Running 24/7.</title>
+  <meta name="description" content="Max is your AI co-founder. He manages projects, runs research, drafts outreach, and texts you when it's done. On your own server. Full privacy.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
@@ -17,9 +17,10 @@
       --primary: #00bcd4;
       --primary-dim: rgba(0, 188, 212, 0.1);
       --accent: #f56565;
+      --green: #26c6da;
       --text: #e2e8f0;
       --text-muted: #8899aa;
-      --grid-color: rgba(0, 188, 212, 0.04);
+      --grid-color: rgba(0, 188, 212, 0.035);
     }
     * { margin: 0; padding: 0; box-sizing: border-box; }
     body {
@@ -27,136 +28,158 @@
       background: var(--bg);
       color: var(--text);
       line-height: 1.6;
-      min-height: 100vh;
+      -webkit-font-smoothing: antialiased;
       background-image:
         linear-gradient(var(--grid-color) 1px, transparent 1px),
         linear-gradient(90deg, var(--grid-color) 1px, transparent 1px);
-      background-size: 40px 40px;
+      background-size: 48px 48px;
     }
-    .container { max-width: 960px; margin: 0 auto; padding: 0 24px; }
+    a { color: var(--primary); text-decoration: none; }
+    a:hover { opacity: 0.8; }
+    .container { max-width: 860px; margin: 0 auto; padding: 0 28px; }
 
-    /* NAV */
-    nav { padding: 20px 0; border-bottom: 1px solid var(--border); }
+    /* ─── NAV ─── */
+    nav { padding: 18px 0; border-bottom: 1px solid var(--border); }
     nav .container { display: flex; justify-content: space-between; align-items: center; }
-    .logo { font-family: 'JetBrains Mono', monospace; font-size: 1.1rem; font-weight: 600; color: var(--primary); text-decoration: none; letter-spacing: -0.5px; }
+    .logo { font-family: 'JetBrains Mono', monospace; font-size: 1rem; font-weight: 600; color: var(--primary); text-decoration: none; letter-spacing: -0.3px; }
     .logo span { color: var(--text-muted); font-weight: 400; }
-    .nav-links { display: flex; gap: 28px; align-items: center; }
-    .nav-links a { color: var(--text-muted); text-decoration: none; font-size: 0.9rem; transition: color 0.2s; }
-    .nav-links a:hover { color: var(--primary); }
-    .btn-nav { background: var(--primary); color: var(--bg) !important; padding: 8px 18px; border-radius: 6px; font-weight: 600; }
-    .btn-nav:hover { opacity: 0.85; }
+    .nav-right { display: flex; align-items: center; gap: 24px; }
+    .nav-links { display: flex; gap: 20px; align-items: center; }
+    .nav-links a { color: var(--text-muted); text-decoration: none; font-size: 0.88rem; transition: color 0.15s; }
+    .nav-links a:hover { color: var(--text); }
+    .btn { display: inline-block; background: var(--primary); color: var(--bg); font-weight: 600; font-size: 0.88rem; padding: 8px 18px; border-radius: 6px; transition: opacity 0.15s; }
+    .btn:hover { opacity: 0.85; color: var(--bg); }
 
-    /* HERO */
-    .hero { padding: 90px 0 70px; }
-    .badge { display: inline-block; background: var(--primary-dim); border: 1px solid var(--border); color: var(--primary); font-size: 0.75rem; font-family: 'JetBrains Mono', monospace; padding: 4px 14px; border-radius: 100px; margin-bottom: 24px; }
-    h1 { font-size: clamp(2.4rem, 6vw, 3.8rem); font-weight: 800; line-height: 1.1; letter-spacing: -1.5px; margin-bottom: 24px; }
-    h1 .accent { color: var(--accent); }
+    /* ─── HERO ─── */
+    .hero { padding: 100px 0 72px; text-align: center; }
+    .hero-badge { display: inline-flex; align-items: center; gap: 8px; background: var(--primary-dim); border: 1px solid var(--border); color: var(--primary); font-size: 0.75rem; font-family: 'JetBrains Mono', monospace; padding: 5px 14px; border-radius: 100px; margin-bottom: 28px; }
+    .hero-badge-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--primary); animation: pulse 2s infinite; }
+    @keyframes pulse { 0%,100% { opacity: 1; } 50% { opacity: 0.4; } }
+    h1 { font-size: clamp(2.4rem, 6vw, 3.6rem); font-weight: 800; line-height: 1.1; letter-spacing: -1.5px; margin-bottom: 20px; }
+    h1 .accent { color: var(--primary); }
     h1 .dim { color: var(--text-muted); font-weight: 600; }
-    .hero-sub { font-size: 1.15rem; color: var(--text-muted); max-width: 540px; margin-bottom: 48px; line-height: 1.65; }
+    .hero-sub { font-size: 1.2rem; color: var(--text-muted); max-width: 520px; margin: 0 auto 48px; line-height: 1.7; }
+    .hero-sub strong { color: var(--text); font-weight: 500; }
+    .hero-cta { display: flex; gap: 12px; justify-content: center; align-items: center; margin-bottom: 56px; flex-wrap: wrap; }
+    .btn-primary { display: inline-block; background: var(--primary); color: var(--bg); font-weight: 700; font-size: 1rem; padding: 13px 28px; border-radius: 8px; transition: opacity 0.15s; }
+    .btn-primary:hover { opacity: 0.88; color: var(--bg); }
+    .btn-ghost { display: inline-flex; align-items: center; gap: 6px; color: var(--text-muted); font-size: 0.88rem; padding: 13px 0; transition: color 0.15s; }
+    .btn-ghost:hover { color: var(--text); }
+    .hero-meta { font-size: 0.75rem; color: var(--text-muted); font-family: 'JetBrains Mono', monospace; }
 
-    /* TERMINAL */
-    .terminal { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; overflow: hidden; max-width: 640px; margin: 0 auto 70px; box-shadow: 0 20px 60px rgba(0,0,0,0.5); }
-    .terminal-bar { background: var(--surface2); padding: 10px 14px; display: flex; gap: 6px; align-items: center; }
+    /* ─── TERMINAL DEMO ─── */
+    .demo-wrap { max-width: 600px; margin: 0 auto; }
+    .terminal { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; overflow: hidden; box-shadow: 0 24px 64px rgba(0,0,0,0.5); text-align: left; }
+    .terminal-bar { background: var(--surface2); padding: 11px 14px; display: flex; gap: 6px; align-items: center; }
     .dot { width: 12px; height: 12px; border-radius: 50%; }
     .dot-r { background: #f56565; }
     .dot-y { background: #f6c90e; }
     .dot-g { background: #3ccf4e; }
-    .terminal-title { font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; color: var(--text-muted); margin-left: 8px; }
-    .terminal-body { padding: 20px 24px; font-family: 'JetBrains Mono', monospace; font-size: 0.9rem; }
-    .terminal-body .line { margin-bottom: 8px; }
-    .prompt { color: var(--primary); }
+    .terminal-title { font-family: 'JetBrains Mono', monospace; font-size: 0.72rem; color: var(--text-muted); margin-left: 8px; }
+    .terminal-body { padding: 20px 24px; font-family: 'JetBrains Mono', monospace; font-size: 0.88rem; line-height: 1.9; }
+    .line { display: flex; gap: 10px; }
+    .prompt { color: var(--primary); flex-shrink: 0; }
     .cmd { color: var(--text); }
-    .output { color: var(--text-muted); font-size: 0.85rem; }
-    .comment { color: #4a5568; }
-    .highlight { color: var(--accent); }
+    .out { color: var(--text-muted); font-size: 0.82rem; }
+    .cm { color: #4a5568; }
+    .hi { color: var(--accent); }
+    .ok { color: var(--green); }
 
-    /* SECTION LABEL */
-    .section-label { font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; color: var(--primary); text-transform: uppercase; letter-spacing: 2px; margin-bottom: 12px; }
-    .section-title { font-size: 1.9rem; font-weight: 700; margin-bottom: 40px; letter-spacing: -0.5px; }
+    /* ─── LOGO BAR ─── */
+    .logos { padding: 40px 0; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+    .logos p { text-align: center; font-size: 0.72rem; color: var(--text-muted); font-family: 'JetBrains Mono', monospace; text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 20px; }
+    .logo-row { display: flex; justify-content: center; align-items: center; gap: 40px; flex-wrap: wrap; }
+    .logo-pill { background: var(--surface); border: 1px solid var(--border); border-radius: 6px; padding: 7px 16px; font-size: 0.8rem; color: var(--text-muted); font-family: 'JetBrains Mono', monospace; font-weight: 500; }
 
-    /* PROBLEM */
-    .problem { padding: 80px 0; border-top: 1px solid var(--border); }
-    .problem-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: start; }
-    .problem-list { list-style: none; display: flex; flex-direction: column; gap: 16px; }
-    .problem-list li { display: flex; gap: 12px; align-items: flex-start; background: var(--surface); border: 1px solid var(--border); border-radius: 8px; padding: 14px 16px; }
-    .problem-list .x { color: var(--accent); font-weight: 700; font-size: 1rem; flex-shrink: 0; margin-top: 1px; }
-    .problem-list strong { display: block; font-size: 0.9rem; margin-bottom: 2px; }
-    .problem-list span { font-size: 0.8rem; color: var(--text-muted); }
-    .problem-right {}
-    .problem-right .section-title { margin-bottom: 16px; }
-    .problem-tagline { font-size: 1.05rem; color: var(--text-muted); line-height: 1.65; margin-bottom: 24px; }
-    .problem-quote { background: var(--primary-dim); border-left: 3px solid var(--primary); border-radius: 0 8px 8px 0; padding: 16px 20px; font-size: 0.88rem; color: var(--text-muted); font-style: italic; }
+    /* ─── PAIN ─── */
+    .pain { padding: 80px 0; }
+    .pain-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: center; }
+    .pain-left {}
+    .eyebrow { font-family: 'JetBrains Mono', monospace; font-size: 0.72rem; color: var(--primary); text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 12px; }
+    .pain-left h2 { font-size: 1.85rem; font-weight: 700; letter-spacing: -0.5px; line-height: 1.2; margin-bottom: 16px; }
+    .pain-left p { font-size: 1rem; color: var(--text-muted); line-height: 1.65; margin-bottom: 24px; }
+    .pain-quote { background: var(--primary-dim); border-left: 3px solid var(--primary); border-radius: 0 8px 8px 0; padding: 14px 18px; font-size: 0.88rem; color: var(--text-muted); font-style: italic; line-height: 1.6; }
+    .pain-list { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+    .pain-list li { display: flex; gap: 12px; align-items: flex-start; background: var(--surface); border: 1px solid var(--border); border-radius: 8px; padding: 13px 16px; }
+    .pain-list .x { color: var(--accent); font-weight: 700; font-size: 0.9rem; flex-shrink: 0; margin-top: 1px; }
+    .pain-list strong { display: block; font-size: 0.88rem; margin-bottom: 1px; }
+    .pain-list span { font-size: 0.8rem; color: var(--text-muted); }
 
-    /* SOLUTION */
-    .solution { padding: 80px 0; }
-    .solution-intro { max-width: 600px; margin-bottom: 48px; }
-    .solution-intro p { font-size: 1rem; color: var(--text-muted); margin-bottom: 16px; }
-    .solution-card { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 32px; margin-bottom: 20px; }
-    .solution-card-top { display: flex; align-items: center; gap: 14px; margin-bottom: 14px; }
-    .solution-avatar { width: 44px; height: 44px; background: var(--primary-dim); border: 1px solid var(--border); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.2rem; flex-shrink: 0; }
-    .solution-name { font-size: 0.88rem; font-weight: 600; color: var(--primary); font-family: 'JetBrains Mono', monospace; }
-    .solution-role { font-size: 0.72rem; color: var(--text-muted); }
-    .solution-msg { font-size: 0.9rem; color: var(--text); line-height: 1.6; }
-    .solution-msg p { margin-bottom: 10px; }
-    .solution-msg p:last-child { margin-bottom: 0; }
-    .solution-msg .ts { font-size: 0.72rem; color: var(--text-muted); margin-top: 10px; font-family: 'JetBrains Mono', monospace; }
+    /* ─── MAX IN ACTION ─── */
+    .max-section { padding: 80px 0; border-top: 1px solid var(--border); }
+    .max-section .section-header { text-align: center; margin-bottom: 40px; }
+    .max-section .eyebrow { margin-bottom: 10px; }
+    .max-section h2 { font-size: 1.85rem; font-weight: 700; letter-spacing: -0.5px; margin-bottom: 10px; }
+    .max-section > .container > p { text-align: center; color: var(--text-muted); font-size: 0.95rem; max-width: 480px; margin: 0 auto 36px; }
+    .msg-card { background: var(--surface); border: 1px solid var(--border); border-radius: 14px; padding: 28px 32px; max-width: 580px; margin: 0 auto; }
+    .msg-header { display: flex; align-items: center; gap: 12px; margin-bottom: 18px; }
+    .msg-avatar { width: 40px; height: 40px; background: var(--primary-dim); border: 1px solid var(--border); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.1rem; flex-shrink: 0; }
+    .msg-from { font-family: 'JetBrains Mono', monospace; font-size: 0.82rem; font-weight: 600; color: var(--primary); }
+    .msg-role { font-size: 0.72rem; color: var(--text-muted); }
+    .msg-body { font-size: 0.9rem; color: var(--text); line-height: 1.7; }
+    .msg-body p { margin-bottom: 10px; }
+    .msg-body p:last-child { margin-bottom: 0; }
+    .msg-body .tasks { margin: 12px 0; }
+    .msg-body .task { display: flex; gap: 8px; margin-bottom: 5px; font-size: 0.88rem; }
+    .msg-body .task-ok { color: var(--green); flex-shrink: 0; font-weight: 700; }
+    .msg-body .task-text { color: var(--text); }
+    .msg-body .task-sub { color: var(--text-muted); font-size: 0.8rem; }
+    .msg-body .blocker { background: rgba(245,101,101,0.08); border: 1px solid rgba(245,101,101,0.2); border-radius: 6px; padding: 10px 14px; margin-top: 14px; font-size: 0.85rem; color: var(--text-muted); }
+    .msg-body .blocker strong { color: var(--accent); font-weight: 600; }
+    .msg-ts { margin-top: 16px; font-size: 0.72rem; color: var(--text-muted); font-family: 'JetBrains Mono', monospace; }
 
-    /* FEATURES */
+    /* ─── FEATURES ─── */
     .features { padding: 80px 0; border-top: 1px solid var(--border); }
-    .features-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
-    .feature-card { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 26px; transition: border-color 0.2s, transform 0.2s; }
-    .feature-card:hover { border-color: var(--primary); transform: translateY(-2px); }
-    .feature-icon { width: 40px; height: 40px; background: var(--primary-dim); border-radius: 8px; display: flex; align-items: center; justify-content: center; margin-bottom: 14px; font-size: 1.1rem; }
-    .feature-card h3 { font-size: 0.95rem; font-weight: 600; margin-bottom: 8px; }
-    .feature-card p { font-size: 0.85rem; color: var(--text-muted); line-height: 1.6; }
+    .features .section-header { text-align: center; margin-bottom: 48px; }
+    .features .eyebrow { margin-bottom: 10px; }
+    .features h2 { font-size: 1.85rem; font-weight: 700; letter-spacing: -0.5px; margin-bottom: 10px; }
+    .features > .container > p { text-align: center; color: var(--text-muted); font-size: 0.95rem; max-width: 440px; margin: 0 auto 40px; }
+    .feat-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+    .feat { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 24px 22px; }
+    .feat-icon { width: 36px; height: 36px; background: var(--primary-dim); border-radius: 8px; display: flex; align-items: center; justify-content: center; margin-bottom: 14px; font-size: 1rem; }
+    .feat h3 { font-size: 0.9rem; font-weight: 600; margin-bottom: 7px; }
+    .feat p { font-size: 0.82rem; color: var(--text-muted); line-height: 1.6; }
 
-    /* WHAT YOU GET */
-    .whatyouget { padding: 80px 0; }
-    .get-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: start; }
-    .get-list { list-style: none; }
-    .get-list li { padding: 12px 0; border-bottom: 1px solid var(--border); display: flex; gap: 12px; align-items: flex-start; }
-    .get-list li:last-child { border-bottom: none; }
-    .check { color: var(--primary); font-weight: 700; flex-shrink: 0; margin-top: 2px; }
-    .get-list strong { display: block; margin-bottom: 2px; font-size: 0.9rem; }
-    .get-list span { font-size: 0.82rem; color: var(--text-muted); }
+    /* ─── HOW ─── */
+    .how { padding: 80px 0; border-top: 1px solid var(--border); }
+    .how .section-header { text-align: center; margin-bottom: 48px; }
+    .how .eyebrow { margin-bottom: 10px; }
+    .how h2 { font-size: 1.85rem; font-weight: 700; letter-spacing: -0.5px; }
+    .steps { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; }
+    .step { text-align: center; }
+    .step-n { width: 36px; height: 36px; background: var(--primary-dim); border: 1px solid var(--border); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-family: 'JetBrains Mono', monospace; font-size: 0.85rem; font-weight: 600; color: var(--primary); margin: 0 auto 14px; }
+    .step h3 { font-size: 0.88rem; font-weight: 600; margin-bottom: 7px; }
+    .step p { font-size: 0.8rem; color: var(--text-muted); line-height: 1.55; }
 
-    /* CODE PREVIEW */
-    .code-preview { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 28px; font-family: 'JetBrains Mono', monospace; font-size: 0.82rem; line-height: 1.8; }
-    .code-line { display: flex; gap: 12px; }
-    .linenum { color: #4a5568; user-select: none; min-width: 20px; text-align: right; }
-    .code-keyword { color: var(--primary); }
-    .code-string { color: #68d391; }
-    .code-comment { color: #4a5568; }
-    .code-func { color: #f6c90e; }
-    .code-var { color: var(--accent); }
+    /* ─── CTA ─── */
+    .cta-section { padding: 90px 0; border-top: 1px solid var(--border); }
+    .cta-box { background: var(--surface); border: 1px solid var(--border); border-radius: 16px; padding: 52px 40px; text-align: center; max-width: 600px; margin: 0 auto; }
+    .cta-box h2 { font-size: 1.8rem; font-weight: 700; margin-bottom: 10px; letter-spacing: -0.5px; }
+    .cta-box p { color: var(--text-muted); margin-bottom: 28px; font-size: 0.95rem; }
+    .cta-box .btn-primary { font-size: 1rem; padding: 13px 32px; }
+    .cta-paths { display: flex; gap: 12px; justify-content: center; margin-top: 18px; flex-wrap: wrap; }
+    .cta-pill { background: var(--surface2); border: 1px solid var(--border); border-radius: 6px; padding: 8px 14px; font-size: 0.75rem; color: var(--text-muted); font-family: 'JetBrains Mono', monospace; }
+    .cta-pill strong { color: var(--primary); }
 
-    /* CTA */
-    .cta { padding: 90px 0; border-top: 1px solid var(--border); }
-    .cta-box { background: var(--surface); border: 1px solid var(--border); border-radius: 16px; padding: 56px 40px; text-align: center; }
-    .cta h2 { font-size: 1.9rem; font-weight: 700; margin-bottom: 12px; }
-    .cta p { color: var(--text-muted); margin-bottom: 32px; font-size: 1rem; max-width: 480px; margin-left: auto; margin-right: auto; }
-    .cta-btn { display: inline-block; background: var(--primary); color: var(--bg); font-weight: 700; font-size: 1rem; padding: 14px 32px; border-radius: 8px; text-decoration: none; transition: opacity 0.2s; }
-    .cta-btn:hover { opacity: 0.85; }
-    .cta-note { margin-top: 14px; font-size: 0.75rem; color: var(--text-muted); font-family: 'JetBrains Mono', monospace; }
-    .cta-paths { display: flex; gap: 16px; justify-content: center; margin-top: 20px; flex-wrap: wrap; }
-    .cta-path { background: var(--surface2); border: 1px solid var(--border); border-radius: 8px; padding: 12px 18px; font-size: 0.78rem; }
-    .cta-path strong { color: var(--primary); font-family: 'JetBrains Mono', monospace; }
-    .cta-path span { color: var(--text-muted); }
-
-    /* FOOTER */
-    footer { padding: 40px 0; border-top: 1px solid var(--border); font-size: 0.85rem; color: var(--text-muted); }
+    /* ─── FOOTER ─── */
+    footer { padding: 32px 0; border-top: 1px solid var(--border); font-size: 0.8rem; color: var(--text-muted); }
     footer .container { display: flex; justify-content: space-between; align-items: center; }
-    footer a { color: var(--text-muted); text-decoration: none; }
+    footer a { color: var(--text-muted); }
     footer a:hover { color: var(--primary); }
 
     @media (max-width: 768px) {
-      .problem-grid, .get-grid { grid-template-columns: 1fr; }
-      .nav-links { gap: 16px; }
+      .pain-grid, .feat-grid, .steps { grid-template-columns: 1fr; }
+      .feat-grid { grid-template-columns: 1fr 1fr; }
+      .steps { grid-template-columns: 1fr 1fr; }
       .cta-box { padding: 40px 24px; }
-      footer .container { flex-direction: column; gap: 12px; text-align: center; }
-      .cta-paths { flex-direction: column; align-items: center; }
+      footer .container { flex-direction: column; gap: 10px; text-align: center; }
+      .hero { padding: 70px 0 56px; }
+      .nav-links { display: none; }
     }
-    @media (max-width: 480px) { .nav-links a:not(.btn-nav) { display: none; } }
+    @media (max-width: 480px) {
+      .feat-grid { grid-template-columns: 1fr; }
+      .steps { grid-template-columns: 1fr 1fr; }
+    }
   </style>
 </head>
 <body>
@@ -164,83 +187,106 @@
 <nav>
   <div class="container">
     <a href="/" class="logo">clawgentic<span>.os</span></a>
-    <div class="nav-links">
-      <a href="#features">Features</a>
-      <a href="#how">How it works</a>
-      <a href="/pricing.html">Pricing</a>
-      <a href="/projects.html" target="_blank">Dashboard Demo</a>
-      <a href="/pricing.html" class="btn-nav">Get Started</a>
+    <div class="nav-right">
+      <div class="nav-links">
+        <a href="#features">Features</a>
+        <a href="#how">How it works</a>
+        <a href="/projects.html" target="_blank">Demo</a>
+        <a href="/pricing.html">Pricing</a>
+      </div>
+      <a href="/pricing.html" class="btn">Get Started</a>
     </div>
   </div>
 </nav>
 
-<!-- HERO -->
+<!-- ─── HERO ─── -->
 <section class="hero">
   <div class="container">
-    <div class="badge">Wellington, NZ · For NZ Founders</div>
-    <h1>Stop managing tools.<br><span class="dim">Start building</span> <span class="accent">your business.</span></h1>
-    <p class="hero-sub">Founder OS gives you Max — an autonomous AI chief of staff who manages your projects, runs your operations, and reports to you daily. Everything on your own server. Full privacy. Full control.</p>
+    <div class="hero-badge">
+      <span class="hero-badge-dot"></span>
+      AI Co-Founder for NZ Founders
+    </div>
 
-    <div class="terminal">
-      <div class="terminal-bar">
-        <div class="dot dot-r"></div>
-        <div class="dot dot-y"></div>
-        <div class="dot dot-g"></div>
-        <span class="terminal-title">Founder OS — Ubuntu 24.04</span>
-      </div>
-      <div class="terminal-body">
-        <div class="line"><span class="prompt">$</span> <span class="cmd">curl -sSL clawgentic.co.nz/install.sh | bash</span></div>
-        <div class="line"><span class="comment"># ─── Clawgentic OS v1.0 ───</span></div>
-        <div class="line"><span class="output">Installing Docker...</span> <span class="highlight">✓</span></div>
-        <div class="line"><span class="output">Pulling OpenClaw Agentic Core...</span> <span class="highlight">✓</span></div>
-        <div class="line"><span class="output">Configuring Telegram Bot...</span> <span class="highlight">✓</span></div>
-        <div class="line"><span class="output">Launching Max...</span> <span class="highlight">✓</span></div>
-        <div class="line">&nbsp;</div>
-        <div class="line"><span class="comment">✅ Max is live. Check Telegram.</span></div>
+    <h1>Your AI Co-Founder.</h1>
+
+    <p class="hero-sub">
+      Max handles your operations — projects, research, outreach — and texts you when it's done. Everything on <strong>your own server</strong>.
+    </p>
+
+    <div class="hero-cta">
+      <a href="/pricing.html" class="btn-primary">Get Founder OS</a>
+      <a href="/projects.html" class="btn-ghost">→ See the dashboard</a>
+    </div>
+    <div class="hero-meta">One command to install · Runs on your VPS · 100% private</div>
+
+    <div class="demo-wrap" style="margin-top: 52px;">
+      <div class="terminal">
+        <div class="terminal-bar">
+          <span class="dot dot-r"></span>
+          <span class="dot dot-y"></span>
+          <span class="dot dot-g"></span>
+          <<span class="terminal-title">Max · AI Co-Founder</span>
+        </div>
+        <div class="terminal-body">
+          <div class="line"><span class="prompt">$</span> <span class="cmd">curl -sSL clawgentic.co.nz/install.sh | bash</span></div>
+          <div class="line"><span class="cm"># ─── Clawgentic OS ───</span></div>
+          <div class="line"><span class="out">Installing Docker...</span> <span class="ok">✓</span></div>
+          <div class="line"><span class="out">Configuring Max...</span> <span class="ok">✓</span></div>
+          <div class="line"><span class="out">Connecting Telegram...</span> <span class="ok">✓</span></div>
+          <div class="line"><span class="out">Max is online.</span> <span class="ok">✓</span></div>
+          <div class="line">&nbsp;</div>
+          <div class="line"><span class="cm"># Max texts you at 20:00 NZDT:</span></div>
+          <div class="line"><span class="hi">"3 tasks completed, 1 blocker flagged.</span></div>
+          <div class="line"><span class="hi">Ready for tomorrow."</span></div>
+        </div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- PROBLEM -->
-<section class="problem">
+<!-- ─── LOGO BAR ─── -->
+<div class="logos">
   <div class="container">
-    <div class="problem-grid">
-      <div class="problem-right">
-        <div class="section-label">The problem</div>
-        <h2 class="section-title">You're the bottleneck.<br>Not for lack of effort.</h2>
-        <p class="problem-tagline">You're a one-person army. You've got Notion, Asana, Todoist, email, Slack, a calendar, five browsers open — and at 11pm you're still catching up.</p>
-        <div class="problem-quote">
-          "I have systems for my systems. But I'm the one who has to run all of them."
-        </div>
+    <p>Built for founders who run everything themselves</p>
+    <div class="logo-row">
+      <span class="logo-pill">⚡ Lightning Native</span>
+      <span class="logo-pill">🔒 Self-Hosted</span>
+      <span class="logo-pill">🤖 Max AI Inside</span>
+      <span class="logo-pill">🇳🇿 Wellington, NZ</span>
+    </div>
+  </div>
+</div>
+
+<!-- ─── PAIN ─── -->
+<section class="pain" id="problem">
+  <div class="container">
+    <div class="pain-grid">
+      <div class="pain-left">
+        <div class="eyebrow">The problem</div>
+        <h2>You're the bottleneck.<br>Not from lack of effort.</h2>
+        <p>You're managing Notion, Asana, email, Slack, calendar — and five browser tabs. Every task that isn't "building" is drag you down.</p>
+        <div class="pain-quote">"I have systems for my systems. But I'm the one who has to run all of them."</div>
       </div>
-      <ul class="problem-list">
+      <ul class="pain-list">
         <li>
           <span class="x">✕</span>
           <div>
-            <strong>Your tools don't talk to each other</strong>
-            <span>Notion sits there. Your calendar doesn't update your tasks. Your CRM is 3 clicks away.</span>
+            <strong>Tools don't talk to each other</strong>
+            <span>Notion, calendar, email, CRM — all separate. Everything requires manual sync.</span>
           </div>
         </li>
         <li>
           <span class="x">✕</span>
           <div>
-            <strong>You remember everything in your head</strong>
-            <span>The brief from Monday's call, the follow-up you meant to send, the invoice that's overdue. It's all in your memory.</span>
+            <strong>You remember everything</strong>
+            <span>Call notes, follow-ups, pending decisions — it's all in your head. Which leaks at 11pm.</span>
           </div>
         </li>
         <li>
           <span class="x">✕</span>
           <div>
-            <strong>A VA costs $2k/month and needs managing</strong>
-            <span>You don't have the budget, the bandwidth, or the systems to onboard someone properly.</span>
-          </div>
-        </li>
-        <li>
-          <span class="x">✕</span>
-          <div>
-            <strong>You're the bottleneck on everything</strong>
-            <span>Every decision, every send, every follow-up waits for you. And you have one pair of hands.</span>
+            <strong>A VA costs $2k/month+</strong>
+            <span>Budget, onboarding, management overhead. You don't have bandwidth for that.</span>
           </div>
         </li>
       </ul>
@@ -248,180 +294,126 @@
   </div>
 </section>
 
-<!-- SOLUTION -->
-<section class="solution">
+<!-- ─── MAX IN ACTION ─── -->
+<section class="max-section">
   <div class="container">
-    <div class="section-label">The solution</div>
-    <div class="solution-intro">
-      <h2 class="section-title">Max doesn't just answer questions.<br>He runs things for you.</h2>
-      <p>Max is an AI agent that lives on your server. He has context from your projects, your calendar, your emails. He acts autonomously — creating tasks, doing research, drafting outreach, sending updates. And he texts you on Telegram when it's done.</p>
+    <div class="section-header">
+      <div class="eyebrow">Max in action</div>
+      <h2>He doesn't wait. He acts.</h2>
     </div>
 
-    <div class="solution-card">
-      <div class="solution-card-top">
-        <div class="solution-avatar">🤖</div>
+    <div class="msg-card">
+      <div class="msg-header">
+        <div class="msg-avatar">🤖</div>
         <div>
-          <div class="solution-name">Max</div>
-          <div class="solution-role">AI Chief of Staff · running 24/7</div>
+          <div class="msg-from">Max</div>
+          <div class="msg-role">AI Chief of Staff · 24/7</div>
         </div>
       </div>
-      <div class="solution-msg">
-        <p>Good morning. Here's what I did overnight:</p>
-        <p>✓ Outreach ticket #47 sent to Sarah Chen (investor intro) — response pending<br>
-        ✓ Research on Shademap competitors completed — 6 companies mapped, summary in board<br>
-        ✓ Invoice to Meridian Labs drafted — review in your tasks, ready to send<br>
-        ✓ Follow-up on OceanEar supplier — 3 emails back, decision needed from you</p>
-        <p>One blocker: the Kina tracking app mockup is waiting on your feedback from last Thursday. Want me to send a reminder or leave it?</p>
-        <p class="ts">— Sent 08:02 NZDT via Telegram</p>
+      <div class="msg-body">
+        <p>Good morning. Here's what I did while you slept:</p>
+        <div class="tasks">
+          <div class="task"><span class="task-ok">✓</span><span class="task-text">Outreach #47 sent to Sarah Chen — investor intro</span></div>
+          <div class="task"><span class="task-ok">✓</span><span class="task-text">Shademap competitor research done — 6 companies mapped</span></div>
+          <div class="task"><span class="task-ok">✓</span><span class="task-text">Invoice to Meridian Labs drafted — ready to review</span></div>
+          <div class="task"><span class="task-ok">✓</span><span class="task-text">3 supplier replies processed for OceanEar</span></div>
+        </div>
+        <div class="blocker">
+          <strong>⚠ Blocker:</strong> Kina tracking mockup waiting on your feedback since Thursday. Want me to ping you or leave it?
+        </div>
+        <p class="msg-ts">— Sent 08:02 NZDT via Telegram</p>
       </div>
     </div>
   </div>
 </section>
 
-<!-- FEATURES -->
+<!-- ─── FEATURES ─── -->
 <section class="features" id="features">
   <div class="container">
-    <div class="section-label">What you get</div>
-    <h2 class="section-title">Everything stays, everything connects</h2>
-    <div class="features-grid">
-      <div class="feature-card">
-        <div class="feature-icon">🤖</div>
-        <h3>Max — Autonomous AI Agent</h3>
-        <p>Max runs in the background, acts on your behalf, and reports when things are done. Not just a chatbot — a digital employee who never sleeps.</p>
+    <div class="section-header">
+      <div class="eyebrow">What you get</div>
+      <h2>Everything in one place. Max runs it.</h2>
+      <p>Not another app to manage. Max is the operating system that ties your stack together.</p>
+    </div>
+
+    <div class="feat-grid">
+      <div class="feat">
+        <div class="feat-icon">🤖</div>
+        <h3>Max — Your AI Co-Founder</h3>
+        <p>Max has context from your projects, emails, and calendar. He acts autonomously — creates tasks, does research, drafts emails, follows up.</p>
       </div>
-      <div class="feature-card">
-        <div class="feature-icon">📊</div>
-        <h3>Founder Dashboard</h3>
-        <p>Kanban boards, task management, file sharing, comments. Your entire operation in one visual interface — accessible from anywhere.</p>
+      <div class="feat">
+        <div class="feat-icon">📊</div>
+        <h3>Founder OS Dashboard</h3>
+        <p>Kanban boards, task management, file sharing, comments. Your entire operation in one visual interface. Accessible anywhere.</p>
       </div>
-      <div class="feature-card">
-        <div class="feature-icon">⚡</div>
-        <h3>Lightning Address</h3>
-        <p>Your own Lightning address. Get paid in sats instantly, no payment processor fees. Max tracks every incoming payment automatically.</p>
+      <div class="feat">
+        <div class="feat-icon">📲</div>
+        <h3>Telegram-Native</h3>
+        <p>Max texts you. Daily standups, blockers, completed tasks — everything lands in Telegram. No app to open.</p>
       </div>
-      <div class="feature-card">
-        <div class="feature-icon">🔗</div>
+      <div class="feat">
+        <div class="feat-icon">⚡</div>
+        <h3>Lightning Address Built-In</h3>
+        <p>Your own Lightning address. Get paid in sats instantly. Max tracks every payment automatically.</p>
+      </div>
+      <div class="feat">
+        <div class="feat-icon">🔗</div>
         <h3>Connects to Your Stack</h3>
-        <p>GitHub, Gmail, Calendar, and more. Max works with the tools you already use — no need to migrate everything to a new platform.</p>
+        <p>GitHub, Gmail, Calendar — Max works with the tools you already use. No migration required.</p>
       </div>
-      <div class="feature-card">
-        <div class="feature-icon">🔒</div>
-        <h3>Your Own Server</h3>
-        <p>Everything runs on your own VPS. You own the data. Max has no access to your information. Private by default.</p>
-      </div>
-      <div class="feature-card">
-        <div class="feature-icon">📲</div>
-        <h3>Telegram First</h3>
-        <p>Max texts you. Daily standups, blockers, completed tasks — everything lands in your Telegram inbox. No app to open.</p>
+      <div class="feat">
+        <div class="feat-icon">🔒</div>
+        <h3>100% Private</h3>
+        <p>Everything runs on your own VPS. You own the data. No third-party access. Ever.</p>
       </div>
     </div>
   </div>
 </section>
 
-<!-- WHAT YOU GET -->
-<section class="whatyouget">
+<!-- ─── HOW ─── -->
+<section class="how" id="how">
   <div class="container">
-    <div class="section-label">What's included</div>
-    <div class="get-grid">
-      <div>
-        <h2 class="section-title">Built on your own server</h2>
-        <ul class="get-list">
-          <li>
-            <span class="check">✓</span>
-            <div>
-              <strong>OpenClaw Gateway</strong>
-              <span>The agentic engine — handles Telegram, memory, skills, tools, and scheduling</span>
-            </div>
-          </li>
-          <li>
-            <span class="check">✓</span>
-            <div>
-              <strong>Max AI Assistant</strong>
-              <span>Always-on co-founder with context from your projects, emails, and calendar</span>
-            </div>
-          </li>
-          <li>
-            <span class="check">✓</span>
-            <div>
-              <strong>Founder OS Dashboard</strong>
-              <span>Visual Kanban, task management, file sharing, and real-time chat with Max</span>
-            </div>
-          </li>
-          <li>
-            <span class="check">✓</span>
-            <div>
-              <strong>GitHub Integration</strong>
-              <span>Push to main, Max gets the update. Issues automatically linked to your board.</span>
-            </div>
-          </li>
-          <li>
-            <span class="check">✓</span>
-            <div>
-              <strong>Skills Library</strong>
-              <span>Reminders, web search, browser automation, TTS, PDF generation — ready to use</span>
-            </div>
-          </li>
-        </ul>
+    <div class="section-header">
+      <div class="eyebrow">How it works</div>
+      <h2>From zero to live in 24 hours</h2>
+    </div>
+
+    <div class="steps">
+      <div class="step">
+        <div class="step-n">1</div>
+        <h3>Book</h3>
+        <p>Choose Personal Setup ($1,500) or Group Workshop ($990/person). Both get you live fast.</p>
       </div>
-      <div class="code-preview">
-        <div class="code-line"><span class="linenum">1</span><span class="code-comment">// Max manages your projects</span></div>
-        <div class="code-line"><span class="linenum">2</span><span class="code-keyword">const</span> <span class="code-var">task</span> = {</div>
-        <div class="code-line"><span class="linenum">3</span>  title: <span class="code-string">"Outreach to investor"</span>,</div>
-        <div class="code-line"><span class="linenum">4</span>  status: <span class="code-string">"todo"</span>,</div>
-        <div class="code-line"><span class="linenum">5</span>  assignee: <span class="code-string">"max"</span></div>
-        <div class="code-line"><span class="linenum">6</span>}</div>
-        <div class="code-line"><span class="linenum">7</span>&nbsp;</div>
-        <div class="code-line"><span class="linenum">8</span><span class="code-func">max</span>.<span class="code-func">createTask</span>(task)</div>
-        <div class="code-line"><span class="linenum">9</span><span class="code-comment">// → Done. Max sends you a summary.</span></div>
-        <div class="code-line"><span class="linenum">10</span>&nbsp;</div>
-        <div class="code-line"><span class="linenum">11</span><span class="code-comment">// 20:00 NZDT — daily report lands</span></div>
-        <div class="code-line"><span class="linenum">12</span><span class="code-comment">// in your Telegram inbox.</span></div>
+      <div class="step">
+        <div class="step-n">2</div>
+        <h3>We Install</h3>
+        <p>Server, DNS, SSL, Max, dashboard — we handle the technical setup. You focus on your business.</p>
+      </div>
+      <div class="step">
+        <div class="step-n">3</div>
+        <h3>Max Learns</h3>
+        <p>Tell Max about your projects and priorities. He learns your world and starts running tasks autonomously.</p>
+      </div>
+      <div class="step">
+        <div class="step-n">4</div>
+        <h3>You Stay in Control</h3>
+        <p>Max acts but always reports. Telegram, dashboard, or both — you decide how much automation.</p>
       </div>
     </div>
   </div>
 </section>
 
-<!-- HOW IT WORKS -->
-<section class="features" id="how">
-  <div class="container">
-    <div class="section-label">How it works</div>
-    <h2 class="section-title">From zero to running in 24 hours</h2>
-    <div class="features-grid">
-      <div class="feature-card">
-        <div class="feature-icon">1</div>
-        <h3>Book your setup</h3>
-        <p>Pick Personal Setup or Group Workshop. Either way, we get everything configured correctly from day one.</p>
-      </div>
-      <div class="feature-card">
-        <div class="feature-icon">2</div>
-        <h3>We set it up</h3>
-        <p>Server, DNS, SSL, Max, dashboard — I handle the technical side. You focus on your business.</p>
-      </div>
-      <div class="feature-card">
-        <div class="feature-icon">3</div>
-        <h3>Max learns your world</h3>
-        <p>Tell Max about your projects, priorities, and contacts. Max learns your business and starts running tasks.</p>
-      </div>
-      <div class="feature-card">
-        <div class="feature-icon">4</div>
-        <h3>You stay in control</h3>
-        <p>Max acts autonomously but always reports to you. Telegram, dashboard, or both — you decide how much automation you want.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- CTA -->
-<section class="cta">
+<!-- ─── CTA ─── -->
+<section class="cta-section">
   <div class="container">
     <div class="cta-box">
       <h2>Ready to stop being the bottleneck?</h2>
-      <p>Two ways to get started: personal 1:1 setup or a hands-on group workshop. Both get you live in 24 hours.</p>
-      <a href="/pricing.html" class="cta-btn">See Pricing</a>
-      <div class="cta-note">Setup in 24h · 14-day free trial</div>
+      <p>Two ways to get started. Both get you live in 24 hours.</p>
+      <a href="/pricing.html" class="btn-primary">See Pricing</a>
       <div class="cta-paths">
-        <div class="cta-path"><strong>Personal Setup</strong> — <span>$1.500 NZD one-time</span></div>
-        <div class="cta-path"><strong>Group Workshop</strong> — <span>$990 NZD/person · 5 spots</span></div>
+        <span class="cta-pill"><strong>Personal Setup</strong> — $1,500 NZD</span>
+        <span class="cta-pill"><strong>Group Workshop</strong> — $990 NZD/person</span>
       </div>
     </div>
   </div>
@@ -429,11 +421,13 @@
 
 <footer>
   <div class="container">
-    <div>© 2026 Clawgentic OS · Wellington, New Zealand</div>
+    <div>© 2026 Clawgentic OS · Wellington, NZ</div>
     <div>
       <a href="https://github.com/Bitbob21/clawgentic-os" target="_blank">GitHub</a>
       ·
-      <a href="https://discord.gg/clawd" target="_blank">Community</a>
+      <a href="/pricing.html">Pricing</a>
+      ·
+      <a href="/projects.html" target="_blank">Demo</a>
     </div>
   </div>
 </footer>
