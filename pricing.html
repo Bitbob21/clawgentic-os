@@ -70,7 +70,6 @@
     .way-detail { font-size: 0.68rem; color: var(--text-dim); margin-top: 4px; }
     .way-check { display: flex; align-items: center; gap: 6px; margin-top: 10px; font-size: 0.72rem; color: var(--green); }
 
-    /* ── OPTION CONTENT ── */
     .option-panel { display: none; }
     .option-panel.visible { display: block; }
 
@@ -84,7 +83,6 @@
     .opt-includes { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 8px; }
     .opt-tag { background: var(--surface-card); border: 1px solid var(--border-light); border-radius: 6px; padding: 4px 10px; font-size: 0.68rem; color: var(--text-dim); }
 
-    /* ── DELIVERABLES ── */
     .deliverables-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 12px; margin-bottom: 28px; }
     .deliverable {
       background: var(--surface);
@@ -96,7 +94,6 @@
     .deliverable-title { font-size: 0.82rem; font-weight: 600; margin-bottom: 4px; }
     .deliverable-desc { font-size: 0.72rem; color: var(--text-dim); line-height: 1.5; }
 
-    /* ── PROCESS ── */
     .process-title { font-size: 0.7rem; color: var(--text-dim); text-transform: uppercase; letter-spacing: 0.8px; margin-bottom: 14px; }
     .process-steps { display: flex; gap: 0; margin-bottom: 28px; }
     .process-step { flex: 1; padding: 14px 16px; background: var(--surface); border: 1px solid var(--border); position: relative; }
@@ -108,7 +105,6 @@
     .step-time { font-size: 0.65rem; color: var(--text-dim); }
     .step-arrow { position: absolute; right: -10px; top: 50%; transform: translateY(-50%); color: var(--border); font-size: 0.8rem; z-index: 1; }
 
-    /* ── ADD-ONS ── */
     .addons-title { font-size: 0.7rem; color: var(--text-dim); text-transform: uppercase; letter-spacing: 0.8px; margin-bottom: 14px; }
     .addons-desc { font-size: 0.78rem; color: var(--text-dim); margin-bottom: 14px; }
     .addons-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 10px; margin-bottom: 32px; }
@@ -119,7 +115,6 @@
     .addon-price { font-family: 'JetBrains Mono', monospace; font-size: 0.78rem; color: var(--yellow); }
     .addon-once { font-size: 0.6rem; color: var(--text-dim); }
 
-    /* ── CTA ── */
     .cta-box { background: var(--surface); border: 1px solid var(--border); border-radius: 14px; padding: 28px 32px; display: flex; align-items: center; justify-content: space-between; gap: 20px; }
     .cta-left {}
     .cta-title { font-size: 1rem; font-weight: 700; margin-bottom: 4px; }
@@ -127,11 +122,9 @@
     .cta-btn { background: var(--accent); color: var(--bg); border: none; padding: 12px 28px; border-radius: 8px; font-family: 'Inter', sans-serif; font-size: 0.85rem; font-weight: 600; cursor: pointer; text-decoration: none; transition: all 0.15s; white-space: nowrap; }
     .cta-btn:hover { background: #00d9f5; }
 
-    /* ── WORKSHOP OPTION ── */
     .ws-price-row { display: flex; align-items: baseline; gap: 4px; margin-bottom: 6px; }
     .ws-price { font-family: 'JetBrains Mono', monospace; font-size: 2.4rem; font-weight: 700; color: var(--accent); }
     .ws-price-per { font-size: 0.8rem; color: var(--text-dim); }
-    .ws-total { font-size: 0.78rem; color: var(--text-dim); margin-bottom: 8px; }
     .ws-includes { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; }
 
     .ws-sessions { margin-top: 20px; }
@@ -140,7 +133,6 @@
     .ws-session-desc { font-size: 0.68rem; color: var(--text-dim); }
     .ws-session-time { font-size: 0.62rem; color: var(--accent); font-family: 'JetBrains Mono', monospace; margin-top: 3px; }
 
-    /* ── COMPARE TABLE ── */
     .compare-title { font-size: 0.7rem; color: var(--text-dim); text-transform: uppercase; letter-spacing: 0.8px; margin-bottom: 14px; }
     .compare-table { width: 100%; border-collapse: collapse; margin-bottom: 28px; font-size: 0.78rem; }
     .compare-table th { text-align: left; padding: 10px 14px; background: var(--surface); border: 1px solid var(--border); color: var(--text-dim); font-weight: 500; font-size: 0.7rem; }
@@ -151,7 +143,6 @@
     .compare-table td .yes { color: var(--green); }
     .compare-table td .no { color: var(--text-dim); }
 
-    /* ── FOOTER NOTE ── */
     .footer-note { text-align: center; margin-top: 40px; font-size: 0.7rem; color: var(--text-dim); font-family: 'JetBrains Mono', monospace; }
 
     @media (max-width: 760px) {
@@ -160,10 +151,7 @@
       .process-steps { flex-direction: column; }
       .process-step { border-radius: 10px !important; border-left: 1px solid var(--border) !important; }
       .process-step:not(:first-child) { border-top: none; }
-      .process-step { margin-bottom: 0; }
-      .process-step:not(:first-child) { margin-top: -1px; }
       .cta-box { flex-direction: column; align-items: flex-start; }
-      .compare-table { font-size: 0.7rem; }
     }
     @media (max-width: 640px) { .header-nav { display: none; } .page-title { font-size: 1.5rem; } }
   </style>
@@ -191,27 +179,27 @@
 <main class="container">
 
   <div class="page-eyebrow">Founder OS — Pricing</div>
-  <div class="page-title">Ihr eigenes OS. Auf Ihre Art.</div>
-  <div class="page-sub">Alles beginnt mit dem Setup. Danach läuft Founder OS auf Ihrem eigenen Server. Ich richte es ein, Sie kontrollieren es.</div>
-  <div class="page-sub2">Zwei Wege zum gleichen Ziel: persönlich und individuell — oder gemeinsam in der Gruppe.</div>
+  <div class="page-title">Your Own OS. Your Way.</div>
+  <div class="page-sub">It starts with setup. Then Founder OS runs on your own server. I set it up, you control it.</div>
+  <div class="page-sub2">Two paths to the same goal: personal and individual — or together in a group.</div>
 
-  <!-- TWO WAYS TO START -->
+  <!-- TWO WAYS -->
   <div class="two-ways">
     <div class="way-card active" id="way-personal" onclick="showOption('personal')">
-      <div class="way-label">Weg 1</div>
+      <div class="way-label">Path 1</div>
       <div class="way-name">Personal Setup</div>
-      <div class="way-desc">Ich richte Founder OS persönlich auf Ihrem Server ein. 1:1, individuell, keine Kompromisse.</div>
+      <div class="way-desc">I set up Founder OS personally on your server. 1:1, custom, no compromises.</div>
       <div class="way-price">$1.500 <span class="per">NZD</span></div>
-      <div class="way-detail">einmalig</div>
-      <div class="way-check">✓ Inkl. Hosting 3 Monate</div>
+      <div class="way-detail">one-time</div>
+      <div class="way-check">✓ 3 months hosting included</div>
     </div>
     <div class="way-card" id="way-workshop" onclick="showOption('workshop')">
-      <div class="way-label">Weg 2</div>
+      <div class="way-label">Path 2</div>
       <div class="way-name">Group Workshop</div>
-      <div class="way-desc">5 Founder, zusammen an einem Tag. Jeder bringt seinen eigenen Laptop mit, wir setzen alles gemeinsam auf.</div>
+      <div class="way-desc">5 founders, one day, set up together. Everyone brings their own laptop and we build it live.</div>
       <div class="way-price">$990 <span class="per">NZD</span></div>
-      <div class="way-detail">pro Person · 5 Teilnehmer Minimum</div>
-      <div class="way-check">✓ Max $4.950 NZD total</div>
+      <div class="way-detail">per person · 5 participants minimum</div>
+      <div class="way-check">✓ $4.950 NZD total</div>
     </div>
   </div>
 
@@ -221,113 +209,112 @@
     <div class="opt-header">
       <div class="opt-price-block">
         <div class="opt-price">$1.500</div>
-        <div class="opt-price-label">NZD · einmalig</div>
+        <div class="opt-price-label">NZD · one-time</div>
       </div>
       <div class="opt-meta">
-        <div class="opt-title">Personal Setup — 1:1 mit Max</div>
-        <div class="opt-desc">Ich richte Founder OS persönlich auf Ihrem Server ein. Sie bekommen ein vollständig funktionierendes System, konfiguriert auf Ihre Situation. Kein Template, kein generisches Setup.</div>
+        <div class="opt-title">Personal Setup — 1:1 with Max</div>
+        <div class="opt-desc">I set up Founder OS personally on your server. You get a fully working system, configured for your specific situation. No template, no generic setup.</div>
         <div class="opt-includes">
           <span class="opt-tag">Server Setup</span>
           <span class="opt-tag">DNS + SSL</span>
-          <span class="opt-tag">Max integriert</span>
+          <span class="opt-tag">Max integrated</span>
           <span class="opt-tag">Dashboard & Board</span>
           <span class="opt-tag">Lightning Address</span>
-          <span class="opt-tag">3 Monate Hosting</span>
+          <span class="opt-tag">3 Months Hosting</span>
         </div>
       </div>
     </div>
 
-    <div class="process-title">Wie es abläuft</div>
+    <div class="process-title">How it works</div>
     <div class="process-steps">
       <div class="process-step">
         <div class="step-n">01</div>
         <div class="step-name">Kickoff Call</div>
-        <div class="step-time">30 Minuten · Zoom</div>
+        <div class="step-time">30 minutes · Zoom</div>
         <div class="step-arrow">→</div>
       </div>
       <div class="process-step">
         <div class="step-n">02</div>
         <div class="step-name">Setup</div>
-        <div class="step-time">24–48 Stunden</div>
+        <div class="step-time">24–48 hours</div>
         <div class="step-arrow">→</div>
       </div>
       <div class="process-step">
         <div class="step-n">03</div>
-        <div class="step-name">Einführung</div>
-        <div class="step-time">1 Stunde · Screenshare</div>
+        <div class="step-name">Walkthrough</div>
+        <div class="step-time">1 hour · Screenshare</div>
         <div class="step-arrow">→</div>
       </div>
       <div class="process-step">
         <div class="step-n">04</div>
-        <div class="step-name">Sie sind live</div>
-        <div class="step-time">Fertig</div>
+        <div class="step-name">You're live</div>
+        <div class="step-time">Done</div>
       </div>
     </div>
 
     <div class="deliverables-grid">
       <div class="deliverable">
         <div class="deliverable-icon">🖥️</div>
-        <div class="deliverable-title">Server & Infrastruktur</div>
-        <div class="deliverable-desc">Server-Setup, DNS, SSL-Zertifikate, nginx — alles fertig konfiguriert.</div>
+        <div class="deliverable-title">Server & Infrastructure</div>
+        <div class="deliverable-desc">Server setup, DNS, SSL certificates, nginx — everything pre-configured and ready.</div>
       </div>
       <div class="deliverable">
         <div class="deliverable-icon">🤖</div>
-        <div class="deliverable-title">Max integriert</div>
-        <div class="deliverable-desc">Max AI ist auf Ihrem Server eingerichtet und mit Ihrem Dashboard verbunden.</div>
+        <div class="deliverable-title">Max Integrated</div>
+        <div class="deliverable-desc">Max AI is set up on your server and connected to your dashboard.</div>
       </div>
       <div class="deliverable">
         <div class="deliverable-icon">📋</div>
         <div class="deliverable-title">Dashboard & Board</div>
-        <div class="deliverable-desc">Kanban-Board, Dashboard-Statistiken, Schnellaktionen — alles vorkonfiguriert.</div>
+        <div class="deliverable-desc">Kanban board, dashboard stats, quick actions — all pre-configured.</div>
       </div>
       <div class="deliverable">
         <div class="deliverable-icon">⚡</div>
         <div class="deliverable-title">Lightning Address</div>
-        <div class="deliverable-desc">Eigene Lightning Address für Ihr Business. Eingehende Zahlungen werden automatisch dokumentiert.</div>
+        <div class="deliverable-desc">Your own Lightning Address for your business. Incoming payments are logged automatically.</div>
       </div>
       <div class="deliverable">
         <div class="deliverable-icon">☁️</div>
-        <div class="deliverable-title">3 Monate Hosting</div>
-        <div class="deliverable-desc">Server-Hosting ist für die ersten 3 Monate inklusive. Danach: $29/mo oder eigenes Hosting.</div>
+        <div class="deliverable-title">3 Months Hosting</div>
+        <div class="deliverable-desc">Server hosting is included for the first 3 months. After that: $29/mo or bring your own.</div>
       </div>
       <div class="deliverable">
         <div class="deliverable-icon">📚</div>
-        <div class="deliverable-title">Dokumentation</div>
-        <div class="deliverable-desc">Schriftliche Dokumentation was wie läuft. Für Sie und Ihr Team.</div>
+        <div class="deliverable-title">Documentation</div>
+        <div class="deliverable-desc">Written documentation of how everything works. For you and your team.</div>
       </div>
     </div>
 
-    <!-- Add-ons -->
-    <div class="addons-title">Optionale Extras</div>
-    <div class="addons-desc">Jedes Extra kann nachträglich dazugebucht werden.</div>
+    <div class="addons-title">Optional Add-ons</div>
+    <div class="addons-desc">Any add-on can be added later at any time.</div>
     <div class="addons-grid">
       <div class="addon-card">
-        <div class="addon-name">Extra Projekt-Space</div>
-        <div class="addon-desc">Isolierter Bereich für ein zweites Business oder Team. Eigene URL, eigene Daten.</div>
+        <div class="addon-name">Extra Project Space</div>
+        <div class="addon-desc">Isolated space for a second business or team. Own URL, own data.</div>
         <div class="addon-bottom">
           <span class="addon-price">+$9/mo</span>
-          <span class="addon-once">oder $79 einmalig</span>
+          <span class="addon-once">or $79 one-time</span>
         </div>
       </div>
       <div class="addon-card">
         <div class="addon-name">Migration</div>
-        <div class="addon-desc">Max zieht Ihre Daten von Notion, Asana, Trello oder Todoist um und strukturiert alles.</div>
+        <div class="addon-desc">Max migrates your data from Notion, Asana, Trello or Todoist and structures everything.</div>
         <div class="addon-bottom">
           <span class="addon-price">$199</span>
-          <span class="addon-once">einmalig</span>
+          <span class="addon-once">one-time</span>
         </div>
       </div>
       <div class="addon-card">
         <div class="addon-name">GitHub Integration</div>
-        <div class="addon-desc">Max verknüpft Issues mit Ihrem Board. PRs werden als Tasks erfasst. Commits im Chat.</div>
+        <div class="addon-desc">Max links issues to your board. PRs are captured as tasks. Commits visible in chat.</div>
         <div class="addon-bottom">
           <span class="addon-price">+$7/mo</span>
           <span class="addon-once">—</span>
         </div>
       </div>
       <div class="addon-card">
-        <div class="addon-name">Max als VA</div>
-        <div class="addon-desc">Max übernimmt wiederkehrende Aufgaben: E-Mail-Screening, Erinnerungen, Weekly Reports.</div>
+        <div class="addon-name">Max as VA</div>
+        <div class="addon-desc">Max handles recurring tasks: email screening, reminders, weekly reports.</div>
         <div class="addon-bottom">
           <span class="addon-price">+$49/mo</span>
           <span class="addon-once">—</span>
@@ -335,7 +322,7 @@
       </div>
       <div class="addon-card">
         <div class="addon-name">Priority Support</div>
-        <div class="addon-desc">Max antwortet innerhalb von 2 Stunden, werktags. Ohne Priority: 1–2 Arbeitstage.</div>
+        <div class="addon-desc">Max responds within 2 hours on workdays. Standard: 1–2 business days.</div>
         <div class="addon-bottom">
           <span class="addon-price">+$15/mo</span>
           <span class="addon-once">—</span>
@@ -345,10 +332,10 @@
 
     <div class="cta-box">
       <div class="cta-left">
-        <div class="cta-title">Personal Setup starten</div>
-        <div class="cta-sub">$1.500 NZD · einmalig · inkl. 3 Monate Hosting</div>
+        <div class="cta-title">Start Personal Setup</div>
+        <div class="cta-sub">$1.500 NZD · one-time · 3 months hosting included</div>
       </div>
-      <a href="#" class="cta-btn" onclick="return false;">Termin buchen</a>
+      <a href="#" class="cta-btn" onclick="return false;">Book a call</a>
     </div>
 
   </div>
@@ -360,104 +347,103 @@
       <div class="opt-price-block">
         <div class="ws-price-row">
           <div class="ws-price">$990</div>
-          <div class="ws-price-per">NZD/Person</div>
+          <div class="ws-price-per">NZD / person</div>
         </div>
-        <div class="opt-price-label">$4.950 NZD total · 5 Teilnehmer</div>
+        <div class="opt-price-label">$4.950 NZD total · 5 participants</div>
       </div>
       <div class="opt-meta">
-        <div class="opt-title">Group Workshop — zusammen aufsetzen</div>
-        <div class="opt-desc">Ein Tag mit 5 Founder. Jeder bringt seinen Laptop, einen Server (oder Zugang dazu), und am Ende des Tages ist jeder mit seinem eigenen Founder OS live. Gemeinsam lernt man schneller — und günstiger.</div>
+        <div class="opt-title">Group Workshop — build it together</div>
+        <div class="opt-desc">One day with 5 founders. Everyone brings their laptop and a server (or access to one), and by the end of the day everyone has their own Founder OS live. Learning together is faster — and cheaper.</div>
         <div class="ws-includes">
-          <span class="opt-tag">5 Teilnehmer</span>
-          <span class="opt-tag">1 Tag (10:00–17:00)</span>
-          <span class="opt-tag">Max vor Ort</span>
-          <span class="opt-tag">Alle starten mit funktionierendem System</span>
+          <span class="opt-tag">5 participants</span>
+          <span class="opt-tag">1 day (10am–5pm)</span>
+          <span class="opt-tag">Max on-site</span>
+          <span class="opt-tag">Everyone leaves with a live system</span>
           <span class="opt-tag">Community Access</span>
-          <span class="opt-tag">Lunch inklusive</span>
+          <span class="opt-tag">Lunch included</span>
         </div>
       </div>
     </div>
 
     <div class="ws-sessions">
       <div class="ws-session">
-        <div class="ws-session-title">Vormittag: Setup & Infrastructure</div>
-        <div class="ws-session-desc">Server, DNS, SSL, Grundeinrichtung. Jeder arbeitet an seinem eigenen System — Max hilft allen gleichzeitig.</div>
+        <div class="ws-session-title">Morning: Setup & Infrastructure</div>
+        <div class="ws-session-desc">Server, DNS, SSL, base configuration. Everyone works on their own system — Max helps everyone simultaneously.</div>
         <div class="ws-session-time">10:00 — 13:00</div>
       </div>
       <div class="ws-session">
-        <div class="ws-session-title">Nachmittag: Max, Board & Automation</div>
-        <div class="ws-session-desc">Max integrieren, Board einrichten, erste Automatisierungen. Und wie man es täglich nutzt.</div>
+        <div class="ws-session-title">Afternoon: Max, Board & Automation</div>
+        <div class="ws-session-desc">Integrate Max, set up your board, first automations. And how to use it day-to-day.</div>
         <div class="ws-session-time">13:00 — 17:00</div>
       </div>
     </div>
 
-    <div class="process-title">Was Sie mitnehmen</div>
+    <div class="process-title">What you walk away with</div>
     <div class="deliverables-grid">
       <div class="deliverable">
         <div class="deliverable-icon">✅</div>
-        <div class="deliverable-title">Funktionierendes System</div>
-        <div class="deliverable-desc">Jeder Teilnehmer verlässt den Workshop mit einem vollständig funktionierenden Founder OS.</div>
+        <div class="deliverable-title">Working System</div>
+        <div class="deliverable-desc">Every participant leaves with a fully functional Founder OS.</div>
       </div>
       <div class="deliverable">
         <div class="deliverable-icon">🤝</div>
         <div class="deliverable-title">Peer Network</div>
-        <div class="deliverable-desc">5 Founder am selben Tisch. Erfahrungen teilen, Synergien finden, Connections künftig.</div>
+        <div class="deliverable-desc">5 founders at the same table. Share experiences, find synergies, build connections.</div>
       </div>
       <div class="deliverable">
         <div class="deliverable-icon">⚡</div>
-        <div class="deliverable-title">Max direkt</div>
-        <div class="deliverable-desc">Max steht während des Workshops für Fragen und Konfiguration zur Verfügung.</div>
+        <div class="deliverable-title">Direct Max Access</div>
+        <div class="deliverable-desc">Max is available throughout the workshop for questions and configuration.</div>
       </div>
       <div class="deliverable">
         <div class="deliverable-icon">📖</div>
-        <div class="deliverable-title">Dokumentation</div>
-        <div class="deliverable-desc">Schriftliche Schritt-für-Schritt-Anleitung für die nächsten Schritte.</div>
+        <div class="deliverable-title">Documentation</div>
+        <div class="deliverable-desc">Written step-by-step guide for the next steps.</div>
       </div>
     </div>
 
-    <!-- Add-ons (nur relevant für Workshop) -->
     <div class="addons-title">Workshop Extras</div>
-    <div class="addons-desc">Diese Add-ons können individuell zum Workshop dazu gebucht werden.</div>
+    <div class="addons-desc">These add-ons can be booked individually with the workshop.</div>
     <div class="addons-grid">
       <div class="addon-card">
         <div class="addon-name">1:1 Follow-up Call</div>
-        <div class="addon-desc">Persönliche Nachbesprechung, 1 Woche nach dem Workshop. Individuelle Fragen, Optimierung.</div>
+        <div class="addon-desc">Personal debrief 1 week after the workshop. Individual questions, optimisation.</div>
         <div class="addon-bottom">
           <span class="addon-price">$150</span>
-          <span class="addon-once">einmalig</span>
+          <span class="addon-once">one-time</span>
         </div>
       </div>
       <div class="addon-card">
-        <div class="addon-name">Server Hosting (12 Monate)</div>
-        <div class="addon-desc">12 Monate Managed Hosting für Ihren Server inkl. Backups, SSL, Updates.</div>
+        <div class="addon-name">Server Hosting (12 months)</div>
+        <div class="addon-desc">12 months managed hosting including backups, SSL, and updates.</div>
         <div class="addon-bottom">
           <span class="addon-price">$290</span>
-          <span class="addon-once">einmalig (12 Mo)</span>
+          <span class="addon-once">12 months</span>
         </div>
       </div>
       <div class="addon-card">
         <div class="addon-name">Lightning Address Setup</div>
-        <div class="addon-desc">Max richtet Ihre Lightning Address ein und erklärt die Integration.</div>
+        <div class="addon-desc">Max sets up your Lightning Address and walks you through the integration.</div>
         <div class="addon-bottom">
           <span class="addon-price">$49</span>
-          <span class="addon-once">einmalig</span>
+          <span class="addon-once">one-time</span>
         </div>
       </div>
     </div>
 
     <div class="cta-box">
       <div class="cta-left">
-        <div class="cta-title">Group Workshop buchen</div>
-        <div class="cta-sub">$990 NZD/Person · 5 Teilnehmer · $4.950 NZD total</div>
+        <div class="cta-title">Book a Group Workshop</div>
+        <div class="cta-sub">$990 NZD/person · 5 participants · $4.950 NZD total</div>
       </div>
-      <a href="#" class="cta-btn" onclick="return false;">Plätze anfragen</a>
+      <a href="#" class="cta-btn" onclick="return false;">Enquire about spots</a>
     </div>
 
   </div>
 
   <!-- COMPARE TABLE -->
   <div style="margin-top: 48px;">
-    <div class="compare-title">Vergleich: Personal Setup vs. Workshop</div>
+    <div class="compare-title">Compare: Personal Setup vs. Workshop</div>
     <table class="compare-table">
       <thead>
         <tr>
@@ -468,39 +454,39 @@
       </thead>
       <tbody>
         <tr>
-          <td>Preis</td>
+          <td>Price</td>
           <td>$1.500 NZD</td>
-          <td>$990 NZD/Person ($4.950 total)</td>
+          <td>$990 NZD/person ($4.950 total)</td>
         </tr>
         <tr>
           <td>Format</td>
-          <td>1:1, persönlich</td>
-          <td>Gruppe, 5 Teilnehmer</td>
+          <td>1:1, personal</td>
+          <td>Group, 5 participants</td>
         </tr>
         <tr>
-          <td>Zeitaufwand Ihrerseits</td>
-          <td>~2 Stunden (Calls + Feedback)</td>
-          <td>1 ganzer Tag</td>
+          <td>Your time</td>
+          <td>~2 hours (calls + feedback)</td>
+          <td>1 full day</td>
         </tr>
         <tr>
-          <td>Individuelle Konfiguration</td>
-          <td class="yes">✓ Vollständig</td>
-          <td class="no">— Basis-Setup</td>
+          <td>Custom configuration</td>
+          <td class="yes">✓ Full</td>
+          <td class="no">— Base setup only</td>
         </tr>
         <tr>
-          <td>Max 1:1 Zeit mit Max</td>
-          <td class="yes">✓ 1.5 Stunden</td>
-          <td class="no">— Geteilt mit Gruppe</td>
+          <td>Dedicated Max time</td>
+          <td class="yes">✓ 1.5 hours</td>
+          <td class="no">— Shared with group</td>
         </tr>
         <tr>
           <td>Lightning Address</td>
-          <td class="yes">✓ Inklusive</td>
-          <td class="no">— Extra ($49)</td>
+          <td class="yes">✓ Included</td>
+          <td class="no">— Add-on ($49)</td>
         </tr>
         <tr>
-          <td>3 Monate Hosting inkl.</td>
-          <td class="yes">✓ Ja</td>
-          <td class="no">— Extra</td>
+          <td>3 months hosting</td>
+          <td class="yes">✓ Yes</td>
+          <td class="no">— Add-on</td>
         </tr>
         <tr>
           <td>Community Access</td>
@@ -510,12 +496,12 @@
         <tr>
           <td>Peer Network</td>
           <td class="no">—</td>
-          <td class="yes">✓ 4 andere Founder</td>
+          <td class="yes">✓ 4 other founders</td>
         </tr>
         <tr>
-          <td>Ideal für</td>
-          <td>Solo Founder, wenig Zeit, maximales Ergebnis</td>
-          <td>Gruppen, die gemeinsam lernen wollen</td>
+          <td>Best for</td>
+          <td>Solo founders, less time, maximum result</td>
+          <td>Groups that want to learn together</td>
         </tr>
       </tbody>
     </table>
@@ -523,36 +509,36 @@
 
   <!-- FAQ -->
   <div style="margin-top: 40px;">
-    <div class="compare-title">Häufige Fragen</div>
+    <div class="compare-title">Frequently Asked Questions</div>
     <div style="display: flex; flex-direction: column; gap: 8px;">
       <div class="addon-card">
-        <div class="addon-name">Brauche ich technisches Wissen?</div>
-        <div class="addon-desc" style="margin-bottom: 0;">Nein. Sie brauchen nur einen Server (oder wir stellen einen bereit). Alles andere macht Max für Sie.</div>
+        <div class="addon-name">Do I need technical knowledge?</div>
+        <div class="addon-desc" style="margin-bottom: 0;">No. You only need a server (or we can provide one). Everything else is handled by Max.</div>
       </div>
       <div class="addon-card">
-        <div class="addon-name">Was ist wenn ich schon einen Server habe?</div>
-        <div class="addon-desc" style="margin-bottom: 0;">Kein Problem. Ich installiere Founder OS auf Ihrem bestehenden Server. Preislich bleibt es gleich — $1.500 einmalig.</div>
+        <div class="addon-name">What if I already have a server?</div>
+        <div class="addon-desc" style="margin-bottom: 0;">No problem. I install Founder OS on your existing server. Price stays the same — $1.500 one-time.</div>
       </div>
       <div class="addon-card">
-        <div class="addon-name">Wie läuft die Bezahlung?</div>
-        <div class="addon-desc" style="margin-bottom: 0;">Rechnung via Banktransfer oder Lightning Address. 50% bei Kickoff, 50% nach dem Setup.</div>
+        <div class="addon-name">How does payment work?</div>
+        <div class="addon-desc" style="margin-bottom: 0;">Invoice via bank transfer or Lightning Address. 50% on kickoff, 50% after setup is complete.</div>
       </div>
       <div class="addon-card">
-        <div class="addon-name">Kann ich erst testen?</div>
-        <div class="addon-desc" style="margin-bottom: 0;">Ja. Managed und Concierge haben 14 Tage Testphase. Danach wird regulär abgerechnet.</div>
+        <div class="addon-name">Can I try first?</div>
+        <div class="addon-desc" style="margin-bottom: 0;">Yes. There's a 14-day trial period. After that, regular billing begins.</div>
       </div>
       <div class="addon-card">
-        <div class="addon-name">Was ist Max genau?</div>
-        <div class="addon-desc" style="margin-bottom: 0;">Max ist Ihr AI Chief of Staff — ein AI-Agent der auf Ihrem Server läuft und über Ihr Dashboard erreichbar ist. Kein Abo von OpenAI nötig.</div>
+        <div class="addon-name">What exactly is Max?</div>
+        <div class="addon-desc" style="margin-bottom: 0;">Max is your AI Chief of Staff — an AI agent running on your server, accessible through your dashboard. No separate OpenAI subscription needed.</div>
       </div>
       <div class="addon-card">
-        <div class="addon-name">Was passiert nach dem Workshop?</div>
-        <div class="addon-desc" style="margin-bottom: 0;">Jeder Teilnehmer hat sein eigenes funktionierendes System. Danach kann jeder einzeln Add-ons dazu buchen oder einen Personal Setup für die volle Konfiguration.</div>
+        <div class="addon-name">What happens after the workshop?</div>
+        <div class="addon-desc" style="margin-bottom: 0;">Every participant leaves with their own working system. After that, anyone can book add-ons individually or upgrade to a full Personal Setup.</div>
       </div>
     </div>
   </div>
 
-  <div class="footer-note">Alle Preise in NZD · 50% bei Kickoff, 50% nach Abschluss · Lightning ⚡ oder Banktransfer</div>
+  <div class="footer-note">All prices in NZD · 50% on kickoff, 50% on completion · Lightning ⚡ or bank transfer</div>
 
 </main>
 
